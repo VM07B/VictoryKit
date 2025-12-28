@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const { connectDatabase } = require('../../../shared/config/database');
 const { errorHandler, notFoundHandler } = require('../../../shared/middleware/errorHandler.middleware');
 const authRoutes = require('./routes/auth.routes');
+const paymentRoutes = require('./routes/payment.routes');
 const logger = require('../../../shared/utils/logger');
 
 const app = express();
@@ -34,6 +35,7 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/payment', paymentRoutes);
 
 // Error handling
 app.use(notFoundHandler);

@@ -1,17 +1,19 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { authMiddleware, optionalAuth } = require('../../../shared/middleware/auth.middleware');
+const { checkToolAccessFromRoute } = require('../../../shared/middleware/toolAccess.middleware');
 const { apiLimiter } = require('../../../shared/middleware/rateLimiter.middleware');
 const logger = require('../../../shared/utils/logger');
 
 const router = express.Router();
 
-// Auth service proxy (public routes)
-router.use('/auth', createProxyMiddleware({
+// Auth service proxy (public routes - includes /auth and /payment)
+router.use(['/auth', '/payment'], createProxyMiddleware({
   target: process.env.AUTH_SERVICE_URL || 'http://localhost:5000',
   changeOrigin: true,
   pathRewrite: {
-    '^/api/v1/auth': '/api/v1/auth'
+    '^/api/v1/auth': '/api/v1/auth',
+    '^/api/v1/payment': '/api/v1/payment'
   },
   onError: (err, req, res) => {
     logger.error(`Auth Service proxy error: ${err.message}`);
@@ -104,11 +106,12 @@ const tools = [
   { name: 'cyberthreatmap', port: 4050 }
 ];
 
-// Register all tool proxies with auth middleware
+// Register all tool proxies with auth + access control middleware
 tools.forEach(tool => {
   router.use(
     `/${tool.name}`,
     authMiddleware,
+    checkToolAccessFromRoute, // Verify user has paid for 24h access
     apiLimiter,
     createToolProxy(tool.name, tool.port)
   );
