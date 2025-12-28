@@ -1,0 +1,159 @@
+# FraudGuard Tool - Docker Compose for Phase 2
+# Services: Frontend (3001), API (4001), ML Engine (8001), AI Assistant (6001)
+
+version: '3.8'
+
+services:
+  # FraudGuard Frontend - React Dashboard
+  fraudguard-frontend:
+    build:
+      context: ./frontend/tools/01-fraudguard
+      dockerfile: Dockerfile
+    container_name: fraudguard-frontend
+    ports:
+      - "3001:80"
+    environment:
+      - VITE_API_URL=http://fraudguard-api:4001
+      - VITE_WS_URL=ws://fraudguard-ai:6001
+    depends_on:
+      - fraudguard-api
+      - fraudguard-ai
+    networks:
+      - fraudguard-network
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fraudguard-frontend.rule=Host(`fguard.maula.ai`)"
+      - "traefik.http.services.fraudguard-frontend.loadbalancer.server.port=80"
+
+  # FraudGuard API - Express.js Backend
+  fraudguard-api:
+    build:
+      context: ./backend/tools/01-fraudguard/api
+      dockerfile: Dockerfile
+    container_name: fraudguard-api
+    ports:
+      - "4001:4001"
+    environment:
+      - NODE_ENV=production
+      - PORT=4001
+      - MONGODB_URI=${MONGODB_URI:-mongodb://mongo:27017/fraudguard_db}
+      - ML_ENGINE_URL=http://fraudguard-ml:8001
+      - JWT_SECRET=${JWT_SECRET:-fraudguard_jwt_secret_key}
+      - CORS_ORIGIN=http://localhost:3001,https://fguard.maula.ai
+    depends_on:
+      - mongo
+      - fraudguard-ml
+    networks:
+      - fraudguard-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # FraudGuard ML Engine - Python FastAPI
+  fraudguard-ml:
+    build:
+      context: ./backend/tools/01-fraudguard/ml-engine
+      dockerfile: Dockerfile
+    container_name: fraudguard-ml
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MODEL_PATH=/app/models
+    volumes:
+      - fraudguard-models:/app/models
+    networks:
+      - fraudguard-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # FraudGuard AI Assistant - WebSocket + LLM
+  fraudguard-ai:
+    build:
+      context: ./backend/tools/01-fraudguard/ai-assistant
+      dockerfile: Dockerfile
+    container_name: fraudguard-ai
+    ports:
+      - "6001:6001"
+    environment:
+      - NODE_ENV=production
+      - PORT=6001
+      - FRAUDGUARD_API_URL=http://fraudguard-api:4001
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - XAI_API_KEY=${XAI_API_KEY}
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+      - TOGETHER_API_KEY=${TOGETHER_API_KEY}
+    depends_on:
+      - fraudguard-api
+    networks:
+      - fraudguard-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:6001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # MongoDB Database
+  mongo:
+    image: mongo:7
+    container_name: fraudguard-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=fraudguard_db
+    volumes:
+      - fraudguard-mongo-data:/data/db
+      - ./infrastructure/mongo/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - fraudguard-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Redis Cache (for session and rate limiting)
+  redis:
+    image: redis:7-alpine
+    container_name: fraudguard-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - fraudguard-redis-data:/data
+    networks:
+      - fraudguard-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  fraudguard-network:
+    driver: bridge
+    name: fraudguard-network
+
+volumes:
+  fraudguard-mongo-data:
+    name: fraudguard-mongo-data
+  fraudguard-redis-data:
+    name: fraudguard-redis-data
+  fraudguard-models:
+    name: fraudguard-models

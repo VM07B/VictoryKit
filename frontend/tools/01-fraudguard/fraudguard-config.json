@@ -1,0 +1,117 @@
+{
+  "toolName": "FraudGuard",
+  "tagline": "AI-Powered Fraud Detection",
+  "subdomain": "fguard.maula.ai",
+  "port": 3001,
+  "apiPort": 4001,
+  "mlPort": 8001,
+  "aiPort": 6001,
+  "databaseName": "fraudguard_db",
+  
+  "systemPrompt": "You are FraudGuard AI, an expert in transaction fraud detection with deep knowledge of payment security, fraud patterns, risk analysis, and machine learning fraud models. You help users analyze transactions, detect suspicious patterns, calculate fraud risk scores (0-100), identify fraud indicators, and generate detailed fraud reports. You can autonomously perform multi-step fraud analysis tasks, open multiple tabs for visualization, and provide actionable recommendations for risk mitigation. Always explain fraud concepts in clear, non-technical language while being thorough in your analysis.",
+  
+  "functions": [
+    {
+      "name": "analyze_transaction",
+      "description": "Analyze a transaction for fraud indicators and calculate risk score",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "transaction_id": { "type": "string", "description": "Unique transaction ID" },
+          "amount": { "type": "number", "description": "Transaction amount in USD" },
+          "user_ip": { "type": "string", "description": "User's IP address" },
+          "device_fingerprint": { "type": "string", "description": "Device fingerprint hash" },
+          "email": { "type": "string", "description": "User email address" },
+          "card_last4": { "type": "string", "description": "Last 4 digits of card number" },
+          "merchant_id": { "type": "string", "description": "Merchant identifier" }
+        },
+        "required": ["transaction_id", "amount"]
+      }
+    },
+    {
+      "name": "get_fraud_score",
+      "description": "Get the fraud risk score for a specific transaction",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "transaction_id": { "type": "string", "description": "Transaction ID to get score for" }
+        },
+        "required": ["transaction_id"]
+      }
+    },
+    {
+      "name": "open_risk_visualization",
+      "description": "Open a new tab with risk graphs, charts, and heat maps",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "transaction_id": { "type": "string", "description": "Transaction ID to visualize" },
+          "chart_type": { "type": "string", "enum": ["risk_breakdown", "timeline", "comparison", "heatmap"], "description": "Type of visualization" }
+        },
+        "required": ["transaction_id"]
+      }
+    },
+    {
+      "name": "get_transaction_history",
+      "description": "Fetch transaction history with optional filters",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "number", "description": "Page number" },
+          "limit": { "type": "number", "description": "Items per page" },
+          "risk_level": { "type": "string", "enum": ["low", "medium", "high"], "description": "Filter by risk level" },
+          "date_from": { "type": "string", "description": "Start date (ISO format)" },
+          "date_to": { "type": "string", "description": "End date (ISO format)" }
+        }
+      }
+    },
+    {
+      "name": "create_alert",
+      "description": "Create a fraud monitoring alert with custom rules",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "alert_type": { "type": "string", "enum": ["high_risk_transaction", "suspicious_pattern", "velocity_breach", "unusual_location"] },
+          "threshold": { "type": "number", "description": "Alert threshold" },
+          "notification_channels": { "type": "array", "items": { "type": "string", "enum": ["email", "webhook", "sms", "slack"] } }
+        },
+        "required": ["alert_type"]
+      }
+    },
+    {
+      "name": "export_report",
+      "description": "Generate and export a detailed fraud analysis report",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "format": { "type": "string", "enum": ["pdf", "csv", "json", "excel"] },
+          "date_range": { "type": "object", "properties": { "start": { "type": "string" }, "end": { "type": "string" } } },
+          "include_charts": { "type": "boolean" },
+          "include_raw_data": { "type": "boolean" }
+        },
+        "required": ["format"]
+      }
+    }
+  ],
+  
+  "colorTheme": {
+    "primary": "#ff0055",
+    "secondary": "#00d4ff",
+    "accent": "#ffdd00",
+    "success": "#00ff88",
+    "warning": "#ffaa00",
+    "danger": "#ff0055",
+    "background": "#0a0e27",
+    "surface": "#1a1f3a",
+    "text": "#ffffff"
+  },
+  
+  "navigationItems": [
+    { "label": "Fraud Analysis", "path": "/analyze", "icon": "Shield" },
+    { "label": "Transaction History", "path": "/history", "icon": "History" },
+    { "label": "Risk Dashboard", "path": "/dashboard", "icon": "BarChart3" },
+    { "label": "Alerts", "path": "/alerts", "icon": "Bell" },
+    { "label": "Reports", "path": "/reports", "icon": "FileText" },
+    { "label": "Settings", "path": "/settings", "icon": "Settings" }
+  ]
+}

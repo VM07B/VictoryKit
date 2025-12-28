@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FraudGuard Custom Styles */
+:root {
+  --fg-primary: #EF4444;
+  --fg-secondary: #EC4899;
+  --fg-accent: #06B6D4;
+  --fg-bg-dark: #0F172A;
+  --fg-bg-darker: #020617;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(239, 68, 68, 0.3) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(239, 68, 68, 0.3);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(239, 68, 68, 0.5);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #020617 0%, #0F172A 50%, #020617 100%);
+  min-height: 100vh;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--fg-primary) 0%, var(--fg-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects */
+.glow-red {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3),
+              0 0 40px rgba(239, 68, 68, 0.2),
+              0 0 60px rgba(239, 68, 68, 0.1);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3),
+              0 0 40px rgba(6, 182, 212, 0.2),
+              0 0 60px rgba(6, 182, 212, 0.1);
+}
+
+/* Animated border */
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(239, 68, 68, 0.3); }
+  50% { border-color: rgba(239, 68, 68, 0.6); }
+}
+
+.animated-border {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+/* Pulse animation for risk indicators */
+@keyframes pulse-red {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+.pulse-red {
+  animation: pulse-red 2s ease-in-out infinite;
+}
+
+/* Score meter gradient */
+.score-gradient {
+  background: linear-gradient(90deg, 
+    #22C55E 0%, 
+    #EAB308 33%, 
+    #F97316 66%, 
+    #EF4444 100%
+  );
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(239, 68, 68, 0.2);
+}
+
+/* Loading shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Risk level badges */
+.risk-low {
+  @apply bg-green-500/20 text-green-400 border-green-500/30;
+}
+
+.risk-medium {
+  @apply bg-yellow-500/20 text-yellow-400 border-yellow-500/30;
+}
+
+.risk-high {
+  @apply bg-orange-500/20 text-orange-400 border-orange-500/30;
+}
+
+.risk-critical {
+  @apply bg-red-500/20 text-red-400 border-red-500/30;
+}
+
+/* Chart container */
+.chart-container {
+  @apply bg-slate-800/30 rounded-xl border border-red-500/20 p-4;
+}
+
+/* Input focus states */
+input:focus, select:focus, textarea:focus {
+  @apply ring-2 ring-red-500/50 border-red-500;
+}
+
+/* Button transitions */
+button {
+  @apply transition-all duration-200;
+}
+
+/* Table styles */
+.fraud-table {
+  @apply w-full border-collapse;
+}
+
+.fraud-table th {
+  @apply text-left text-sm font-bold text-red-200 py-3 px-4 border-b border-red-500/20;
+}
+
+.fraud-table td {
+  @apply py-3 px-4 border-b border-red-500/10;
+}
+
+.fraud-table tr:hover td {
+  @apply bg-red-500/5;
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+/* Neural network pattern background */
+.neural-bg {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(236, 72, 153, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.02) 0%, transparent 70%);
+}
