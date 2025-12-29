@@ -1,48 +1,139 @@
 {
-    "python-envs.defaultEnvManager": "ms-python.python:system",
-    "python-envs.pythonProjects": [],
-    
-    // Editor
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    
-    // JavaScript/Node
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    
-    // Files
-    "files.exclude": {
-        "**/node_modules": true,
-        "**/.git": true,
-        "**/dist": true,
-        "**/__pycache__": true,
-        "**/*.pyc": true
-    },
-    "files.associations": {
-        "*.env*": "dotenv"
-    },
-    
-    // Search
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/dist": true,
-        "**/.git": true
-    },
-    
-    // Terminal
-    "terminal.integrated.defaultProfile.linux": "bash",
-    "terminal.integrated.cwd": "${workspaceFolder}",
-    
-    // VictoryKit Specific
-    "victorykit.apiPort": 4000,
-    "victorykit.tools": {
-        "04-malwarehunter": 4004,
-        "05-phishguard": 4005,
-        "06-vulnscan": 4006,
-        "07-pentestai": 4007,
-        "08-securecode": 4008,
-        "09-compliancecheck": 4009,
-        "10-dataguardian": 4010
-    }
+  // ================================================
+  // 🚀 GITHUB COPILOT - MAXIMUM POWER MODE
+  // ================================================
+
+  // Core Copilot Settings
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": true,
+    "yaml": true,
+    "json": true,
+    "jsonc": true
+  },
+
+  // Agent Mode - No Limits
+  "chat.agent.maxRequests": 500,
+  "chat.agent.enabled": true,
+
+  // Next Edit Suggestions
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.notebook.enhancedNextEditSuggestions.enabled": true,
+
+  // Auto Features
+  "github.copilot.chat.agent.autoFix": true,
+  "git.autofetch": true,
+
+  // Enhanced Prompts & Models
+  "github.copilot.chat.alternateGeminiModelFPrompt.enabled": true,
+  "github.copilot.chat.alternateGptPrompt.enabled": true,
+
+  // Web Search - Maximum Uses
+  "github.copilot.chat.anthropic.tools.websearch.enabled": true,
+  "github.copilot.chat.anthropic.tools.websearch.maxUses": 50,
+
+  // Code Search & Context
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.scopeSelection": true,
+  "github.copilot.chat.tools.memory.enabled": true,
+  "github.copilot.chat.newWorkspace.useContext7": true,
+
+  // TypeScript Intelligence
+  "github.copilot.chat.languageContext.typescript.includeDocumentation": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+
+  // Test Generation
+  "github.copilot.chat.generateTests.codeLens": true,
+
+  // GitHub MCP Server
+  "github.copilot.chat.githubMcpServer.enabled": true,
+  "github.copilot.chat.githubMcpServer.readonly": false,
+  "github.copilot.chat.githubMcpServer.lockdown": false,
+
+  // Custom Agents
+  "github.copilot.chat.customAgents.showOrganizationAndEnterpriseAgents": true,
+
+  // Custom Models (if any)
+  "github.copilot.chat.customOAIModels": {},
+
+  // ================================================
+  // 🛠️ EXTENSIONS & TOOLS
+  // ================================================
+
+  "aws.cloudformation.telemetry.enabled": true,
+  "@azure.argTenant": "",
+  "quokka.automaticRestart": true,
+  "claudeCode.preferredLocation": "panel",
+  "console-ninja.featureSet": "Community",
+
+  // Python
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": [],
+
+  // ================================================
+  // 📝 EDITOR SETTINGS
+  // ================================================
+
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.showToolbar": "always",
+  "editor.suggestSelection": "first",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+
+  // JavaScript/Node
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // ================================================
+  // 📁 FILES & SEARCH
+  // ================================================
+
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/dist": true,
+    "**/__pycache__": true,
+    "**/*.pyc": true
+  },
+  "files.associations": {
+    "*.env*": "dotenv"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true
+  },
+
+  // ================================================
+  // 💻 TERMINAL
+  // ================================================
+
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.cwd": "${workspaceFolder}",
+
+  // ================================================
+  // 🎯 VICTORYKIT PROJECT
+  // ================================================
+
+  "victorykit.apiPort": 4000,
+  "victorykit.tools": {
+    "04-malwarehunter": 4004,
+    "05-phishguard": 4005,
+    "06-vulnscan": 4006,
+    "07-pentestai": 4007,
+    "08-securecode": 4008,
+    "09-compliancecheck": 4009,
+    "10-dataguardian": 4010
+  }
 }
