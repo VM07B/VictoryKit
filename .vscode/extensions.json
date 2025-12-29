@@ -14,6 +14,7 @@
     "mongodb.mongodb-vscode",
     "adrianwilczynski.terminal-commands",
     "nguyenngoclong.terminal-keeper",
-    "saoudrizwan.claude-dev"
+    "saoudrizwan.claude-dev",
+    "matthiesen-technology.yaml-with-script"
   ]
 }
