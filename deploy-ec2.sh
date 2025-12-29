@@ -65,6 +65,10 @@ ssh_cmd "
     cd $APP_DIR/backend/tools/04-malwarehunter/api && npm install
     cd $APP_DIR/backend/tools/05-phishguard/api && npm install
     cd $APP_DIR/backend/tools/06-vulnscan/api && npm install
+    cd $APP_DIR/backend/tools/07-pentestai/api && npm install
+    cd $APP_DIR/backend/tools/08-securecode/api && npm install
+    cd $APP_DIR/backend/tools/09-compliancecheck/api && npm install
+    cd $APP_DIR/backend/tools/10-dataguardian/api && npm install
 "
 
 echo ""
@@ -97,6 +101,38 @@ server {
     # VulnScan API
     location /api/v1/vulnscan {
         proxy_pass http://localhost:4006;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # PenTestAI API
+    location /api/v1/pentestai {
+        proxy_pass http://localhost:4007;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # SecureCode API
+    location /api/v1/securecode {
+        proxy_pass http://localhost:4008;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # ComplianceCheck API
+    location /api/v1/compliancecheck {
+        proxy_pass http://localhost:4009;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # DataGuardian API
+    location /api/v1/dataguardian {
+        proxy_pass http://localhost:4010;
         proxy_http_version 1.1;
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
@@ -137,6 +173,26 @@ module.exports = {
       name: 'vulnscan-api',
       script: 'backend/tools/06-vulnscan/api/src/server.js',
       env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'pentestai-api',
+      script: 'backend/tools/07-pentestai/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'securecode-api',
+      script: 'backend/tools/08-securecode/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'compliancecheck-api',
+      script: 'backend/tools/09-compliancecheck/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'dataguardian-api',
+      script: 'backend/tools/10-dataguardian/api/src/server.js',
+      env: { NODE_ENV: 'production' }
     }
   ]
 };
@@ -155,6 +211,10 @@ echo "📍 Your APIs are live at:"
 echo "   https://api.fyzo.xyz/api/v1/malwarehunter"
 echo "   https://api.fyzo.xyz/api/v1/phishguard"
 echo "   https://api.fyzo.xyz/api/v1/vulnscan"
+echo "   https://api.fyzo.xyz/api/v1/pentestai"
+echo "   https://api.fyzo.xyz/api/v1/securecode"
+echo "   https://api.fyzo.xyz/api/v1/compliancecheck"
+echo "   https://api.fyzo.xyz/api/v1/dataguardian"
 echo ""
 echo "🧪 Test: curl https://api.fyzo.xyz/health"
 echo ""
