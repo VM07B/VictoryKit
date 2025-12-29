@@ -2,7 +2,7 @@
 
 **The world's first AI-powered security services platform**
 
-🌐 **Domain**: [maula.ai](https://maula.ai)
+🌐 **Domain**: [fyzo.xyz](https://fyzo.xyz)
 
 ---
 
@@ -191,6 +191,6 @@ See [LICENSE](LICENSE) file.
 
 **MAULA.AI** - Where security meets AI 🦾
 
-**Domain**: maula.ai  
+**Domain**: fyzo.xyz  
 **Repository**: VictoryKit  
 **Status**: Planning Complete ✅

@@ -5,7 +5,7 @@
 **MAULA.AI** is the world's first AI-powered security services platform, offering **50+ standalone security tools**, each enhanced with **real-time conversational AI assistants**.
 
 ### Domain
-**maula.ai**
+**fyzo.xyz**
 
 ---
 
@@ -381,6 +381,6 @@ All in **real-time**, with **conversational AI**, across **50 specialized tools*
 
 **Let's build the future of security! 🦾🔥**
 
-**Domain**: maula.ai  
+**Domain**: fyzo.xyz  
 **Repo**: VictoryKit  
 **Status**: Planning Complete ✅

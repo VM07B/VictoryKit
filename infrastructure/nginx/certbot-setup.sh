@@ -16,17 +16,17 @@ if ! command -v certbot &> /dev/null; then
 fi
 
 # Email for Let's Encrypt notifications
-EMAIL="admin@maula.ai"
+EMAIL="admin@fyzo.xyz"
 
 echo "📧 Using email: $EMAIL"
 echo ""
 
 # Generate certificates for main domains
 DOMAINS=(
-    "maula.ai"
-    "www.maula.ai"
-    "auth.maula.ai"
-    "api.maula.ai"
+    "fyzo.xyz"
+    "www.fyzo.xyz"
+    "auth.fyzo.xyz"
+    "api.fyzo.xyz"
 )
 
 for DOMAIN in "${DOMAINS[@]}"; do
@@ -67,9 +67,9 @@ echo "✅ SSL certificate setup complete!"
 echo ""
 echo "📋 Next steps:"
 echo "1. Enable Nginx sites:"
-echo "   sudo ln -s /etc/nginx/sites-available/maula.ai.conf /etc/nginx/sites-enabled/"
-echo "   sudo ln -s /etc/nginx/sites-available/auth.maula.ai.conf /etc/nginx/sites-enabled/"
-echo "   sudo ln -s /etc/nginx/sites-available/api.maula.ai.conf /etc/nginx/sites-enabled/"
+echo "   sudo ln -s /etc/nginx/sites-available/fyzo.xyz.conf /etc/nginx/sites-enabled/"
+echo "   sudo ln -s /etc/nginx/sites-available/auth.fyzo.xyz.conf /etc/nginx/sites-enabled/"
+echo "   sudo ln -s /etc/nginx/sites-available/api.fyzo.xyz.conf /etc/nginx/sites-enabled/"
 echo ""
 echo "2. Test Nginx configuration:"
 echo "   sudo nginx -t"

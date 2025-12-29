@@ -6,7 +6,7 @@
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                              MAULA.AI                                   │
 │                         Security Command Center                         │
-│                              maula.ai                                   │
+│                              fyzo.xyz                                   │
 └─────────────────────────────┬───────────────────────────────────────────┘
                               │
                               ▼
@@ -73,7 +73,7 @@
 
 ### Journey 1: User Signs Up
 ```
-1. User visits maula.ai
+1. User visits fyzo.xyz
    │
    ▼
 2. Cloudflare → AWS EC2 → Nginx → Main Dashboard
@@ -103,7 +103,7 @@
 1. User clicks "IPIntel" tool card
    │
    ▼
-2. Opens ipintel.maula.ai
+2. Opens ipintel.fyzo.xyz
    │
    ▼
 3. User enters IP address: 45.142.122.1
@@ -182,7 +182,7 @@
    ▼
 2. Makes HTTP request:
    │
-   │  POST https://api.maula.ai/ipintel/analyze
+   │  POST https://api.fyzo.xyz/ipintel/analyze
    │  Authorization: Bearer sk_live_abc123...
    │  {
    │    "ip": "45.142.122.1"
@@ -231,7 +231,7 @@
 │                                                     │
 │  ┌──────────────────────────────────────────────┐  │
 │  │  Frontend (Next.js)                          │  │
-│  │  ipintel.maula.ai                            │  │
+│  │  ipintel.fyzo.xyz                            │  │
 │  │  ├─ IP Input Form                            │  │
 │  │  ├─ Risk Score Display                       │  │
 │  │  ├─ Geolocation Map                          │  │

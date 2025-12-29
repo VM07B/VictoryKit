@@ -105,7 +105,7 @@ curl http://localhost:4000/health
 
 ---
 
-#### 1.3 Main Landing Site (maula.ai)
+#### 1.3 Main Landing Site (fyzo.xyz)
 - **Port:** 3000
 - **Framework:** Next.js 14
 - **Reference:** [02-FRONTEND-ARCHITECTURE.md](./02-FRONTEND-ARCHITECTURE.md)
@@ -144,7 +144,7 @@ npm run dev
 **Deployment:**
 - [ ] Build: `npm run build`
 - [ ] Create Dockerfile
-- [ ] Configure Nginx for maula.ai → port 3000
+- [ ] Configure Nginx for fyzo.xyz → port 3000
 
 ---
 
@@ -161,15 +161,15 @@ npm run dev
 
 **Nginx Configuration:**
 ```nginx
-# /etc/nginx/sites-available/maula.ai
+# /etc/nginx/sites-available/fyzo.xyz
 
 # Main site
 server {
     listen 443 ssl;
-    server_name maula.ai;
+    server_name fyzo.xyz;
     
-    ssl_certificate /etc/letsencrypt/live/maula.ai/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/maula.ai/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/fyzo.xyz/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/fyzo.xyz/privkey.pem;
     
     location / {
         proxy_pass http://localhost:3000;
@@ -181,7 +181,7 @@ server {
 # Auth service
 server {
     listen 443 ssl;
-    server_name auth.maula.ai;
+    server_name auth.fyzo.xyz;
     
     location / {
         proxy_pass http://localhost:5000;
@@ -191,7 +191,7 @@ server {
 # API Gateway
 server {
     listen 443 ssl;
-    server_name api.maula.ai;
+    server_name api.fyzo.xyz;
     
     location / {
         proxy_pass http://localhost:4000;
@@ -200,12 +200,12 @@ server {
 ```
 
 **Cloudflare DNS:**
-- [ ] Add domain maula.ai
-- [ ] Create A record: maula.ai → AWS EC2 IP
-- [ ] Create CNAME: `*.maula.ai` → maula.ai (wildcard)
+- [ ] Add domain fyzo.xyz
+- [ ] Create A record: fyzo.xyz → AWS EC2 IP
+- [ ] Create CNAME: `*.fyzo.xyz` → fyzo.xyz (wildcard)
 - [ ] Enable proxy (orange cloud)
 - [ ] Set SSL/TLS: Full (strict)
-- [ ] Test: `dig maula.ai`, `dig auth.maula.ai`
+- [ ] Test: `dig fyzo.xyz`, `dig auth.fyzo.xyz`
 
 ---
 
@@ -213,7 +213,7 @@ server {
 **Goal:** Build one complete tool to validate the pattern  
 **Time:** 2-3 weeks
 
-#### 2.1 Frontend (fguard.maula.ai)
+#### 2.1 Frontend (fguard.fyzo.xyz)
 - **Port:** 3001
 - **Base:** Neural Link Interface
 
@@ -232,7 +232,7 @@ npm install
 {
   "toolName": "FraudGuard",
   "tagline": "AI-Powered Fraud Detection",
-  "subdomain": "fguard.maula.ai",
+  "subdomain": "fguard.fyzo.xyz",
   "systemPrompt": "You are FraudGuard AI, an expert in transaction fraud detection. You help users analyze transactions, detect suspicious patterns, calculate risk scores, and generate fraud reports. You have access to real-time fraud detection APIs and machine learning models.",
   "functions": [
     {
@@ -306,7 +306,7 @@ npm run dev
 **Deployment:**
 - [ ] Build: `npm run build`
 - [ ] Create Dockerfile
-- [ ] Configure Nginx for fguard.maula.ai → port 3001
+- [ ] Configure Nginx for fguard.fyzo.xyz → port 3001
 - [ ] Test subdomain
 
 ---
@@ -503,9 +503,9 @@ PORT=6001
 #### 2.5 End-to-End Testing
 
 **Test Flow:**
-1. **Auth:** Register/login on maula.ai
+1. **Auth:** Register/login on fyzo.xyz
 2. **Tool Access:** Click FraudGuard card → See detail page → Click "Access Tool"
-3. **Tool Opens:** fguard.maula.ai loads with Neural Link Interface
+3. **Tool Opens:** fguard.fyzo.xyz loads with Neural Link Interface
 4. **Fraud Analysis:**
    - Enter transaction data in TransactionForm
    - Submit for analysis
@@ -527,7 +527,7 @@ PORT=6001
 **Performance Testing:**
 ```bash
 # Load test with Apache Bench
-ab -n 1000 -c 100 http://fguard.maula.ai/
+ab -n 1000 -c 100 http://fguard.fyzo.xyz/
 
 # Monitor with htop, docker stats
 ```
@@ -571,8 +571,8 @@ echo "Tool created! Now customize tool-config.json and AI functions."
 **Usage:**
 ```bash
 chmod +x scripts/create-tool.sh
-./scripts/create-tool.sh smartscore 02 sscore.maula.ai
-./scripts/create-tool.sh ipintel 11 ipintel.maula.ai
+./scripts/create-tool.sh smartscore 02 sscore.fyzo.xyz
+./scripts/create-tool.sh ipintel 11 ipintel.fyzo.xyz
 ```
 
 #### 3.2 Build Each Tool

@@ -49,7 +49,7 @@ GET    /health                 - Health check
 **Features:**
 - ✅ Proxy to Auth Service (port 5000)
 - ✅ Rate limiting (100 requests per 15 minutes)
-- ✅ CORS for all *.maula.ai subdomains
+- ✅ CORS for all *.fyzo.xyz subdomains
 - ✅ Health check endpoint
 - ✅ Error handling
 
@@ -87,11 +87,11 @@ GET    /health                 - Health check
 - ✅ Footer
 
 **All 50 Tools Included:**
-1. FraudGuard - fguard.maula.ai
-2. IntelliScout - iscout.maula.ai
-3. ThreatRadar - tradar.maula.ai
-4. MalwareHunter - mhunter.maula.ai
-5. PhishGuard - pguard.maula.ai
+1. FraudGuard - fguard.fyzo.xyz
+2. IntelliScout - iscout.fyzo.xyz
+3. ThreatRadar - tradar.fyzo.xyz
+4. MalwareHunter - mhunter.fyzo.xyz
+5. PhishGuard - pguard.fyzo.xyz
 ... (and 45 more - all configured!)
 
 ---
@@ -108,9 +108,9 @@ GET    /health                 - Health check
   - Volume management
 
 **Nginx Configurations:**
-- ✅ `infrastructure/nginx/sites-available/maula.ai.conf`
-- ✅ `infrastructure/nginx/sites-available/auth.maula.ai.conf`
-- ✅ `infrastructure/nginx/sites-available/api.maula.ai.conf`
+- ✅ `infrastructure/nginx/sites-available/fyzo.xyz.conf`
+- ✅ `infrastructure/nginx/sites-available/auth.fyzo.xyz.conf`
+- ✅ `infrastructure/nginx/sites-available/api.fyzo.xyz.conf`
 - ✅ `infrastructure/nginx/certbot-setup.sh` - SSL certificate automation
 
 **MongoDB Setup:**
@@ -185,7 +185,7 @@ curl http://localhost:5000/health
 curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@maula.ai",
+    "email": "test@fyzo.xyz",
     "password": "SecurePass123!",
     "firstName": "Test",
     "lastName": "User"
@@ -195,7 +195,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@maula.ai",
+    "email": "test@fyzo.xyz",
     "password": "SecurePass123!"
   }'
 
@@ -215,7 +215,7 @@ curl http://localhost:4000/health
 curl -X POST http://localhost:4000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "gateway-test@maula.ai",
+    "email": "gateway-test@fyzo.xyz",
     "password": "SecurePass123!",
     "firstName": "Gateway",
     "lastName": "Test"

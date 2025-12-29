@@ -34,7 +34,7 @@ git add backend/tools/01-fraudguard/ai-assistant/
 
 # Infrastructure
 git add docker-compose.phase2.yml
-git add infrastructure/nginx/sites-available/fguard.maula.ai.conf
+git add infrastructure/nginx/sites-available/fguard.fyzo.xyz.conf
 git add infrastructure/mongo/init/init-fraudguard.js
 
 # Documentation
@@ -110,7 +110,7 @@ Complete microservices architecture for real-time fraud detection with AI assist
 ## 🏗️ Infrastructure (3 files)
 
 - docker-compose.phase2.yml: Full orchestration
-- Nginx config: fguard.maula.ai reverse proxy
+- Nginx config: fguard.fyzo.xyz reverse proxy
 - MongoDB init: Collections, indexes, sample data
 
 ## 📊 Features
@@ -136,7 +136,7 @@ Complete microservices architecture for real-time fraud detection with AI assist
 ## 🚀 Deployment
 
 ### Subdomain
-fguard.maula.ai
+fguard.fyzo.xyz
 
 ### Services
 - Frontend: React dashboard (3001)

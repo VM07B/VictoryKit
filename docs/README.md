@@ -204,7 +204,7 @@ After reviewing the documentation:
 ## 📞 Additional Resources
 
 - **Repository**: https://github.com/VM07B/VictoryKit
-- **Domain** (Future): https://maula.ai
+- **Domain** (Future): https://fyzo.xyz
 - **License**: See [LICENSE](../LICENSE)
 
 ---

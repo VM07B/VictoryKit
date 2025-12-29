@@ -36,7 +36,7 @@ This commit includes:
 ✅ 50 AI Security Tools (02-50, plus 01-FraudGuard from Phase 2)
 ✅ 300+ AI Functions across all security domains
 ✅ 200 Microservices (Frontend, API, ML Engine, AI Assistant × 50)
-✅ 50 Subdomain configurations (*.maula.ai)
+✅ 50 Subdomain configurations (*.fyzo.xyz)
 ✅ Complete infrastructure (Nginx, Docker, MongoDB)
 ✅ Multi-LLM AI assistants (6 providers per tool)
 ✅ Automation scripts for tool generation
@@ -44,65 +44,65 @@ This commit includes:
 All 50 Tools by Domain:
 
 Batch 1 - Core Security (02-06):
-• IntelliScout (iscout.maula.ai) - OSINT Intelligence
-• ThreatRadar (tradar.maula.ai) - Threat Detection
-• MalwareHunter (mhunter.maula.ai) - Malware Analysis
-• PhishGuard (pguard.maula.ai) - Phishing Detection
-• VulnScan (vscan.maula.ai) - Vulnerability Scanning
+• IntelliScout (iscout.fyzo.xyz) - OSINT Intelligence
+• ThreatRadar (tradar.fyzo.xyz) - Threat Detection
+• MalwareHunter (mhunter.fyzo.xyz) - Malware Analysis
+• PhishGuard (pguard.fyzo.xyz) - Phishing Detection
+• VulnScan (vscan.fyzo.xyz) - Vulnerability Scanning
 
 Batch 2 - Security Operations (07-11):
-• PenTestAI (pentest.maula.ai) - Penetration Testing
-• SecureCode (scode.maula.ai) - Code Security
-• ComplianceCheck (compliance.maula.ai) - Compliance Auditing
-• DataGuardian (dguardian.maula.ai) - Data Protection
-• CryptoShield (cshield.maula.ai) - Cryptography
+• PenTestAI (pentest.fyzo.xyz) - Penetration Testing
+• SecureCode (scode.fyzo.xyz) - Code Security
+• ComplianceCheck (compliance.fyzo.xyz) - Compliance Auditing
+• DataGuardian (dguardian.fyzo.xyz) - Data Protection
+• CryptoShield (cshield.fyzo.xyz) - Cryptography
 
 Batch 3 - Infrastructure Security (12-21):
-• IAMControl (iamcontrol.maula.ai) - IAM Management
-• LogIntel (logintel.maula.ai) - Log Analysis
-• NetDefender (netdefender.maula.ai) - Network Defense
-• EndpointShield (endpointshield.maula.ai) - Endpoint Protection
-• CloudSecure (cloudsecure.maula.ai) - Cloud Security
-• APIGuardian (apiguardian.maula.ai) - API Security
-• ContainerWatch (containerwatch.maula.ai) - Container Security
-• DevSecOps (devsecops.maula.ai) - DevSecOps Pipeline
-• IncidentCommand (incidentcmd.maula.ai) - Incident Response
-• ForensicsLab (forensicslab.maula.ai) - Digital Forensics
+• IAMControl (iamcontrol.fyzo.xyz) - IAM Management
+• LogIntel (logintel.fyzo.xyz) - Log Analysis
+• NetDefender (netdefender.fyzo.xyz) - Network Defense
+• EndpointShield (endpointshield.fyzo.xyz) - Endpoint Protection
+• CloudSecure (cloudsecure.fyzo.xyz) - Cloud Security
+• APIGuardian (apiguardian.fyzo.xyz) - API Security
+• ContainerWatch (containerwatch.fyzo.xyz) - Container Security
+• DevSecOps (devsecops.fyzo.xyz) - DevSecOps Pipeline
+• IncidentCommand (incidentcmd.fyzo.xyz) - Incident Response
+• ForensicsLab (forensicslab.fyzo.xyz) - Digital Forensics
 
 Batch 4 - Advanced Security (22-31):
-• ThreatHunt (threathunt.maula.ai) - Threat Hunting
-• RansomDefend (ransomdefend.maula.ai) - Ransomware Defense
-• ZeroTrustNet (zerotrust.maula.ai) - Zero Trust
-• PrivacyShield (privacyshield.maula.ai) - Privacy Protection
-• SOCAutomation (socauto.maula.ai) - SOC Automation
-• ThreatIntelHub (threatintel.maula.ai) - Threat Intelligence
-• AssetDiscovery (assetdisco.maula.ai) - Asset Discovery
-• PatchManager (patchmgr.maula.ai) - Patch Management
-• BackupGuardian (backupguard.maula.ai) - Backup Security
-• DisasterRecovery (disasterrecovery.maula.ai) - Disaster Recovery
+• ThreatHunt (threathunt.fyzo.xyz) - Threat Hunting
+• RansomDefend (ransomdefend.fyzo.xyz) - Ransomware Defense
+• ZeroTrustNet (zerotrust.fyzo.xyz) - Zero Trust
+• PrivacyShield (privacyshield.fyzo.xyz) - Privacy Protection
+• SOCAutomation (socauto.fyzo.xyz) - SOC Automation
+• ThreatIntelHub (threatintel.fyzo.xyz) - Threat Intelligence
+• AssetDiscovery (assetdisco.fyzo.xyz) - Asset Discovery
+• PatchManager (patchmgr.fyzo.xyz) - Patch Management
+• BackupGuardian (backupguard.fyzo.xyz) - Backup Security
+• DisasterRecovery (disasterrecovery.fyzo.xyz) - Disaster Recovery
 
 Batch 5 - Perimeter Security (32-41):
-• EmailSecure (emailsecure.maula.ai) - Email Security
-• WebAppFirewall (waf.maula.ai) - WAF Protection
-• BotDefense (botdefense.maula.ai) - Bot Detection
-• DDoSMitigator (ddosmit.maula.ai) - DDoS Mitigation
-• SecureGateway (secgateway.maula.ai) - Web Gateway
-• MobileSecurity (mobilesec.maula.ai) - Mobile Security
-• IoTSecure (iotsecure.maula.ai) - IoT Security
-• SupplyChainSec (supplychainsec.maula.ai) - Supply Chain Security
-• BrandProtect (brandprotect.maula.ai) - Brand Protection
-• DataLossPrevention (dlp.maula.ai) - DLP
+• EmailSecure (emailsecure.fyzo.xyz) - Email Security
+• WebAppFirewall (waf.fyzo.xyz) - WAF Protection
+• BotDefense (botdefense.fyzo.xyz) - Bot Detection
+• DDoSMitigator (ddosmit.fyzo.xyz) - DDoS Mitigation
+• SecureGateway (secgateway.fyzo.xyz) - Web Gateway
+• MobileSecurity (mobilesec.fyzo.xyz) - Mobile Security
+• IoTSecure (iotsecure.fyzo.xyz) - IoT Security
+• SupplyChainSec (supplychainsec.fyzo.xyz) - Supply Chain Security
+• BrandProtect (brandprotect.fyzo.xyz) - Brand Protection
+• DataLossPrevention (dlp.fyzo.xyz) - DLP
 
 Batch 6 - Security Management (42-50):
-• UserBehaviorAnalytics (uba.maula.ai) - UBA
-• ThreatModeling (threatmodel.maula.ai) - Threat Modeling
-• RedTeamSim (redteam.maula.ai) - Red Team Simulation
-• BlueTeamOps (blueteam.maula.ai) - Blue Team Operations
-• PurpleTeamHub (purpleteam.maula.ai) - Purple Team Collaboration
-• CyberInsurance (cyberinsurance.maula.ai) - Cyber Insurance
-• SecurityAwareness (secawareness.maula.ai) - Security Training
-• VendorRiskMgmt (vendorrisk.maula.ai) - Vendor Risk Management
-• CyberThreatMap (threatmap.maula.ai) - Threat Visualization
+• UserBehaviorAnalytics (uba.fyzo.xyz) - UBA
+• ThreatModeling (threatmodel.fyzo.xyz) - Threat Modeling
+• RedTeamSim (redteam.fyzo.xyz) - Red Team Simulation
+• BlueTeamOps (blueteam.fyzo.xyz) - Blue Team Operations
+• PurpleTeamHub (purpleteam.fyzo.xyz) - Purple Team Collaboration
+• CyberInsurance (cyberinsurance.fyzo.xyz) - Cyber Insurance
+• SecurityAwareness (secawareness.fyzo.xyz) - Security Training
+• VendorRiskMgmt (vendorrisk.fyzo.xyz) - Vendor Risk Management
+• CyberThreatMap (threatmap.fyzo.xyz) - Threat Visualization
 
 Technical Stack:
 - Frontend: React 19 + TypeScript + Vite

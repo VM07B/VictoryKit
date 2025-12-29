@@ -128,7 +128,7 @@ curl http://localhost:5000/health
 curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@maula.ai",
+    "email": "test@fyzo.xyz",
     "password": "SecurePass123!",
     "firstName": "Test",
     "lastName": "User"
@@ -138,7 +138,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@maula.ai",
+    "email": "test@fyzo.xyz",
     "password": "SecurePass123!"
   }'
 
@@ -157,7 +157,7 @@ curl http://localhost:4000/health
 curl -X POST http://localhost:4000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@maula.ai",
+    "email": "test@fyzo.xyz",
     "password": "SecurePass123!"
   }'
 ```

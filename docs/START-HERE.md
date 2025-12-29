@@ -98,8 +98,8 @@ cat docs/PHASE-1-CENTRAL-GRID.md
 
 ### The Platform: MAULA.AI
 
-- **Main Site:** maula.ai (Dashboard with all 50 tools)
-- **50 AI Tools:** Each at `{toolname}.maula.ai`
+- **Main Site:** fyzo.xyz (Dashboard with all 50 tools)
+- **50 AI Tools:** Each at `{toolname}.fyzo.xyz`
 - **152 Microservices:** All containerized with Docker
 - **51 Databases:** MongoDB Atlas cluster
 - **6 LLM Providers:** Gemini, Claude, GPT-4, Grok, Mistral, Llama
@@ -170,7 +170,7 @@ VictoryKit/
 │
 ├─ neural-link-interface/         # 🪟 Base Neural Link template
 ├─ frontend/
-│   ├─ main-dashboard/            # Main site (maula.ai)
+│   ├─ main-dashboard/            # Main site (fyzo.xyz)
 │   └─ tools/                     # All 50 tool frontends
 │       ├─ 01-fraudguard/
 │       ├─ 02-intelliscout/

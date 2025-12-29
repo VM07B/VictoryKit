@@ -23,7 +23,7 @@ echo "Step 1/6: Committing Phase 2 changes..."
 git add frontend/tools/01-fraudguard/ \
     backend/tools/01-fraudguard/ \
     docker-compose.phase2.yml \
-    infrastructure/nginx/sites-available/fguard.maula.ai.conf \
+    infrastructure/nginx/sites-available/fguard.fyzo.xyz.conf \
     infrastructure/mongo/init/init-fraudguard.js \
     docs/FRAUDGUARD.md \
     .env.phase2.example \
@@ -48,7 +48,7 @@ Features:
 
 Infrastructure:
 - Docker Compose orchestration
-- Nginx reverse proxy (fguard.maula.ai)
+- Nginx reverse proxy (fguard.fyzo.xyz)
 - MongoDB with indexes & sample data
 
 See docs/FRAUDGUARD.md for full documentation."
@@ -96,7 +96,7 @@ Frontend (3001) → API (4001) → ML Engine (8001)
 \`\`\`
 
 ### 🌐 Deployment
-- Subdomain: **fguard.maula.ai**
+- Subdomain: **fguard.fyzo.xyz**
 - All services containerized
 - Nginx reverse proxy configured
 - Health checks on all endpoints

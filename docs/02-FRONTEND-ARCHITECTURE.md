@@ -5,7 +5,7 @@
 ```
 FRONTEND ARCHITECTURE
 │
-├─ 🏠 Main Dashboard (maula.ai)
+├─ 🏠 Main Dashboard (fyzo.xyz)
 │   ├─ Landing Page
 │   ├─ All 50 Tools Grid
 │   ├─ Tool Detail Pages (/tools/[toolId])
@@ -16,7 +16,7 @@ FRONTEND ARCHITECTURE
 └─ 🛡️ 50 Independent Tool Frontends
     ├─ Each tool = Standalone Next.js app
     ├─ Each tool = Neural Link Interface + Tool-specific UI
-    ├─ Own subdomain (fguard.maula.ai, ipintel.maula.ai)
+    ├─ Own subdomain (fguard.fyzo.xyz, ipintel.fyzo.xyz)
     └─ No shared components between tools (complete isolation)
 ```
 
@@ -297,7 +297,7 @@ frontend/
 │   │   ├─ vite.config.ts
 │   │   ├─ tailwind.config.js         # Custom FraudGuard color palette
 │   │   ├─ tsconfig.json
-│   │   ├─ Dockerfile                 # Deploy to fguard.maula.ai
+│   │   ├─ Dockerfile                 # Deploy to fguard.fyzo.xyz
 │   │   └─ fraudguard-config.json     # 🔧 AI System Prompt:
 │   │       # "You are FraudGuard AI, expert in transaction fraud detection.
 │   │       #  You can analyze transactions, calculate risk scores, identify
@@ -406,7 +406,7 @@ cd tools/01-fraudguard/
 // fraudguard-config.json
 {
   "toolName": "FraudGuard",
-  "subdomain": "fguard.maula.ai",
+  "subdomain": "fguard.fyzo.xyz",
   "systemPrompt": "You are FraudGuard AI, an expert fraud detection assistant. You help users analyze transactions, detect suspicious patterns, calculate fraud risk scores, and generate detailed fraud reports. You have access to real-time fraud detection APIs and machine learning models.",
   "functions": [
     {
@@ -514,10 +514,10 @@ CMD ["npm", "run", "preview"]
 ```
 
 ```nginx
-# Nginx config for fguard.maula.ai
+# Nginx config for fguard.fyzo.xyz
 server {
     listen 443 ssl;
-    server_name fguard.maula.ai;
+    server_name fguard.fyzo.xyz;
     
     location / {
         proxy_pass http://localhost:3001;
@@ -650,22 +650,22 @@ const useIPIntelStore = create<IPIntelState>((set) => ({
 
 ### Main Dashboard
 ```
-maula.ai/                → Landing
-maula.ai/login           → Login
-maula.ai/register        → Register
-maula.ai/dashboard       → User dashboard
-maula.ai/tools           → All tools grid
-maula.ai/profile         → User profile
-maula.ai/api-keys        → API key management
-maula.ai/billing         → Billing
+fyzo.xyz/                → Landing
+fyzo.xyz/login           → Login
+fyzo.xyz/register        → Register
+fyzo.xyz/dashboard       → User dashboard
+fyzo.xyz/tools           → All tools grid
+fyzo.xyz/profile         → User profile
+fyzo.xyz/api-keys        → API key management
+fyzo.xyz/billing         → Billing
 ```
 
 ### Individual Tools (Subdomains)
 ```
-fraudguard.maula.ai/             → Tool home
-fraudguard.maula.ai/dashboard    → Analytics
-fraudguard.maula.ai/settings     → Configuration
-fraudguard.maula.ai/api-docs     → API docs
+fraudguard.fyzo.xyz/             → Tool home
+fraudguard.fyzo.xyz/dashboard    → Analytics
+fraudguard.fyzo.xyz/settings     → Configuration
+fraudguard.fyzo.xyz/api-docs     → API docs
 ```
 
 ---
@@ -711,7 +711,7 @@ fraudguard.maula.ai/api-docs     → API docs
 - [ ] Test workspace modes (CHAT, PORTAL, CANVAS)
 - [ ] Verify function calling with test functions
 
-### Phase 2: Build Main Dashboard (maula.ai)
+### Phase 2: Build Main Dashboard (fyzo.xyz)
 - [ ] Create `/frontend/main-dashboard/` with Next.js 14
 - [ ] Install dependencies: React 19, TailwindCSS, lucide-react
 - [ ] Build homepage with 50 tool cards (grid layout)
@@ -720,7 +720,7 @@ fraudguard.maula.ai/api-docs     → API docs
 - [ ] Integrate with auth-service API (JWT handling)
 - [ ] Build user dashboard (profile, API keys, billing)
 - [ ] Add analytics page (usage stats, graphs)
-- [ ] Deploy to maula.ai (Docker + Nginx)
+- [ ] Deploy to fyzo.xyz (Docker + Nginx)
 
 ### Phase 3: Build First Tool (FraudGuard)
 - [ ] Copy neural-link-interface to `/frontend/tools/01-fraudguard/`
@@ -741,7 +741,7 @@ fraudguard.maula.ai/api-docs     → API docs
 - [ ] Test AI conversation flow end-to-end
 - [ ] Test multi-tab autonomous agent features
 - [ ] Create Dockerfile for deployment
-- [ ] Deploy to fguard.maula.ai (Docker + Nginx subdomain)
+- [ ] Deploy to fguard.fyzo.xyz (Docker + Nginx subdomain)
 
 ### Phase 4: Replicate to Remaining 49 Tools
 - [ ] Create script to copy tool template: `./scripts/create-tool.sh [toolName]`
@@ -752,7 +752,7 @@ fraudguard.maula.ai/api-docs     → API docs
   - [ ] Implement tool-specific AI functions
   - [ ] Connect to tool backend APIs
   - [ ] Test AI functionality
-  - [ ] Deploy to [toolname].maula.ai
+  - [ ] Deploy to [toolname].fyzo.xyz
 - [ ] Verify all 50 subdomains are accessible
 - [ ] Test SSO works across all subdomains
 
