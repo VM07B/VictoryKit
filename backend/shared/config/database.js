@@ -1,42 +1,57 @@
 const mongoose = require('mongoose');
-const logger = require('../utils/logger');
+const config = require('./index');
 
-const connectDatabase = async (uri, dbName) => {
+const connections = {};
+
+const connectDB = async (dbName) => {
+  if (connections[dbName]) {
+    return connections[dbName];
+  }
+
   try {
-    const options = {
-      dbName,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    const uri = `${config.mongodb.uri}/${dbName}`;
+    
+    const conn = await mongoose.createConnection(uri, {
       maxPoolSize: 10,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-    };
-
-    await mongoose.connect(uri, options);
-
-    logger.info(`MongoDB connected successfully to database: ${dbName}`);
-
-    // Handle connection events
-    mongoose.connection.on('error', (err) => {
-      logger.error(`MongoDB connection error: ${err}`);
     });
 
-    mongoose.connection.on('disconnected', () => {
-      logger.warn('MongoDB disconnected');
+    conn.on('connected', () => {
+      console.log(`✅ MongoDB connected: ${dbName}`);
     });
 
-    // Graceful shutdown
-    process.on('SIGINT', async () => {
-      await mongoose.connection.close();
-      logger.info('MongoDB connection closed due to app termination');
-      process.exit(0);
+    conn.on('error', (err) => {
+      console.error(`❌ MongoDB error (${dbName}):`, err.message);
     });
 
-    return mongoose.connection;
+    conn.on('disconnected', () => {
+      console.log(`⚠️ MongoDB disconnected: ${dbName}`);
+    });
+
+    connections[dbName] = conn;
+    return conn;
   } catch (error) {
-    logger.error(`MongoDB connection failed: ${error.message}`);
+    console.error(`❌ MongoDB connection failed (${dbName}):`, error.message);
     process.exit(1);
   }
 };
 
-module.exports = { connectDatabase };
+// Legacy support
+const connectDatabase = async (uri, dbName) => {
+  return connectDB(dbName);
+};
+
+const closeAll = async () => {
+  for (const [name, conn] of Object.entries(connections)) {
+    await conn.close();
+    console.log(`🔌 Closed connection: ${name}`);
+  }
+};
+
+process.on('SIGINT', async () => {
+  await closeAll();
+  process.exit(0);
+});
+
+module.exports = { connectDB, connectDatabase, closeAll, connections };

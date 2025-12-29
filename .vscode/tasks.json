@@ -1,0 +1,99 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Start All APIs",
+      "dependsOn": [
+        "MalwareHunter API (4004)",
+        "PhishGuard API (4005)",
+        "VulnScan API (4006)"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    },
+    {
+      "label": "📦 Install All Dependencies",
+      "type": "shell",
+      "command": "cd backend/shared && npm install && cd ../tools/04-malwarehunter/api && npm install && cd ../../05-phishguard/api && npm install && cd ../../06-vulnscan/api && npm install",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "🔌 Test MongoDB Connection",
+      "type": "shell",
+      "command": "node -e \"require('dotenv').config(); const mongoose = require('mongoose'); mongoose.connect(process.env.MONGODB_URI).then(() => { console.log('✅ MongoDB Connected!'); process.exit(0); }).catch(e => { console.error('❌ Failed:', e.message); process.exit(1); })\"",
+      "options": { "cwd": "${workspaceFolder}/backend/shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "🚀 Deploy to EC2",
+      "type": "shell",
+      "command": "bash deploy-ec2.sh",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "MalwareHunter API (4004)",
+      "type": "shell",
+      "command": "npm start",
+      "options": { "cwd": "${workspaceFolder}/backend/tools/04-malwarehunter/api" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+    },
+    {
+      "label": "PhishGuard API (4005)",
+      "type": "shell",
+      "command": "npm start",
+      "options": { "cwd": "${workspaceFolder}/backend/tools/05-phishguard/api" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+    },
+    {
+      "label": "VulnScan API (4006)",
+      "type": "shell",
+      "command": "npm start",
+      "options": { "cwd": "${workspaceFolder}/backend/tools/06-vulnscan/api" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+    },
+    {
+      "label": "PenTestAI API (4007)",
+      "type": "shell",
+      "command": "npm start",
+      "options": { "cwd": "${workspaceFolder}/backend/tools/07-pentestai/api" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+    },
+    {
+      "label": "SecureCode API (4008)",
+      "type": "shell",
+      "command": "npm start",
+      "options": { "cwd": "${workspaceFolder}/backend/tools/08-securecode/api" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+    },
+    {
+      "label": "ComplianceCheck API (4009)",
+      "type": "shell",
+      "command": "npm start",
+      "options": { "cwd": "${workspaceFolder}/backend/tools/09-compliancecheck/api" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+    },
+    {
+      "label": "DataGuardian API (4010)",
+      "type": "shell",
+      "command": "npm start",
+      "options": { "cwd": "${workspaceFolder}/backend/tools/10-dataguardian/api" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+    }
+  ]
+}

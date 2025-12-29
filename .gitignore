@@ -1,0 +1,79 @@
+# Dependencies
+node_modules/
+*/node_modules/
+**/node_modules/
+
+# ===============================
+# 🔐 SENSITIVE FILES - NEVER COMMIT!
+# ===============================
+
+# Environment files
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Private keys and certificates
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+victorykit.pem
+*.cer
+*.der
+
+# AWS credentials
+credentials
+.aws/
+
+# Secrets folders
+secrets/
+credentials/
+private/
+
+# ===============================
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# IDE
+.idea/
+*.swp
+*.swo
+.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads & temp
+uploads/
+temp/
+tmp/
+
+# Docker
+docker-compose.override.yml
+
+# Testing
+*.test.js.snap
+
+# Misc
+.cache/
+*.bak
