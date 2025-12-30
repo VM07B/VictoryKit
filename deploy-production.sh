@@ -80,13 +80,13 @@ deploy_tool() {
     log_info "Deploying $tool to $subdomain (port $port)..."
 
     # Create remote directory
-    ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/$subdomain /tmp/$tool-dist-dir"
+    ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/$subdomain"
 
     # Copy built files
-    scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "frontend/tools/$tool/dist" "$EC2_HOST:/tmp/$tool-dist-dir/"
+    scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "frontend/tools/$tool/dist" "$EC2_HOST:/tmp/"
 
     # Move files to final location
-    ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mv /tmp/$tool-dist-dir/dist/* /var/www/$subdomain/ && sudo chown -R ubuntu:ubuntu /var/www/$subdomain"
+    ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mv /tmp/dist/* /var/www/$subdomain/ && sudo chown -R ubuntu:ubuntu /var/www/$subdomain && sudo rm -rf /tmp/dist"
 
     # Create/update systemd service
     ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/systemd/system/$tool-frontend.service > /dev/null <<EOF
