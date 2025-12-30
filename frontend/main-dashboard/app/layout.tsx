@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'MAULA.AI - AI-Powered Security Services',
+  title: 'FYZO.XYZ - AI-Powered Security Services',
   description: '50+ AI-powered tools to protect your business',
 }
 

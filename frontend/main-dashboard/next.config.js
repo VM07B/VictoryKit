@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['maula.ai'],
+    domains: ['fyzo.xyz'],
   },
 }
 
