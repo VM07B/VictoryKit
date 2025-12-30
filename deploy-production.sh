@@ -340,7 +340,7 @@ main() {
         cd ../..
 
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/fyzo.xyz"
-        scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "frontend/main-dashboard/dist/*" "$EC2_HOST:/tmp/dashboard-dist/"
+        scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "frontend/main-dashboard/out/*" "$EC2_HOST:/tmp/dashboard-dist/"
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mv /tmp/dashboard-dist/* /var/www/fyzo.xyz/ && sudo chown -R ubuntu:ubuntu /var/www/fyzo.xyz"
 
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/systemd/system/dashboard.service > /dev/null <<EOF
