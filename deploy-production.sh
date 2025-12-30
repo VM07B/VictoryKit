@@ -79,14 +79,9 @@ deploy_tool() {
 
     log_info "Deploying $tool to $subdomain (port $port)..."
 
-    # Create remote directory
-    ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/$subdomain"
-
-    # Copy built files
-    scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "frontend/tools/$tool/dist" "$EC2_HOST:/tmp/"
-
-    # Move files to final location
-    ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mv /tmp/dist/* /var/www/$subdomain/ && sudo chown -R ubuntu:ubuntu /var/www/$subdomain && sudo rm -rf /tmp/dist"
+        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/$subdomain"
+        scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "frontend/tools/$tool/dist" "$EC2_HOST:/tmp/"
+        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo rm -rf /var/www/$subdomain/* && sudo mv /tmp/dist/* /var/www/$subdomain/ && sudo chown -R ubuntu:ubuntu /var/www/$subdomain && sudo rm -rf /tmp/dist"
 
     # Create/update systemd service
     ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/systemd/system/$tool-frontend.service > /dev/null <<EOF
@@ -201,7 +196,7 @@ deploy_backend() {
 
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/$tool-api"
         scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "backend/tools/$tool/api/dist" "$EC2_HOST:/tmp/"
-        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mv /tmp/dist/* /var/www/$tool-api/ && sudo chown -R ubuntu:ubuntu /var/www/$tool-api && sudo rm -rf /tmp/dist"
+        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo rm -rf /var/www/$tool-api/* && sudo mv /tmp/dist/* /var/www/$tool-api/ && sudo chown -R ubuntu:ubuntu /var/www/$tool-api && sudo rm -rf /tmp/dist"
 
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/systemd/system/$tool-api.service > /dev/null <<EOF
 [Unit]
@@ -261,7 +256,7 @@ EOF"
 
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/$tool-ai"
         scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "backend/tools/$tool/ai-assistant/dist" "$EC2_HOST:/tmp/"
-        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mv /tmp/dist/* /var/www/$tool-ai/ && sudo chown -R ubuntu:ubuntu /var/www/$tool-ai && sudo rm -rf /tmp/dist"
+        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo rm -rf /var/www/$tool-ai/* && sudo mv /tmp/dist/* /var/www/$tool-ai/ && sudo chown -R ubuntu:ubuntu /var/www/$tool-ai && sudo rm -rf /tmp/dist"
 
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/systemd/system/$tool-ai.service > /dev/null <<EOF
 [Unit]
