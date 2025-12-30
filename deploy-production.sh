@@ -339,7 +339,7 @@ main() {
         npm run build
         cd ../..
 
-        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/fyzo.xyz"
+        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/fyzo.xyz && sudo chown ubuntu:ubuntu /var/www/fyzo.xyz"
         scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "frontend/main-dashboard/out/." "$EC2_HOST:/var/www/fyzo.xyz/"
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo chown -R ubuntu:ubuntu /var/www/fyzo.xyz"
 
