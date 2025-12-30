@@ -83,6 +83,11 @@ deploy_tool() {
 
     log_info "Deploying $tool to $subdomain (port $port)..."
 
+    if [ ! -d "frontend/tools/$tool/dist" ]; then
+        log_warning "No frontend build found for $tool - skipping frontend deployment"
+        return 0
+    fi
+
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo mkdir -p /var/www/$subdomain"
         scp -i "$EC2_KEY" -o StrictHostKeyChecking=no -r "$PROJECT_ROOT/frontend/tools/$tool/dist" "$EC2_HOST:/tmp/"
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo rm -rf /var/www/$subdomain/* && sudo mv /tmp/dist/* /var/www/$subdomain/ && sudo chown -R ubuntu:ubuntu /var/www/$subdomain && sudo rm -rf /tmp/dist"
@@ -121,6 +126,12 @@ update_nginx() {
 
     log_info "Updating Nginx configuration for $subdomain..."
 
+    # Check if frontend exists
+    local has_frontend=false
+    if [ -d "frontend/tools/$tool/dist" ]; then
+        has_frontend=true
+    fi
+
     ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/nginx/sites-available/$subdomain > /dev/null <<EOF
 server {
     listen 443 ssl http2;
@@ -133,6 +144,10 @@ server {
     add_header X-Frame-Options \"SAMEORIGIN\" always;
     add_header X-Content-Type-Options \"nosniff\" always;
     add_header X-XSS-Protection \"1; mode=block\" always;
+EOF"
+
+    if [ "$has_frontend" = true ]; then
+        ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee -a /etc/nginx/sites-available/$subdomain > /dev/null <<EOF
 
     # Proxy to $tool frontend (port $port)
     location / {
@@ -146,6 +161,11 @@ server {
         proxy_set_header X-Forwarded-Proto \\\$scheme;
         proxy_cache_bypass \\\$http_upgrade;
     }
+EOF"
+    fi
+
+    # Always add API and WS proxy
+    ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee -a /etc/nginx/sites-available/$subdomain > /dev/null <<EOF
 
     # Proxy API requests to $tool backend
     location /api {
@@ -369,19 +389,28 @@ EOF"
         log_info "Deploying $tool..."
 
         if build_frontend "$tool"; then
-            # Deploy frontend
-            deploy_tool "$tool" "$subdomain.fyzo.xyz" "$port"
-            
-            # Update Nginx
-            update_nginx "$tool" "$subdomain" "$port" "$api_port" "$ai_port"
+            # Check if frontend was actually built (directory exists)
+            if [ -d "frontend/tools/$tool/dist" ]; then
+                # Deploy frontend
+                deploy_tool "$tool" "$subdomain.fyzo.xyz" "$port"
+                
+                # Update Nginx
+                update_nginx "$tool" "$subdomain" "$port" "$api_port" "$ai_port"
+            else
+                log_warning "No frontend build output found for $tool - deploying backend only"
+            fi
         else
             log_warning "Skipping $tool deployment due to frontend build failure"
             continue
         fi
-        update_nginx "$tool" "$subdomain" "$port" "$api_port" "$ai_port"
 
         # Deploy backend
         deploy_backend "$tool" "$api_port" "$ml_port" "$ai_port"
+
+        # Test deployment
+        test_deployment "$subdomain"
+
+        log_success "$tool deployment completed"
 
         # Test deployment
         test_deployment "$subdomain"

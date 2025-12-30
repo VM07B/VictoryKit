@@ -5,6 +5,7 @@ This script automates the complete deployment process for MAULA.AI, including gi
 ## 🚀 Quick Start
 
 1. **Configure deployment settings:**
+
    ```bash
    cp deploy-config.sh.example deploy-config.sh
    # Edit deploy-config.sh with your actual values
@@ -16,6 +17,7 @@ This script automates the complete deployment process for MAULA.AI, including gi
    ```
 
 That's it! The script will:
+
 - ✅ Commit and push all changes to Git
 - ✅ Build all frontends
 - ✅ Deploy to AWS EC2
@@ -46,17 +48,21 @@ TOOLS_CONFIG=(
 ## 🏗️ What Gets Deployed
 
 ### Main Dashboard
+
 - **URL:** https://fyzo.xyz
 - **Port:** 3000
 - **Path:** `/var/www/fyzo.xyz`
 
 ### Tools
+
 Each tool gets deployed as a subdomain:
+
 - **Frontend:** `https://{subdomain}.fyzo.xyz`
 - **API:** `https://{subdomain}.fyzo.xyz/api`
 - **WebSocket:** `wss://{subdomain}.fyzo.xyz/ws`
 
 ### Current Tools
+
 - **FraudGuard:** https://fguard.fyzo.xyz
   - Frontend: Port 3001
   - API: Port 4001
@@ -66,11 +72,13 @@ Each tool gets deployed as a subdomain:
 ## 🔧 Prerequisites
 
 ### Local Machine
+
 - `git`, `scp`, `ssh` installed
 - SSH key configured for EC2 access
 - Node.js and npm for building frontends
 
 ### AWS EC2 Server
+
 - Ubuntu 20.04+ or Amazon Linux 2+
 - Node.js, Python3, pip installed
 - Nginx installed and configured
@@ -79,6 +87,7 @@ Each tool gets deployed as a subdomain:
 - Systemd for service management
 
 ### Required EC2 Setup
+
 ```bash
 # Install dependencies
 sudo apt update
@@ -116,6 +125,7 @@ sudo ufw allow 22,80,443
 ## 🔍 Troubleshooting
 
 ### Check Service Status
+
 ```bash
 # On EC2 server
 sudo systemctl status fraudguard-frontend
@@ -124,6 +134,7 @@ sudo journalctl -u fraudguard-frontend -f
 ```
 
 ### Test Endpoints
+
 ```bash
 curl https://fyzo.xyz
 curl https://fguard.fyzo.xyz
@@ -131,6 +142,7 @@ curl https://fguard.fyzo.xyz/api/health
 ```
 
 ### Common Issues
+
 - **SSH Connection Failed:** Check EC2 security group and SSH key
 - **Build Failed:** Ensure all dependencies are installed locally
 - **Nginx Error:** Check SSL certificates and configuration syntax

@@ -41,6 +41,7 @@ cp deploy-config.sh.example deploy-config.sh
 ```
 
 **What happens in seconds:**
+
 - ✅ Git commit & push all changes
 - ✅ Build all frontends
 - ✅ Deploy to AWS EC2
@@ -50,6 +51,7 @@ cp deploy-config.sh.example deploy-config.sh
 - ✅ Health checks performed
 
 ### Production URLs
+
 - **Main Dashboard**: [fyzo.xyz](https://fyzo.xyz)
 - **FraudGuard**: [fguard.fyzo.xyz](https://fguard.fyzo.xyz)
 - **All Tools**: https://{tool}.fyzo.xyz
@@ -59,6 +61,7 @@ cp deploy-config.sh.example deploy-config.sh
 ---
 
 ### Core Categories
+
 - **Payment & Fraud Detection** (5 tools)
 - **Device Fingerprinting & Biometrics** (5 tools)
 - **IP & Network Intelligence** (5 tools)
@@ -81,6 +84,7 @@ cp deploy-config.sh.example deploy-config.sh
 ## 🏗️ Architecture
 
 ### Tech Stack
+
 - **Frontend**: React.js, Next.js, TailwindCSS
 - **Backend**: Node.js, Python, FastAPI
 - **Database**: MongoDB Atlas, Redis
@@ -88,6 +92,7 @@ cp deploy-config.sh.example deploy-config.sh
 - **Infrastructure**: Cloudflare, AWS EC2, Nginx, Docker
 
 ### Scale
+
 - **203 microservices**
 - **51 databases**
 - **50 AI assistants**
@@ -113,6 +118,7 @@ Complete planning documentation:
 ## 🎨 Key Features
 
 ### Every Tool Includes
+
 - Core security functionality (API/service)
 - Real-time AI assistant (conversational)
 - Multi-LLM provider support
@@ -123,6 +129,7 @@ Complete planning documentation:
 - SDKs (Python, JavaScript, PHP, etc.)
 
 ### Platform Features
+
 - Single Sign-On (SSO)
 - Unified billing system
 - API key management
@@ -135,18 +142,21 @@ Complete planning documentation:
 ## 💰 Pricing Tiers
 
 ### FREE
+
 - 50 AI messages/day
 - 1,000 API calls/month per tool
 - Gemini AI only
 - Community support
 
 ### PRO ($99/month)
+
 - 1,000 AI messages/day
 - 100,000 API calls/month per tool
 - Claude, GPT, Gemini, Mistral
 - Priority support
 
 ### ENTERPRISE (Custom)
+
 - Unlimited AI messages & API calls
 - All AI providers (including Grok)
 - Dedicated support
@@ -185,24 +195,28 @@ docker-compose up
 ## 🎯 Roadmap
 
 ### Phase 1: Foundation (Months 1-3)
+
 - Infrastructure setup
 - Auth system + API gateway
 - Main dashboard
 - First tool: IPIntel
 
 ### Phase 2: Core Tools (Months 4-9)
+
 - Build 10 high-priority tools
 - Payment fraud detection
 - Device fingerprinting
 - Bot detection
 
 ### Phase 3: Expansion (Months 10-15)
+
 - Complete all 50 tools
 - Advanced analytics
 - Webhook system
 - SDKs
 
 ### Phase 4: Scale (Months 16-24)
+
 - Enterprise features
 - White-label options
 - Global expansion
