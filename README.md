@@ -22,7 +22,41 @@ Traditional security tools are static APIs with complex documentation. **MAULA.A
 
 ---
 
-## 🛡️ The 50 Security Tools
+## � Deployment
+
+### One-Command Production Deployment
+
+MAULA.AI includes automated deployment scripts for instant production deployment:
+
+```bash
+# 1. Configure your settings
+cp deploy-config.sh.example deploy-config.sh
+# Edit deploy-config.sh with your EC2 IP, SSH key, etc.
+
+# 2. Pre-flight check
+./deploy-check.sh
+
+# 3. Deploy everything
+./deploy-production.sh
+```
+
+**What happens in seconds:**
+- ✅ Git commit & push all changes
+- ✅ Build all frontends
+- ✅ Deploy to AWS EC2
+- ✅ Configure Nginx subdomains
+- ✅ Start all backend services
+- ✅ SSL certificates applied
+- ✅ Health checks performed
+
+### Production URLs
+- **Main Dashboard**: [fyzo.xyz](https://fyzo.xyz)
+- **FraudGuard**: [fguard.fyzo.xyz](https://fguard.fyzo.xyz)
+- **All Tools**: https://{tool}.fyzo.xyz
+
+[📖 Detailed Deployment Guide](DEPLOYMENT-README.md)
+
+---
 
 ### Core Categories
 - **Payment & Fraud Detection** (5 tools)
