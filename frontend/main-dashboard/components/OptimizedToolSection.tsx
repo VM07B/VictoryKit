@@ -72,6 +72,30 @@ export default function OptimizedToolSection({
 
     // Animation sequence (unboxing effect) linked to scroll progress
     
+    // 0-30%: Deep rising effect (The "Emerging from deep inside" feel)
+    // We start with the content pushed down, scaled down, and slightly rotated for depth
+    tl.fromTo(contentRef.current,
+      { 
+        opacity: 0, 
+        scale: 0.85, 
+        y: '15vh', 
+        filter: 'blur(10px)',
+        transformPerspective: 1000,
+        rotateX: 5
+      },
+      { 
+        opacity: 1, 
+        scale: 1, 
+        y: '0vh', 
+        filter: 'blur(0px)',
+        transformPerspective: 1000,
+        rotateX: 0,
+        duration: 0.3,
+        ease: 'power2.out'
+      },
+      0
+    );
+
     // 0-20%: Fade in number
     tl.fromTo(number, 
       { opacity: 0, scale: 0.8 },
@@ -81,8 +105,8 @@ export default function OptimizedToolSection({
 
     // 10-50%: Headline slides and fades in
     tl.fromTo(headline,
-      { opacity: 0, y: 60, clipPath: 'inset(100% 0% 0% 0%)' },
-      { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4 },
+      { opacity: 0, y: 60 },
+      { opacity: 1, y: 0, duration: 0.4 },
       0.1
     );
 
@@ -90,9 +114,8 @@ export default function OptimizedToolSection({
     tl.fromTo(preview,
       { 
         opacity: 0, 
-        scale: 0.85, 
-        x: isAlternate ? -80 : 80,
-        clipPath: 'inset(8% 8% 8% 8%)'
+        scale: 0.9, 
+        x: isAlternate ? -40 : 40,
       },
       { 
         opacity: 1, 
