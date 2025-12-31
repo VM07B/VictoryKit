@@ -1,13 +1,13 @@
 /**
  * VictoryKit Connector Registry
  * 
- * Enterprise-grade connectors for the RARE stack:
- * - Google Chronicle (SIEM)
- * - Tines (SOAR)
- * - Keycloak + FIDO2 (IdP)
+ * Enterprise-grade connectors for the chosen stack:
+ * - Microsoft Sentinel (SIEM)
+ * - Cortex XSOAR (SOAR)
+ * - Okta (IdP)
  * - Kong (API Gateway)
- * - Fastly (WAF/CDN)
- * - SentinelOne (EDR)
+ * - Cloudflare (WAF/CDN)
+ * - CrowdStrike Falcon (EDR)
  * - Wiz (CSPM)
  * - Redpanda (Message Bus)
  * - OpenCTI (TIP)
@@ -30,20 +30,20 @@ const { RetryStrategy, CircuitBreaker } = require('./base/Resilience');
 const { RedpandaConnector, RedpandaProducer, RedpandaConsumer } = require('./messaging/RedpandaConnector');
 
 // SIEM & SOAR
-const { ChronicleConnector } = require('./siem/ChronicleConnector');
-const { TinesConnector } = require('./soar/TinesConnector');
+const { SentinelConnector } = require('./siem/SentinelConnector');
+const { CortexXSOARConnector } = require('./soar/CortexXSOARConnector');
 
 // Identity & Access
-const { KeycloakConnector, FIDO2Manager } = require('./identity/KeycloakConnector');
+const { OktaConnector } = require('./identity/OktaConnector');
 const { CedarPolicyEngine, OPAConnector } = require('./policy/PolicyConnector');
 
 // Network & Edge
 const { KongConnector } = require('./gateway/KongConnector');
-const { FastlyConnector } = require('./cdn/FastlyConnector');
+const { CloudflareConnector } = require('./cdn/CloudflareConnector');
 const { ZeekConnector, SuricataConnector } = require('./network/NetworkConnector');
 
 // Endpoint & Cloud
-const { SentinelOneConnector } = require('./edr/SentinelOneConnector');
+const { CrowdStrikeConnector } = require('./edr/CrowdStrikeConnector');
 const { WizConnector } = require('./cspm/WizConnector');
 const { CapeSandboxConnector } = require('./sandbox/CapeSandboxConnector');
 
@@ -78,26 +78,26 @@ async function initializeConnectors(config = {}) {
   }
 
   // SIEM
-  if (config.chronicle) {
-    const chronicle = new ChronicleConnector(config.chronicle);
-    await chronicle.connect();
-    registry.register('chronicle', chronicle);
-    connectors.push(chronicle);
+  if (config.sentinel) {
+    const sentinel = new SentinelConnector(config.sentinel);
+    await sentinel.connect();
+    registry.register('sentinel', sentinel);
+    connectors.push(sentinel);
   }
 
   // SOAR
-  if (config.tines) {
-    const tines = new TinesConnector(config.tines);
-    await tines.connect();
-    registry.register('tines', tines);
-    connectors.push(tines);
+  if (config.cortexXSOAR) {
+    const cortexXSOAR = new CortexXSOARConnector(config.cortexXSOAR);
+    await cortexXSOAR.connect();
+    registry.register('cortexXSOAR', cortexXSOAR);
+    connectors.push(cortexXSOAR);
   }
 
   // IdP
-  if (config.keycloak) {
-    const keycloak = new KeycloakConnector(config.keycloak);
-    await keycloak.connect();
-    registry.register('keycloak', keycloak);
+  if (config.okta) {
+    const okta = new OktaConnector(config.okta);
+    await okta.connect();
+    registry.register('okta', okta);
     connectors.push(keycloak);
   }
 
@@ -110,19 +110,19 @@ async function initializeConnectors(config = {}) {
   }
 
   // WAF/CDN
-  if (config.fastly) {
-    const fastly = new FastlyConnector(config.fastly);
-    await fastly.connect();
-    registry.register('fastly', fastly);
-    connectors.push(fastly);
+  if (config.cloudflare) {
+    const cloudflare = new CloudflareConnector(config.cloudflare);
+    await cloudflare.connect();
+    registry.register('cloudflare', cloudflare);
+    connectors.push(cloudflare);
   }
 
   // EDR
-  if (config.sentinelone) {
-    const s1 = new SentinelOneConnector(config.sentinelone);
-    await s1.connect();
-    registry.register('sentinelone', s1);
-    connectors.push(s1);
+  if (config.crowdstrike) {
+    const crowdstrike = new CrowdStrikeConnector(config.crowdstrike);
+    await crowdstrike.connect();
+    registry.register('crowdstrike', crowdstrike);
+    connectors.push(crowdstrike);
   }
 
   // CSPM
