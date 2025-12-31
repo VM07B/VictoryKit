@@ -43,7 +43,16 @@
     "@langchain/anthropic": "^0.0.9",
     "@langchain/google-genai": "^0.0.7",
     "ai": "^2.2.30",
-    "isolated-vm": "^4.6.0"
+    "isolated-vm": "^4.6.0",
+    "@opentelemetry/sdk-node": "^0.48.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.41.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.48.0",
+    "@opentelemetry/exporter-metrics-otlp-http": "^0.48.0",
+    "@opentelemetry/semantic-conventions": "^1.21.0",
+    "prom-client": "^15.1.0",
+    "@sentry/node": "^7.91.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

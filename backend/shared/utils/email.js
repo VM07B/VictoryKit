@@ -3,10 +3,10 @@
  * Uses nodemailer for sending notifications, alerts, and reports
  */
 
-const nodemailer = require('nodemailer');
-const pino = require('pino');
+const nodemailer = require("nodemailer");
+const pino = require("pino");
 
-const logger = pino({ name: 'email-service' });
+const logger = pino({ name: "email-service" });
 
 // Transporter instance
 let transporter = null;
@@ -17,26 +17,26 @@ let transporter = null;
  */
 function initializeEmail(options = {}) {
   const config = {
-    host: options.host || process.env.SMTP_HOST || 'smtp.gmail.com',
+    host: options.host || process.env.SMTP_HOST || "smtp.gmail.com",
     port: options.port || parseInt(process.env.SMTP_PORT) || 587,
-    secure: options.secure || process.env.SMTP_SECURE === 'true',
+    secure: options.secure || process.env.SMTP_SECURE === "true",
     auth: {
       user: options.user || process.env.SMTP_USER,
       pass: options.pass || process.env.SMTP_PASS,
     },
   };
-  
+
   transporter = nodemailer.createTransport(config);
-  
+
   // Verify connection
   transporter.verify((error) => {
     if (error) {
-      logger.error({ err: error }, 'Email transporter verification failed');
+      logger.error({ err: error }, "Email transporter verification failed");
     } else {
-      logger.info('Email transporter ready');
+      logger.info("Email transporter ready");
     }
   });
-  
+
   return transporter;
 }
 
@@ -49,9 +49,10 @@ async function sendEmail(options) {
   if (!transporter) {
     initializeEmail();
   }
-  
+
   const mailOptions = {
-    from: options.from || process.env.SMTP_FROM || 'VictoryKit <noreply@fyzo.xyz>',
+    from:
+      options.from || process.env.SMTP_FROM || "VictoryKit <noreply@fyzo.xyz>",
     to: options.to,
     cc: options.cc,
     bcc: options.bcc,
@@ -60,13 +61,19 @@ async function sendEmail(options) {
     html: options.html,
     attachments: options.attachments,
   };
-  
+
   try {
     const result = await transporter.sendMail(mailOptions);
-    logger.info({ to: options.to, subject: options.subject, messageId: result.messageId }, 'Email sent');
+    logger.info(
+      { to: options.to, subject: options.subject, messageId: result.messageId },
+      "Email sent"
+    );
     return result;
   } catch (error) {
-    logger.error({ to: options.to, subject: options.subject, err: error }, 'Failed to send email');
+    logger.error(
+      { to: options.to, subject: options.subject, err: error },
+      "Failed to send email"
+    );
     throw error;
   }
 }
@@ -92,7 +99,9 @@ const templates = {
             <h3>Details</h3>
             <p>${data.description}</p>
           </div>
-          <a href="${data.actionUrl}" style="display: inline-block; background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
+          <a href="${
+            data.actionUrl
+          }" style="display: inline-block; background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
             View Details
           </a>
         </div>
@@ -102,7 +111,7 @@ const templates = {
       </div>
     `,
   }),
-  
+
   /**
    * Scan complete template
    */
@@ -126,7 +135,9 @@ const templates = {
               <li>Low Issues: ${data.low || 0}</li>
             </ul>
           </div>
-          <a href="${data.reportUrl}" style="display: inline-block; background: #059669; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
+          <a href="${
+            data.reportUrl
+          }" style="display: inline-block; background: #059669; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
             View Full Report
           </a>
         </div>
@@ -136,7 +147,7 @@ const templates = {
       </div>
     `,
   }),
-  
+
   /**
    * Daily report template
    */
@@ -152,7 +163,13 @@ const templates = {
           
           <div style="background: white; padding: 15px; border-radius: 4px; margin: 15px 0;">
             <h3>Security Score</h3>
-            <p style="font-size: 48px; font-weight: bold; color: ${data.score >= 80 ? '#059669' : data.score >= 60 ? '#d97706' : '#dc2626'}; margin: 0;">
+            <p style="font-size: 48px; font-weight: bold; color: ${
+              data.score >= 80
+                ? "#059669"
+                : data.score >= 60
+                ? "#d97706"
+                : "#dc2626"
+            }; margin: 0;">
               ${data.score}/100
             </p>
           </div>
@@ -166,7 +183,9 @@ const templates = {
             </ul>
           </div>
           
-          <a href="${data.dashboardUrl}" style="display: inline-block; background: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
+          <a href="${
+            data.dashboardUrl
+          }" style="display: inline-block; background: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px;">
             View Dashboard
           </a>
         </div>
@@ -176,7 +195,7 @@ const templates = {
       </div>
     `,
   }),
-  
+
   /**
    * Welcome email template
    */
@@ -224,7 +243,7 @@ async function sendTemplatedEmail(templateName, to, data) {
   if (!template) {
     throw new Error(`Email template "${templateName}" not found`);
   }
-  
+
   const { subject, html } = template(data);
   return sendEmail({ to, subject, html });
 }

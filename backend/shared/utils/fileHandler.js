@@ -3,16 +3,17 @@
  * Uses multer for uploads and fs-extra for file operations
  */
 
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs-extra');
-const { v4: uuidv4 } = require('uuid');
-const pino = require('pino');
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs-extra");
+const { v4: uuidv4 } = require("uuid");
+const pino = require("pino");
 
-const logger = pino({ name: 'file-handler' });
+const logger = pino({ name: "file-handler" });
 
 // Base upload directory
-const UPLOAD_DIR = process.env.UPLOAD_DIR || path.join(process.cwd(), 'uploads');
+const UPLOAD_DIR =
+  process.env.UPLOAD_DIR || path.join(process.cwd(), "uploads");
 
 // Ensure upload directory exists
 fs.ensureDirSync(UPLOAD_DIR);
@@ -21,39 +22,49 @@ fs.ensureDirSync(UPLOAD_DIR);
 const fileTypes = {
   // Malware analysis samples
   malware: {
-    extensions: ['.exe', '.dll', '.bin', '.zip', '.rar', '.7z', '.tar', '.gz'],
+    extensions: [".exe", ".dll", ".bin", ".zip", ".rar", ".7z", ".tar", ".gz"],
     maxSize: 100 * 1024 * 1024, // 100MB
-    folder: 'malware-samples',
+    folder: "malware-samples",
   },
   // Log files for analysis
   logs: {
-    extensions: ['.log', '.txt', '.json', '.csv', '.xml'],
+    extensions: [".log", ".txt", ".json", ".csv", ".xml"],
     maxSize: 50 * 1024 * 1024, // 50MB
-    folder: 'logs',
+    folder: "logs",
   },
   // Configuration files
   config: {
-    extensions: ['.json', '.yaml', '.yml', '.toml', '.ini', '.conf'],
+    extensions: [".json", ".yaml", ".yml", ".toml", ".ini", ".conf"],
     maxSize: 10 * 1024 * 1024, // 10MB
-    folder: 'configs',
+    folder: "configs",
   },
   // Reports
   reports: {
-    extensions: ['.pdf', '.html', '.json', '.csv'],
+    extensions: [".pdf", ".html", ".json", ".csv"],
     maxSize: 25 * 1024 * 1024, // 25MB
-    folder: 'reports',
+    folder: "reports",
   },
   // Code for analysis
   code: {
-    extensions: ['.js', '.ts', '.py', '.java', '.c', '.cpp', '.go', '.rs', '.php'],
+    extensions: [
+      ".js",
+      ".ts",
+      ".py",
+      ".java",
+      ".c",
+      ".cpp",
+      ".go",
+      ".rs",
+      ".php",
+    ],
     maxSize: 20 * 1024 * 1024, // 20MB
-    folder: 'code',
+    folder: "code",
   },
   // General documents
   documents: {
-    extensions: ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'],
+    extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx"],
     maxSize: 25 * 1024 * 1024, // 25MB
-    folder: 'documents',
+    folder: "documents",
   },
 };
 
@@ -66,11 +77,11 @@ function createStorage(type) {
   const config = fileTypes[type] || fileTypes.documents;
   const folderPath = path.join(UPLOAD_DIR, config.folder);
   fs.ensureDirSync(folderPath);
-  
+
   return multer.diskStorage({
     destination: (req, file, cb) => {
       // Create date-based subdirectory
-      const dateFolder = new Date().toISOString().split('T')[0];
+      const dateFolder = new Date().toISOString().split("T")[0];
       const destPath = path.join(folderPath, dateFolder);
       fs.ensureDirSync(destPath);
       cb(null, destPath);
@@ -91,7 +102,7 @@ function createStorage(type) {
  */
 function createFileFilter(type) {
   const config = fileTypes[type] || fileTypes.documents;
-  
+
   return (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
     if (config.extensions.includes(ext)) {
@@ -110,7 +121,7 @@ function createFileFilter(type) {
  */
 function createUploader(type, options = {}) {
   const config = fileTypes[type] || fileTypes.documents;
-  
+
   return multer({
     storage: createStorage(type),
     fileFilter: createFileFilter(type),
@@ -168,14 +179,14 @@ async function deleteFile(filePath) {
     // Ensure file is within upload directory (security)
     const resolved = path.resolve(filePath);
     if (!resolved.startsWith(path.resolve(UPLOAD_DIR))) {
-      throw new Error('Cannot delete files outside upload directory');
+      throw new Error("Cannot delete files outside upload directory");
     }
-    
+
     await fs.remove(filePath);
-    logger.info({ filePath }, 'File deleted');
+    logger.info({ filePath }, "File deleted");
     return true;
   } catch (error) {
-    logger.error({ filePath, err: error }, 'Failed to delete file');
+    logger.error({ filePath, err: error }, "Failed to delete file");
     return false;
   }
 }
@@ -190,13 +201,13 @@ async function deleteFile(filePath) {
 async function moveFile(sourcePath, destFolder, newName = null) {
   const destPath = path.join(UPLOAD_DIR, destFolder);
   await fs.ensureDir(destPath);
-  
+
   const filename = newName || path.basename(sourcePath);
   const destination = path.join(destPath, filename);
-  
+
   await fs.move(sourcePath, destination, { overwrite: true });
-  logger.info({ from: sourcePath, to: destination }, 'File moved');
-  
+  logger.info({ from: sourcePath, to: destination }, "File moved");
+
   return destination;
 }
 
@@ -206,7 +217,7 @@ async function moveFile(sourcePath, destFolder, newName = null) {
  * @param {string} encoding - File encoding (default: utf-8)
  * @returns {Promise<string|Buffer>}
  */
-async function readFile(filePath, encoding = 'utf-8') {
+async function readFile(filePath, encoding = "utf-8") {
   return fs.readFile(filePath, encoding);
 }
 
@@ -219,7 +230,7 @@ async function readFile(filePath, encoding = 'utf-8') {
 async function writeFile(filePath, content) {
   await fs.ensureDir(path.dirname(filePath));
   await fs.writeFile(filePath, content);
-  logger.info({ filePath }, 'File written');
+  logger.info({ filePath }, "File written");
 }
 
 /**
@@ -230,7 +241,7 @@ async function writeFile(filePath, content) {
  */
 async function listFiles(dirPath, options = {}) {
   const resolvedPath = path.join(UPLOAD_DIR, dirPath);
-  
+
   if (options.recursive) {
     const files = [];
     const walk = async (dir) => {
@@ -241,14 +252,14 @@ async function listFiles(dirPath, options = {}) {
         if (stats.isDirectory()) {
           await walk(itemPath);
         } else {
-          files.push(itemPath.replace(UPLOAD_DIR, ''));
+          files.push(itemPath.replace(UPLOAD_DIR, ""));
         }
       }
     };
     await walk(resolvedPath);
     return files;
   }
-  
+
   return fs.readdir(resolvedPath);
 }
 
@@ -260,13 +271,13 @@ async function listFiles(dirPath, options = {}) {
 async function cleanupOldFiles(maxAgeDays = 30) {
   const cutoff = Date.now() - maxAgeDays * 24 * 60 * 60 * 1000;
   let deleted = 0;
-  
+
   const cleanup = async (dir) => {
     const items = await fs.readdir(dir);
     for (const item of items) {
       const itemPath = path.join(dir, item);
       const stats = await fs.stat(itemPath);
-      
+
       if (stats.isDirectory()) {
         await cleanup(itemPath);
         // Remove empty directories
@@ -280,9 +291,9 @@ async function cleanupOldFiles(maxAgeDays = 30) {
       }
     }
   };
-  
+
   await cleanup(UPLOAD_DIR);
-  logger.info({ deleted, maxAgeDays }, 'Cleanup completed');
+  logger.info({ deleted, maxAgeDays }, "Cleanup completed");
   return deleted;
 }
 

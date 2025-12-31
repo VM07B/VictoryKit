@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background: linear-gradient(135deg, #1c0f05 0%, #431407 50%, #1c0f05 100%);
   min-height: 100vh;
 }
@@ -22,14 +26,30 @@ body {
   @apply px-2 py-1 rounded-full text-xs font-medium;
 }
 
-.stage-badge.passed { @apply bg-green-600 text-white; }
-.stage-badge.failed { @apply bg-red-600 text-white; }
-.stage-badge.running { @apply bg-orange-600 text-white animate-pulse; }
-.stage-badge.pending { @apply bg-gray-600 text-white; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.stage-badge.passed {
+  @apply bg-green-600 text-white;
+}
+.stage-badge.failed {
+  @apply bg-red-600 text-white;
+}
+.stage-badge.running {
+  @apply bg-orange-600 text-white animate-pulse;
+}
+.stage-badge.pending {
+  @apply bg-gray-600 text-white;
 }
 
-.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}

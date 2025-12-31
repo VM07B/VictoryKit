@@ -1,0 +1,84 @@
+{
+  "name": "victorykit",
+  "version": "1.0.0",
+  "description": "VictoryKit - Enterprise Cybersecurity Platform with 50 AI-Powered Security Tools",
+  "private": true,
+  "workspaces": [
+    "backend/shared",
+    "backend/shared-services/*",
+    "backend/tools/*/api",
+    "frontend/*",
+    "neural-link-interface"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:gateway\" \"npm run dev:auth\"",
+    "dev:gateway": "cd backend/shared-services/api-gateway && npm run dev",
+    "dev:auth": "cd backend/shared-services/auth-service && npm run dev",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint . --ext .js,.ts,.tsx --fix",
+    "lint:check": "eslint . --ext .js,.ts,.tsx",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md,css,scss}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,json,md,css,scss}\"",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky install",
+    "precommit": "lint-staged",
+    "commit": "cz",
+    "start:prod": "pm2 start ecosystem.config.js",
+    "stop:prod": "pm2 stop ecosystem.config.js",
+    "restart:prod": "pm2 restart ecosystem.config.js",
+    "logs:prod": "pm2 logs",
+    "monit": "pm2 monit",
+    "docker:build": "docker-compose -f docker-compose.prod.yml build",
+    "docker:up": "docker-compose -f docker-compose.prod.yml up -d",
+    "docker:down": "docker-compose -f docker-compose.prod.yml down",
+    "docker:logs": "docker-compose -f docker-compose.prod.yml logs -f",
+    "install:all": "npm install && npm run install:tools",
+    "install:tools": "node scripts/install-all-tools.js"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "commitizen": "^4.3.0",
+    "concurrently": "^8.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-security": "^2.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss}": [
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VM07B/VictoryKit.git"
+  },
+  "author": "VictoryKit Team",
+  "license": "MIT"
+}

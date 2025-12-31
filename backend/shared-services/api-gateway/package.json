@@ -9,7 +9,11 @@
     "start": "node dist/server.js",
     "test": "jest"
   },
-  "keywords": ["gateway", "proxy", "maula"],
+  "keywords": [
+    "gateway",
+    "proxy",
+    "maula"
+  ],
   "author": "MAULA.AI",
   "license": "MIT",
   "dependencies": {

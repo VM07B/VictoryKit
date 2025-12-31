@@ -1,5 +1,5 @@
 {
-  "name": "accesscontrol-api",
+  "name": "accesscontrol-api-16",
   "version": "1.0.0",
   "description": "AccessControl - Role-Based Access Control Management API",
   "main": "src/server.js",

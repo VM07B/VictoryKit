@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background: linear-gradient(135deg, #1a0a1f 0%, #2d1a3d 50%, #1a0a1f 100%);
   min-height: 100vh;
 }
@@ -23,8 +27,16 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}

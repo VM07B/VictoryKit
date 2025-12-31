@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #052e16 100%);
   min-height: 100vh;
 }
@@ -22,13 +26,27 @@ body {
   @apply px-2 py-1 rounded-full text-xs font-medium;
 }
 
-.access-badge.granted { @apply bg-green-600 text-white; }
-.access-badge.denied { @apply bg-red-600 text-white; }
-.access-badge.pending { @apply bg-yellow-600 text-white; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.access-badge.granted {
+  @apply bg-green-600 text-white;
+}
+.access-badge.denied {
+  @apply bg-red-600 text-white;
+}
+.access-badge.pending {
+  @apply bg-yellow-600 text-white;
 }
 
-.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}

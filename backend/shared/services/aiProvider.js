@@ -3,37 +3,37 @@
  * Supports OpenAI, Anthropic, and Google Gemini with seamless provider switching
  */
 
-const OpenAI = require('openai');
-const Anthropic = require('@anthropic-ai/sdk');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const pino = require('pino');
+const OpenAI = require("openai");
+const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const pino = require("pino");
 
-const logger = pino({ name: 'ai-provider' });
+const logger = pino({ name: "ai-provider" });
 
 // Provider configurations
 const providers = {
-  OPENAI: 'openai',
-  ANTHROPIC: 'anthropic',
-  GEMINI: 'gemini',
+  OPENAI: "openai",
+  ANTHROPIC: "anthropic",
+  GEMINI: "gemini",
 };
 
 // Model mappings
 const models = {
   openai: {
-    default: 'gpt-4-turbo-preview',
-    fast: 'gpt-3.5-turbo',
-    vision: 'gpt-4-vision-preview',
-    embedding: 'text-embedding-3-small',
+    default: "gpt-4-turbo-preview",
+    fast: "gpt-3.5-turbo",
+    vision: "gpt-4-vision-preview",
+    embedding: "text-embedding-3-small",
   },
   anthropic: {
-    default: 'claude-3-opus-20240229',
-    fast: 'claude-3-haiku-20240307',
-    vision: 'claude-3-opus-20240229',
+    default: "claude-3-opus-20240229",
+    fast: "claude-3-haiku-20240307",
+    vision: "claude-3-opus-20240229",
   },
   gemini: {
-    default: 'gemini-pro',
-    fast: 'gemini-pro',
-    vision: 'gemini-pro-vision',
+    default: "gemini-pro",
+    fast: "gemini-pro",
+    vision: "gemini-pro-vision",
   },
 };
 
@@ -52,7 +52,7 @@ function initializeProviders(config = {}) {
     openaiClient = new OpenAI({
       apiKey: config.openaiApiKey || process.env.OPENAI_API_KEY,
     });
-    logger.info('OpenAI provider initialized');
+    logger.info("OpenAI provider initialized");
   }
 
   // Anthropic
@@ -60,7 +60,7 @@ function initializeProviders(config = {}) {
     anthropicClient = new Anthropic({
       apiKey: config.anthropicApiKey || process.env.ANTHROPIC_API_KEY,
     });
-    logger.info('Anthropic provider initialized');
+    logger.info("Anthropic provider initialized");
   }
 
   // Google Gemini
@@ -68,7 +68,7 @@ function initializeProviders(config = {}) {
     geminiClient = new GoogleGenerativeAI(
       config.geminiApiKey || process.env.GEMINI_API_KEY
     );
-    logger.info('Google Gemini provider initialized');
+    logger.info("Google Gemini provider initialized");
   }
 }
 
@@ -108,24 +108,48 @@ async function chat(options) {
 
     switch (provider) {
       case providers.OPENAI:
-        result = await chatOpenAI({ model, messages, temperature, maxTokens, stream, tools, toolChoice });
+        result = await chatOpenAI({
+          model,
+          messages,
+          temperature,
+          maxTokens,
+          stream,
+          tools,
+          toolChoice,
+        });
         break;
       case providers.ANTHROPIC:
-        result = await chatAnthropic({ model, messages, temperature, maxTokens, stream, tools });
+        result = await chatAnthropic({
+          model,
+          messages,
+          temperature,
+          maxTokens,
+          stream,
+          tools,
+        });
         break;
       case providers.GEMINI:
-        result = await chatGemini({ model, messages, temperature, maxTokens, stream });
+        result = await chatGemini({
+          model,
+          messages,
+          temperature,
+          maxTokens,
+          stream,
+        });
         break;
       default:
         throw new Error(`Unknown provider: ${provider}`);
     }
 
     const duration = Date.now() - startTime;
-    logger.info({ provider, model: result.model, duration, tokens: result.usage }, 'Chat completion');
+    logger.info(
+      { provider, model: result.model, duration, tokens: result.usage },
+      "Chat completion"
+    );
 
     return result;
   } catch (error) {
-    logger.error({ provider, error: error.message }, 'Chat completion failed');
+    logger.error({ provider, error: error.message }, "Chat completion failed");
     throw error;
   }
 }
@@ -133,11 +157,19 @@ async function chat(options) {
 /**
  * OpenAI chat completion
  */
-async function chatOpenAI({ model, messages, temperature, maxTokens, stream, tools, toolChoice }) {
-  if (!openaiClient) throw new Error('OpenAI not initialized');
+async function chatOpenAI({
+  model,
+  messages,
+  temperature,
+  maxTokens,
+  stream,
+  tools,
+  toolChoice,
+}) {
+  if (!openaiClient) throw new Error("OpenAI not initialized");
 
   const modelName = model || models.openai.default;
-  
+
   const params = {
     model: modelName,
     messages,
@@ -168,17 +200,25 @@ async function chatOpenAI({ model, messages, temperature, maxTokens, stream, too
 /**
  * Anthropic chat completion
  */
-async function chatAnthropic({ model, messages, temperature, maxTokens, stream, tools }) {
-  if (!anthropicClient) throw new Error('Anthropic not initialized');
+async function chatAnthropic({
+  model,
+  messages,
+  temperature,
+  maxTokens,
+  stream,
+  tools,
+}) {
+  if (!anthropicClient) throw new Error("Anthropic not initialized");
 
   const modelName = model || models.anthropic.default;
 
   // Convert messages format for Anthropic
-  const systemMessage = messages.find(m => m.role === 'system')?.content || '';
+  const systemMessage =
+    messages.find((m) => m.role === "system")?.content || "";
   const conversationMessages = messages
-    .filter(m => m.role !== 'system')
-    .map(m => ({
-      role: m.role === 'assistant' ? 'assistant' : 'user',
+    .filter((m) => m.role !== "system")
+    .map((m) => ({
+      role: m.role === "assistant" ? "assistant" : "user",
       content: m.content,
     }));
 
@@ -192,7 +232,7 @@ async function chatAnthropic({ model, messages, temperature, maxTokens, stream, 
   };
 
   if (tools) {
-    params.tools = tools.map(t => ({
+    params.tools = tools.map((t) => ({
       name: t.function.name,
       description: t.function.description,
       input_schema: t.function.parameters,
@@ -206,21 +246,25 @@ async function chatAnthropic({ model, messages, temperature, maxTokens, stream, 
   }
 
   // Extract tool use if present
-  const toolUse = response.content.find(c => c.type === 'tool_use');
-  const textContent = response.content.find(c => c.type === 'text');
+  const toolUse = response.content.find((c) => c.type === "tool_use");
+  const textContent = response.content.find((c) => c.type === "text");
 
   return {
     provider: providers.ANTHROPIC,
     model: modelName,
-    content: textContent?.text || '',
-    toolCalls: toolUse ? [{
-      id: toolUse.id,
-      type: 'function',
-      function: {
-        name: toolUse.name,
-        arguments: JSON.stringify(toolUse.input),
-      },
-    }] : undefined,
+    content: textContent?.text || "",
+    toolCalls: toolUse
+      ? [
+          {
+            id: toolUse.id,
+            type: "function",
+            function: {
+              name: toolUse.name,
+              arguments: JSON.stringify(toolUse.input),
+            },
+          },
+        ]
+      : undefined,
     finishReason: response.stop_reason,
     usage: {
       prompt_tokens: response.usage.input_tokens,
@@ -234,18 +278,18 @@ async function chatAnthropic({ model, messages, temperature, maxTokens, stream, 
  * Google Gemini chat completion
  */
 async function chatGemini({ model, messages, temperature, maxTokens, stream }) {
-  if (!geminiClient) throw new Error('Gemini not initialized');
+  if (!geminiClient) throw new Error("Gemini not initialized");
 
   const modelName = model || models.gemini.default;
   const geminiModel = geminiClient.getGenerativeModel({ model: modelName });
 
   // Convert messages format for Gemini
-  const systemInstruction = messages.find(m => m.role === 'system')?.content;
+  const systemInstruction = messages.find((m) => m.role === "system")?.content;
   const history = messages
-    .filter(m => m.role !== 'system')
+    .filter((m) => m.role !== "system")
     .slice(0, -1)
-    .map(m => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
+    .map((m) => ({
+      role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: m.content }],
     }));
 
@@ -287,26 +331,24 @@ async function chatGemini({ model, messages, temperature, maxTokens, stream }) {
  * @returns {Promise<number[][]>}
  */
 async function generateEmbeddings(options) {
-  const {
-    provider = providers.OPENAI,
-    model,
-    texts,
-  } = options;
+  const { provider = providers.OPENAI, model, texts } = options;
 
   if (provider === providers.OPENAI && openaiClient) {
     const response = await openaiClient.embeddings.create({
       model: model || models.openai.embedding,
       input: texts,
     });
-    return response.data.map(d => d.embedding);
+    return response.data.map((d) => d.embedding);
   }
 
   if (provider === providers.GEMINI && geminiClient) {
-    const embedModel = geminiClient.getGenerativeModel({ model: 'embedding-001' });
+    const embedModel = geminiClient.getGenerativeModel({
+      model: "embedding-001",
+    });
     const results = await Promise.all(
-      texts.map(text => embedModel.embedContent(text))
+      texts.map((text) => embedModel.embedContent(text))
     );
-    return results.map(r => r.embedding.values);
+    return results.map((r) => r.embedding.values);
   }
 
   throw new Error(`Embeddings not supported for provider: ${provider}`);
@@ -320,18 +362,18 @@ async function generateEmbeddings(options) {
  */
 async function streamChat(options, onChunk) {
   const result = await chat({ ...options, stream: true });
-  let fullContent = '';
+  let fullContent = "";
 
   if (options.provider === providers.OPENAI) {
     for await (const chunk of result) {
-      const content = chunk.choices[0]?.delta?.content || '';
+      const content = chunk.choices[0]?.delta?.content || "";
       fullContent += content;
       onChunk(content);
     }
   } else if (options.provider === providers.ANTHROPIC) {
     for await (const event of result) {
-      if (event.type === 'content_block_delta') {
-        const content = event.delta?.text || '';
+      if (event.type === "content_block_delta") {
+        const content = event.delta?.text || "";
         fullContent += content;
         onChunk(content);
       }

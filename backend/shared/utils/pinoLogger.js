@@ -3,7 +3,7 @@
  * Use for high-throughput scenarios - faster than Winston
  */
 
-const pino = require('pino');
+const pino = require("pino");
 
 // Log levels
 const levels = {
@@ -17,14 +17,14 @@ const levels = {
 
 // Base configuration
 const baseConfig = {
-  level: process.env.LOG_LEVEL || 'info',
+  level: process.env.LOG_LEVEL || "info",
   timestamp: pino.stdTimeFunctions.isoTime,
   formatters: {
     level: (label) => ({ level: label }),
   },
   base: {
-    service: process.env.SERVICE_NAME || 'victorykit',
-    env: process.env.NODE_ENV || 'development',
+    service: process.env.SERVICE_NAME || "victorykit",
+    env: process.env.NODE_ENV || "development",
   },
 };
 
@@ -32,11 +32,11 @@ const baseConfig = {
 const devConfig = {
   ...baseConfig,
   transport: {
-    target: 'pino-pretty',
+    target: "pino-pretty",
     options: {
       colorize: true,
-      translateTime: 'SYS:standard',
-      ignore: 'pid,hostname',
+      translateTime: "SYS:standard",
+      ignore: "pid,hostname",
     },
   },
 };
@@ -44,7 +44,13 @@ const devConfig = {
 // Production configuration (JSON output)
 const prodConfig = {
   ...baseConfig,
-  redact: ['req.headers.authorization', 'req.headers.cookie', 'password', 'token', 'apiKey'],
+  redact: [
+    "req.headers.authorization",
+    "req.headers.cookie",
+    "password",
+    "token",
+    "apiKey",
+  ],
 };
 
 /**
@@ -54,8 +60,8 @@ const prodConfig = {
  * @returns {pino.Logger}
  */
 function createLogger(name, options = {}) {
-  const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
-  
+  const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
+
   return pino({
     ...config,
     name,
@@ -79,32 +85,32 @@ function createChildLogger(parent, bindings) {
  * @returns {Function}
  */
 function requestLogger(options = {}) {
-  const logger = createLogger('http');
-  
+  const logger = createLogger("http");
+
   return (req, res, next) => {
     const startTime = Date.now();
-    
+
     // Generate request ID if not present
-    req.id = req.id || req.headers['x-request-id'] || require('uuid').v4();
-    
+    req.id = req.id || req.headers["x-request-id"] || require("uuid").v4();
+
     // Log request
     logger.info({
-      type: 'request',
+      type: "request",
       requestId: req.id,
       method: req.method,
       url: req.url,
       query: req.query,
       ip: req.ip || req.connection.remoteAddress,
-      userAgent: req.headers['user-agent'],
+      userAgent: req.headers["user-agent"],
     });
-    
+
     // Log response on finish
-    res.on('finish', () => {
+    res.on("finish", () => {
       const duration = Date.now() - startTime;
-      const logMethod = res.statusCode >= 400 ? 'error' : 'info';
-      
+      const logMethod = res.statusCode >= 400 ? "error" : "info";
+
       logger[logMethod]({
-        type: 'response',
+        type: "response",
         requestId: req.id,
         method: req.method,
         url: req.url,
@@ -112,7 +118,7 @@ function requestLogger(options = {}) {
         duration,
       });
     });
-    
+
     next();
   };
 }
@@ -120,7 +126,7 @@ function requestLogger(options = {}) {
 /**
  * Security event logger
  */
-const securityLogger = createLogger('security');
+const securityLogger = createLogger("security");
 
 /**
  * Log security event
@@ -128,9 +134,9 @@ const securityLogger = createLogger('security');
  * @param {object} details - Event details
  * @param {string} severity - Event severity (info, warn, error)
  */
-function logSecurityEvent(event, details, severity = 'info') {
+function logSecurityEvent(event, details, severity = "info") {
   securityLogger[severity]({
-    type: 'security-event',
+    type: "security-event",
     event,
     ...details,
     timestamp: new Date().toISOString(),
@@ -140,7 +146,7 @@ function logSecurityEvent(event, details, severity = 'info') {
 /**
  * Audit logger for compliance
  */
-const auditLogger = createLogger('audit');
+const auditLogger = createLogger("audit");
 
 /**
  * Log audit event
@@ -149,7 +155,7 @@ const auditLogger = createLogger('audit');
  */
 function logAuditEvent(action, details) {
   auditLogger.info({
-    type: 'audit',
+    type: "audit",
     action,
     ...details,
     timestamp: new Date().toISOString(),
@@ -159,7 +165,7 @@ function logAuditEvent(action, details) {
 /**
  * Performance logger
  */
-const performanceLogger = createLogger('performance');
+const performanceLogger = createLogger("performance");
 
 /**
  * Create performance timer
@@ -168,18 +174,18 @@ const performanceLogger = createLogger('performance');
  */
 function startPerformanceTimer(operation) {
   const startTime = process.hrtime.bigint();
-  
+
   return (metadata = {}) => {
     const endTime = process.hrtime.bigint();
     const duration = Number(endTime - startTime) / 1e6; // Convert to milliseconds
-    
+
     performanceLogger.info({
-      type: 'performance',
+      type: "performance",
       operation,
       duration,
       ...metadata,
     });
-    
+
     return duration;
   };
 }

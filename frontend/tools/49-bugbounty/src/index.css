@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background: linear-gradient(135deg, #1a1505 0%, #422006 50%, #1a1505 100%);
   min-height: 100vh;
 }
@@ -22,14 +26,30 @@ body {
   @apply px-2 py-1 rounded-full text-xs font-medium;
 }
 
-.severity-badge.critical { @apply bg-red-600 text-white; }
-.severity-badge.high { @apply bg-orange-600 text-white; }
-.severity-badge.medium { @apply bg-yellow-600 text-black; }
-.severity-badge.low { @apply bg-blue-600 text-white; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.severity-badge.critical {
+  @apply bg-red-600 text-white;
+}
+.severity-badge.high {
+  @apply bg-orange-600 text-white;
+}
+.severity-badge.medium {
+  @apply bg-yellow-600 text-black;
+}
+.severity-badge.low {
+  @apply bg-blue-600 text-white;
 }
 
-.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}

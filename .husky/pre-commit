@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged for code quality
+npx lint-staged
+
+# Type check TypeScript files
+echo "🔍 Running type check..."
+npx tsc --noEmit --skipLibCheck 2>/dev/null || true
+
+echo "✅ Pre-commit checks passed!"

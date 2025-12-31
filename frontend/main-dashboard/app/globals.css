@@ -4,22 +4,118 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 10, 14, 39;
-  --background-end-rgb: 26, 31, 58;
+  --background-start-rgb: 5, 5, 5;
+  --background-end-rgb: 10, 10, 10;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimized scrolling */
+html, body {
+  overscroll-behavior: none;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #050505;
+  overflow-x: hidden;
 }
 
+/* GPU acceleration for animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Smooth animations */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Custom animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background-size: 200% 100%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pin-spacer styles for GSAP ScrollTrigger */
+.pin-spacer {
+  pointer-events: none;
+}
+
+.pin-spacer > * {
+  pointer-events: auto;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #9333ea, #db2777);
+}
+
+/* Selection styles */
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: white;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid rgba(168, 85, 247, 0.8);
+  outline-offset: 2px;
 }
