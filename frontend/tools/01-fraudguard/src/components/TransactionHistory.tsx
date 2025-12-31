@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
-import { History, Search, Filter, ChevronDown, ChevronUp, Eye, MoreVertical, AlertTriangle, CheckCircle, Clock, XCircle } from 'lucide-react';
-import { Transaction } from '../types';
-import { format } from 'date-fns';
+import React, { useState } from "react";
+import {
+  History,
+  Search,
+  Filter,
+  ChevronDown,
+  ChevronUp,
+  Eye,
+  MoreVertical,
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  XCircle,
+} from "lucide-react";
+import { Transaction } from "../types";
+import { format } from "date-fns";
 
 interface TransactionHistoryProps {
   transactions: Transaction[];
@@ -10,87 +22,104 @@ interface TransactionHistoryProps {
   loading?: boolean;
 }
 
-export const TransactionHistory: React.FC<TransactionHistoryProps> = ({ 
-  transactions, 
-  onViewTransaction, 
+export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
+  transactions,
+  onViewTransaction,
   onAnalyze,
-  loading 
+  loading,
 }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortField, setSortField] = useState<'timestamp' | 'amount' | 'fraud_score'>('timestamp');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
-  const [filterRisk, setFilterRisk] = useState<'all' | 'low' | 'medium' | 'high'>('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortField, setSortField] = useState<
+    "timestamp" | "amount" | "fraud_score"
+  >("timestamp");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const [filterRisk, setFilterRisk] = useState<
+    "all" | "low" | "medium" | "high"
+  >("all");
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'approved': return <CheckCircle className="w-4 h-4 text-green-500" />;
-      case 'declined': return <XCircle className="w-4 h-4 text-red-500" />;
-      case 'flagged': return <AlertTriangle className="w-4 h-4 text-yellow-500" />;
-      default: return <Clock className="w-4 h-4 text-gray-500" />;
+      case "approved":
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
+      case "declined":
+        return <XCircle className="w-4 h-4 text-red-500" />;
+      case "flagged":
+        return <AlertTriangle className="w-4 h-4 text-yellow-500" />;
+      default:
+        return <Clock className="w-4 h-4 text-gray-500" />;
     }
   };
 
   const getRiskBadge = (risk_level?: string) => {
     if (!risk_level) return null;
-    
+
     const colors = {
-      low: 'bg-green-500/20 text-green-400 border-green-500/30',
-      medium: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      high: 'bg-red-500/20 text-red-400 border-red-500/30'
+      low: "bg-green-500/20 text-green-400 border-green-500/30",
+      medium: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+      high: "bg-red-500/20 text-red-400 border-red-500/30",
     };
 
     return (
-      <span className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase border ${colors[risk_level as keyof typeof colors]}`}>
+      <span
+        className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase border ${
+          colors[risk_level as keyof typeof colors]
+        }`}
+      >
         {risk_level}
       </span>
     );
   };
 
   const getScoreColor = (score?: number) => {
-    if (!score) return 'text-gray-500';
-    if (score >= 70) return 'text-red-500';
-    if (score >= 40) return 'text-yellow-500';
-    return 'text-green-500';
+    if (!score) return "text-gray-500";
+    if (score >= 70) return "text-red-500";
+    if (score >= 40) return "text-yellow-500";
+    return "text-green-500";
   };
 
   const filteredTransactions = transactions
-    .filter(tx => {
-      const matchesSearch = 
+    .filter((tx) => {
+      const matchesSearch =
         tx.transaction_id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        tx.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        tx.merchant_id?.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      const matchesRisk = filterRisk === 'all' || tx.risk_level === filterRisk;
-      
+        tx.user_email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        tx.merchant_category?.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesRisk = filterRisk === "all" || tx.risk_level === filterRisk;
+
       return matchesSearch && matchesRisk;
     })
     .sort((a, b) => {
       let comparison = 0;
-      if (sortField === 'timestamp') {
-        comparison = new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
-      } else if (sortField === 'amount') {
+      if (sortField === "timestamp") {
+        comparison =
+          new Date(a.timestamp || 0).getTime() -
+          new Date(b.timestamp || 0).getTime();
+      } else if (sortField === "amount") {
         comparison = a.amount - b.amount;
-      } else if (sortField === 'fraud_score') {
+      } else if (sortField === "fraud_score") {
         comparison = (a.fraud_score || 0) - (b.fraud_score || 0);
       }
-      return sortDirection === 'asc' ? comparison : -comparison;
+      return sortDirection === "asc" ? comparison : -comparison;
     });
 
   const handleSort = (field: typeof sortField) => {
     if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
-      setSortDirection('desc');
+      setSortDirection("desc");
     }
   };
 
   const SortIcon = ({ field }: { field: typeof sortField }) => {
-    if (sortField !== field) return <ChevronDown className="w-4 h-4 text-gray-600" />;
-    return sortDirection === 'asc' 
-      ? <ChevronUp className="w-4 h-4 text-red-400" />
-      : <ChevronDown className="w-4 h-4 text-red-400" />;
+    if (sortField !== field)
+      return <ChevronDown className="w-4 h-4 text-gray-600" />;
+    return sortDirection === "asc" ? (
+      <ChevronUp className="w-4 h-4 text-red-400" />
+    ) : (
+      <ChevronDown className="w-4 h-4 text-red-400" />
+    );
   };
 
   return (
@@ -104,7 +133,9 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
             </div>
             Transaction History
           </h2>
-          <span className="text-sm text-gray-400">{filteredTransactions.length} transactions</span>
+          <span className="text-sm text-gray-400">
+            {filteredTransactions.length} transactions
+          </span>
         </div>
 
         {/* Search & Filters */}
@@ -119,7 +150,7 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
               className="w-full bg-slate-900/50 border border-red-500/30 rounded-lg pl-10 pr-4 py-2 text-white placeholder:text-gray-500 focus:border-red-500 focus:outline-none"
             />
           </div>
-          
+
           <div className="relative">
             <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
             <select
@@ -142,8 +173,8 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
           <thead className="bg-slate-900/50">
             <tr>
               <th className="px-6 py-3 text-left">
-                <button 
-                  onClick={() => handleSort('timestamp')}
+                <button
+                  onClick={() => handleSort("timestamp")}
                   className="flex items-center gap-1 text-xs font-bold text-gray-400 uppercase tracking-wider hover:text-white"
                 >
                   Date/Time <SortIcon field="timestamp" />
@@ -153,16 +184,16 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
                 Transaction ID
               </th>
               <th className="px-6 py-3 text-left">
-                <button 
-                  onClick={() => handleSort('amount')}
+                <button
+                  onClick={() => handleSort("amount")}
                   className="flex items-center gap-1 text-xs font-bold text-gray-400 uppercase tracking-wider hover:text-white"
                 >
                   Amount <SortIcon field="amount" />
                 </button>
               </th>
               <th className="px-6 py-3 text-left">
-                <button 
-                  onClick={() => handleSort('fraud_score')}
+                <button
+                  onClick={() => handleSort("fraud_score")}
                   className="flex items-center gap-1 text-xs font-bold text-gray-400 uppercase tracking-wider hover:text-white"
                 >
                   Fraud Score <SortIcon field="fraud_score" />
@@ -197,46 +228,72 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
               </tr>
             ) : (
               filteredTransactions.map((tx) => (
-                <React.Fragment key={tx.id}>
-                  <tr 
+                <React.Fragment key={tx.transaction_id}>
+                  <tr
                     className="hover:bg-red-500/5 transition-colors cursor-pointer"
-                    onClick={() => setExpandedRow(expandedRow === tx.id ? null : tx.id)}
+                    onClick={() =>
+                      setExpandedRow(
+                        expandedRow === tx.transaction_id
+                          ? null
+                          : tx.transaction_id
+                      )
+                    }
                   >
                     <td className="px-6 py-4 text-sm text-gray-300">
-                      {format(new Date(tx.timestamp), 'MMM dd, yyyy HH:mm')}
+                      {format(
+                        new Date(tx.timestamp || Date.now()),
+                        "MMM dd, yyyy HH:mm"
+                      )}
                     </td>
                     <td className="px-6 py-4">
-                      <span className="font-mono text-sm text-cyan-400">{tx.transaction_id}</span>
+                      <span className="font-mono text-sm text-cyan-400">
+                        {tx.transaction_id}
+                      </span>
                     </td>
                     <td className="px-6 py-4 text-sm font-bold text-white">
-                      ${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                      <span className="text-gray-500 font-normal ml-1">{tx.currency}</span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`text-lg font-bold ${getScoreColor(tx.fraud_score)}`}>
-                        {tx.fraud_score ?? '—'}
+                      $
+                      {tx.amount.toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                      })}
+                      <span className="text-gray-500 font-normal ml-1">
+                        {tx.currency}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      {getRiskBadge(tx.risk_level)}
+                      <span
+                        className={`text-lg font-bold ${getScoreColor(
+                          tx.fraud_score
+                        )}`}
+                      >
+                        {tx.fraud_score ?? "—"}
+                      </span>
                     </td>
+                    <td className="px-6 py-4">{getRiskBadge(tx.risk_level)}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        {getStatusIcon(tx.status)}
-                        <span className="text-sm text-gray-300 capitalize">{tx.status}</span>
+                        {getStatusIcon(tx.status || "pending")}
+                        <span className="text-sm text-gray-300 capitalize">
+                          {tx.status || "pending"}
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button
-                          onClick={(e) => { e.stopPropagation(); onViewTransaction(tx); }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onViewTransaction(tx);
+                          }}
                           className="p-2 hover:bg-red-500/20 rounded-lg transition-colors"
                           title="View Details"
                         >
                           <Eye className="w-4 h-4 text-gray-400 hover:text-white" />
                         </button>
                         <button
-                          onClick={(e) => { e.stopPropagation(); onAnalyze(tx); }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onAnalyze(tx);
+                          }}
                           className="p-2 hover:bg-cyan-500/20 rounded-lg transition-colors"
                           title="Re-analyze"
                         >
@@ -245,27 +302,33 @@ export const TransactionHistory: React.FC<TransactionHistoryProps> = ({
                       </div>
                     </td>
                   </tr>
-                  
+
                   {/* Expanded Row */}
-                  {expandedRow === tx.id && (
+                  {expandedRow === tx.transaction_id && (
                     <tr className="bg-slate-900/30">
                       <td colSpan={7} className="px-6 py-4">
                         <div className="grid grid-cols-4 gap-4 text-sm">
                           <div>
                             <span className="text-gray-500">Email:</span>
-                            <p className="text-white">{tx.email || '—'}</p>
+                            <p className="text-white">{tx.user_email || "—"}</p>
                           </div>
                           <div>
                             <span className="text-gray-500">IP Address:</span>
-                            <p className="text-white font-mono">{tx.user_ip || '—'}</p>
+                            <p className="text-white font-mono">
+                              {tx.user_ip || "—"}
+                            </p>
                           </div>
                           <div>
                             <span className="text-gray-500">Card:</span>
-                            <p className="text-white">•••• {tx.card_last4 || '••••'}</p>
+                            <p className="text-white">
+                              •••• {tx.card_last_four?.slice(-4) || "••••"}
+                            </p>
                           </div>
                           <div>
                             <span className="text-gray-500">Merchant:</span>
-                            <p className="text-white">{tx.merchant_id || '—'}</p>
+                            <p className="text-white">
+                              {tx.merchant_category || "—"}
+                            </p>
                           </div>
                         </div>
                       </td>

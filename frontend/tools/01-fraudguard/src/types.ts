@@ -1,5 +1,4 @@
-
-export type Sender = 'YOU' | 'AGENT' | 'SYSTEM';
+export type Sender = "YOU" | "AGENT" | "SYSTEM";
 
 export interface Message {
   id: string;
@@ -18,23 +17,23 @@ export interface ChatSession {
   settings: SettingsState;
 }
 
-export type NeuralTool = 
-  | 'none' 
-  | 'image_gen' 
-  | 'thinking' 
-  | 'deep_research' 
-  | 'shopping' 
-  | 'study' 
-  | 'web_search' 
-  | 'canvas' 
-  | 'quizzes'
-  | 'browser';
+export type NeuralTool =
+  | "none"
+  | "image_gen"
+  | "thinking"
+  | "deep_research"
+  | "shopping"
+  | "study"
+  | "web_search"
+  | "canvas"
+  | "quizzes"
+  | "browser";
 
-export type WorkspaceMode = 'CHAT' | 'PORTAL' | 'CANVAS';
+export type WorkspaceMode = "CHAT" | "PORTAL" | "CANVAS";
 
 export interface CanvasState {
   content: string;
-  type: 'text' | 'code' | 'html' | 'video' | 'image';
+  type: "text" | "code" | "html" | "video" | "image";
   language?: string;
   title: string;
 }
@@ -60,32 +59,41 @@ export interface NavItem {
 }
 
 // Fraud Detection Types
+export type RiskLevel = "low" | "medium" | "high" | "critical";
+export type TransactionStatus = "approved" | "declined" | "flagged" | "pending";
+
 export interface Transaction {
   id?: string;
   transaction_id: string;
   amount: number;
   currency: string;
   user_email: string;
+  email?: string; // alias for user_email
   user_ip: string;
   device_fingerprint: string;
   card_last_four: string;
+  card_last4?: string; // alias for card_last_four
   merchant_category?: string;
+  merchant_id?: string;
   country: string;
   city?: string;
   timestamp?: string;
+  fraud_score?: number;
+  risk_level?: RiskLevel;
+  status?: TransactionStatus;
 }
 
 export interface FraudIndicator {
   type: string;
   description: string;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  severity: RiskLevel;
   weight: number;
 }
 
 export interface FraudScore {
   transaction_id: string;
   score: number;
-  risk_level: 'low' | 'medium' | 'high' | 'critical';
+  risk_level: RiskLevel;
   confidence: number;
   indicators: FraudIndicator[];
   recommendation?: string;
@@ -95,9 +103,11 @@ export interface Alert {
   id?: string;
   name: string;
   description: string;
+  alert_type: string;
   condition: string;
   threshold: number;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  severity: RiskLevel;
+  notification_channels: string[];
   active: boolean;
   created_at?: string;
   triggered_count?: number;

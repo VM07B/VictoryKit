@@ -1,10 +1,33 @@
-import React, { useState } from 'react';
-import { Bell, Plus, Trash2, Edit2, ToggleLeft, ToggleRight, Mail, Webhook, MessageSquare, Slack, AlertTriangle, Activity, MapPin, Zap } from 'lucide-react';
-import { Alert } from '../types';
+import React, { useState } from "react";
+import {
+  Bell,
+  Plus,
+  Trash2,
+  ToggleLeft,
+  ToggleRight,
+  Mail,
+  Webhook,
+  MessageSquare,
+  Slack,
+  AlertTriangle,
+  Activity,
+  MapPin,
+  Zap,
+} from "lucide-react";
+import { Alert } from "../types";
+
+type AlertType =
+  | "high_risk_transaction"
+  | "suspicious_pattern"
+  | "velocity_breach"
+  | "unusual_location";
+type NotificationChannel = "email" | "webhook" | "sms" | "slack";
 
 interface AlertsPanelProps {
   alerts: Alert[];
-  onCreateAlert: (alert: Omit<Alert, 'id' | 'created_at' | 'triggered_count'>) => void;
+  onCreateAlert: (
+    alert: Omit<Alert, "id" | "created_at" | "triggered_count">
+  ) => void;
   onDeleteAlert: (id: string) => void;
   onToggleAlert: (id: string, active: boolean) => void;
 }
@@ -13,44 +36,45 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
   alerts,
   onCreateAlert,
   onDeleteAlert,
-  onToggleAlert
+  onToggleAlert,
 }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newAlert, setNewAlert] = useState({
-    alert_type: 'high_risk_transaction' as Alert['alert_type'],
+    alert_type: "high_risk_transaction" as AlertType,
     threshold: 70,
-    notification_channels: ['email'] as Alert['notification_channels'],
-    active: true
+    notification_channels: ["email"] as NotificationChannel[],
+    active: true,
   });
 
   const alertTypeConfig = {
-    high_risk_transaction: { 
-      icon: <AlertTriangle className="w-5 h-5" />, 
-      label: 'High Risk Transaction',
-      description: 'Triggers when a transaction exceeds the fraud score threshold'
+    high_risk_transaction: {
+      icon: <AlertTriangle className="w-5 h-5" />,
+      label: "High Risk Transaction",
+      description:
+        "Triggers when a transaction exceeds the fraud score threshold",
     },
-    suspicious_pattern: { 
-      icon: <Activity className="w-5 h-5" />, 
-      label: 'Suspicious Pattern',
-      description: 'Detects unusual transaction patterns'
+    suspicious_pattern: {
+      icon: <Activity className="w-5 h-5" />,
+      label: "Suspicious Pattern",
+      description: "Detects unusual transaction patterns",
     },
-    velocity_breach: { 
-      icon: <Zap className="w-5 h-5" />, 
-      label: 'Velocity Breach',
-      description: 'Triggers on rapid consecutive transactions'
+    velocity_breach: {
+      icon: <Zap className="w-5 h-5" />,
+      label: "Velocity Breach",
+      description: "Triggers on rapid consecutive transactions",
     },
-    unusual_location: { 
-      icon: <MapPin className="w-5 h-5" />, 
-      label: 'Unusual Location',
-      description: 'Detects transactions from unexpected locations'
-    }
+    unusual_location: {
+      icon: <MapPin className="w-5 h-5" />,
+      label: "Unusual Location",
+      description: "Detects transactions from unexpected locations",
+    },
   };
 
   const channelConfig = {
-    email: { icon: <Mail className="w-4 h-4" />, label: 'Email' },
-    webhook: { icon: <Webhook className="w-4 h-4" />, label: 'Webhook' },
-    sms: { icon: <MessageSquare className="w-4 h-4" />, label: 'SMS' },
-    slack: { icon: <Slack className="w-4 h-4" />, label: 'Slack' }
+    email: { icon: <Mail className="w-4 h-4" />, label: "Email" },
+    webhook: { icon: <Webhook className="w-4 h-4" />, label: "Webhook" },
+    sms: { icon: <MessageSquare className="w-4 h-4" />, label: "SMS" },
+    slack: { icon: <Slack className="w-4 h-4" />, label: "Slack" },
   };
 
   const toggleChannel = (channel: keyof typeof channelConfig) => {
@@ -65,13 +89,48 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
   };
 
   const handleCreate = () => {
-    onCreateAlert(newAlert);
+    const alertTypeConfig = {
+      high_risk_transaction: {
+        name: "High Risk Transaction",
+        description:
+          "Triggers when a transaction exceeds the fraud score threshold",
+        condition: "fraud_score > threshold",
+      },
+      suspicious_pattern: {
+        name: "Suspicious Pattern",
+        description: "Detects unusual transaction patterns",
+        condition: "pattern_match",
+      },
+      velocity_breach: {
+        name: "Velocity Breach",
+        description: "Triggers on rapid consecutive transactions",
+        condition: "velocity > threshold",
+      },
+      unusual_location: {
+        name: "Unusual Location",
+        description: "Detects transactions from unexpected locations",
+        condition: "location_anomaly",
+      },
+    };
+
+    const config = alertTypeConfig[newAlert.alert_type];
+
+    onCreateAlert({
+      name: config.name,
+      description: config.description,
+      alert_type: newAlert.alert_type,
+      condition: config.condition,
+      threshold: newAlert.threshold,
+      severity: "high" as const,
+      notification_channels: newAlert.notification_channels,
+      active: newAlert.active,
+    });
     setShowCreateForm(false);
     setNewAlert({
-      alert_type: 'high_risk_transaction',
+      alert_type: "high_risk_transaction",
       threshold: 70,
-      notification_channels: ['email'],
-      active: true
+      notification_channels: ["email"],
+      active: true,
     });
   };
 
@@ -99,21 +158,30 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
       {/* Create Alert Form */}
       {showCreateForm && (
         <div className="p-6 border-b border-red-500/20 bg-slate-900/50">
-          <h3 className="text-lg font-bold text-white mb-4">Create New Alert</h3>
-          
+          <h3 className="text-lg font-bold text-white mb-4">
+            Create New Alert
+          </h3>
+
           <div className="space-y-4">
             {/* Alert Type */}
             <div>
-              <label className="block text-sm text-red-200 mb-2">Alert Type</label>
+              <label className="block text-sm text-red-200 mb-2">
+                Alert Type
+              </label>
               <div className="grid grid-cols-2 gap-2">
                 {Object.entries(alertTypeConfig).map(([type, config]) => (
                   <button
                     key={type}
-                    onClick={() => setNewAlert({ ...newAlert, alert_type: type as Alert['alert_type'] })}
+                    onClick={() =>
+                      setNewAlert({
+                        ...newAlert,
+                        alert_type: type as AlertType,
+                      })
+                    }
                     className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
                       newAlert.alert_type === type
-                        ? 'border-red-500 bg-red-500/20 text-white'
-                        : 'border-red-500/30 bg-slate-900/50 text-gray-400 hover:border-red-500/50'
+                        ? "border-red-500 bg-red-500/20 text-white"
+                        : "border-red-500/30 bg-slate-900/50 text-gray-400 hover:border-red-500/50"
                     }`}
                   >
                     {config.icon}
@@ -126,14 +194,22 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
             {/* Threshold */}
             <div>
               <label className="block text-sm text-red-200 mb-2">
-                Threshold Score: <span className="text-white font-bold">{newAlert.threshold}</span>
+                Threshold Score:{" "}
+                <span className="text-white font-bold">
+                  {newAlert.threshold}
+                </span>
               </label>
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={newAlert.threshold}
-                onChange={(e) => setNewAlert({ ...newAlert, threshold: parseInt(e.target.value) })}
+                onChange={(e) =>
+                  setNewAlert({
+                    ...newAlert,
+                    threshold: Number.parseInt(e.target.value),
+                  })
+                }
                 className="w-full accent-red-500"
               />
               <div className="flex justify-between text-xs text-gray-500">
@@ -146,16 +222,20 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
 
             {/* Notification Channels */}
             <div>
-              <label className="block text-sm text-red-200 mb-2">Notification Channels</label>
+              <label className="block text-sm text-red-200 mb-2">
+                Notification Channels
+              </label>
               <div className="flex gap-2">
                 {Object.entries(channelConfig).map(([channel, config]) => (
                   <button
                     key={channel}
-                    onClick={() => toggleChannel(channel as keyof typeof channelConfig)}
+                    onClick={() =>
+                      toggleChannel(channel as keyof typeof channelConfig)
+                    }
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
                       newAlert.notification_channels.includes(channel as any)
-                        ? 'border-cyan-500 bg-cyan-500/20 text-cyan-300'
-                        : 'border-red-500/30 bg-slate-900/50 text-gray-400 hover:border-red-500/50'
+                        ? "border-cyan-500 bg-cyan-500/20 text-cyan-300"
+                        : "border-red-500/30 bg-slate-900/50 text-gray-400 hover:border-red-500/50"
                     }`}
                   >
                     {config.icon}
@@ -190,21 +270,29 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
           <div className="p-8 text-center text-gray-500">
             <Bell className="w-12 h-12 mx-auto mb-3 opacity-50" />
             <p>No alerts configured</p>
-            <p className="text-sm mt-1">Create your first fraud alert to get notified</p>
+            <p className="text-sm mt-1">
+              Create your first fraud alert to get notified
+            </p>
           </div>
         ) : (
           alerts.map((alert) => {
-            const typeConfig = alertTypeConfig[alert.alert_type];
-            
+            const typeConfig = alertTypeConfig[alert.alert_type as AlertType];
+
             return (
-              <div 
-                key={alert.id} 
-                className={`p-4 flex items-center gap-4 ${alert.active ? '' : 'opacity-50'}`}
+              <div
+                key={alert.id}
+                className={`p-4 flex items-center gap-4 ${
+                  alert.active ? "" : "opacity-50"
+                }`}
               >
                 {/* Icon */}
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  alert.active ? 'bg-red-500/20 text-red-400' : 'bg-gray-700/20 text-gray-500'
-                }`}>
+                <div
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                    alert.active
+                      ? "bg-red-500/20 text-red-400"
+                      : "bg-gray-700/20 text-gray-500"
+                  }`}
+                >
                   {typeConfig.icon}
                 </div>
 
@@ -216,15 +304,17 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
                       Threshold: {alert.threshold}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">{typeConfig.description}</p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {typeConfig.description}
+                  </p>
                   <div className="flex items-center gap-2 mt-2">
                     {alert.notification_channels.map((channel) => (
-                      <span 
+                      <span
                         key={channel}
                         className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400"
                       >
-                        {channelConfig[channel].icon}
-                        {channelConfig[channel].label}
+                        {channelConfig[channel as NotificationChannel].icon}
+                        {channelConfig[channel as NotificationChannel].label}
                       </span>
                     ))}
                     <span className="text-xs text-gray-500 ml-2">
@@ -236,9 +326,11 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
                 {/* Actions */}
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => onToggleAlert(alert.id, !alert.active)}
+                    onClick={() =>
+                      alert.id && onToggleAlert(alert.id, !alert.active)
+                    }
                     className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
-                    title={alert.active ? 'Disable' : 'Enable'}
+                    title={alert.active ? "Disable" : "Enable"}
                   >
                     {alert.active ? (
                       <ToggleRight className="w-6 h-6 text-green-500" />
@@ -247,7 +339,7 @@ export const AlertsPanel: React.FC<AlertsPanelProps> = ({
                     )}
                   </button>
                   <button
-                    onClick={() => onDeleteAlert(alert.id)}
+                    onClick={() => alert.id && onDeleteAlert(alert.id)}
                     className="p-2 hover:bg-red-500/20 rounded-lg transition-colors text-gray-500 hover:text-red-400"
                     title="Delete"
                   >

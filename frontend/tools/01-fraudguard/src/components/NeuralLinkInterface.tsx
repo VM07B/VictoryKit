@@ -1,27 +1,21 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Bot, Shield } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from "react";
 
 // Import neural link components and logic
-import Header from '../../neural-link-interface/components/Header';
-import Sidebar from '../../neural-link-interface/components/Sidebar';
-import SettingsPanel from '../../neural-link-interface/components/SettingsPanel';
-import ChatBox from '../../neural-link-interface/components/ChatBox';
-import NavigationDrawer from '../../neural-link-interface/components/NavigationDrawer';
-import Overlay from '../../neural-link-interface/components/Overlay';
-import Footer from '../../neural-link-interface/components/Footer';
+import Header from "../../neural-link-interface/components/Header";
+import Sidebar from "../../neural-link-interface/components/Sidebar";
+import SettingsPanel from "../../neural-link-interface/components/SettingsPanel";
+import ChatBox from "../../neural-link-interface/components/ChatBox";
+import NavigationDrawer from "../../neural-link-interface/components/NavigationDrawer";
+import Overlay from "../../neural-link-interface/components/Overlay";
+import Footer from "../../neural-link-interface/components/Footer";
 
 import {
   ChatSession,
   Message,
   SettingsState,
-  NavItem,
-  CanvasState,
-  WorkspaceMode,
-} from '../../neural-link-interface/types';
-import { DEFAULT_SETTINGS, NEURAL_PRESETS } from '../../neural-link-interface/constants';
-import { callGemini } from '../../neural-link-interface/services/geminiService';
-import { GoogleGenAI, Modality, LiveServerMessage } from '@google/genai';
+} from "../../neural-link-interface/types";
+import { DEFAULT_SETTINGS } from "../../neural-link-interface/constants";
+import { callGemini } from "../../neural-link-interface/services/geminiService";
 
 const NeuralLinkInterface: React.FC = () => {
   // UI State
@@ -34,26 +28,26 @@ const NeuralLinkInterface: React.FC = () => {
   const [isLiveActive, setIsLiveActive] = useState(false);
 
   // Gemini Live & STT Refs
-  const recognitionRef = useRef<any>(null);
-  const liveSessionRef = useRef<any>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const sourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
-  const nextStartTimeRef = useRef<number>(0);
+  // const recognitionRef = useRef<any>(null);
+  // const liveSessionRef = useRef<any>(null);
+  // const audioContextRef = useRef<AudioContext | null>(null);
+  // const sourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
+  // const nextStartTimeRef = useRef<number>(0);
 
   // App Data State - Enhanced with FraudGuard context
   const [sessions, setSessions] = useState<ChatSession[]>(() => {
-    const saved = localStorage.getItem('fraudguard_neural_sessions');
+    const saved = localStorage.getItem("fraudguard_neural_sessions");
     if (saved) return JSON.parse(saved);
     return [
       {
-        id: '1',
+        id: "1",
         name: "FRAUDGUARD_NEURAL_LINK",
         active: true,
         messages: [
           {
-            id: 'init-1',
-            sender: 'AGENT',
-            text: '🔒 FraudGuard Neural Link established. I have access to your fraud detection data, transaction analysis, and risk assessment tools. How can I help you with fraud detection today?',
+            id: "init-1",
+            sender: "AGENT",
+            text: "🔒 FraudGuard Neural Link established. I have access to your fraud detection data, transaction analysis, and risk assessment tools. How can I help you with fraud detection today?",
             timestamp: new Date().toLocaleTimeString(),
           },
         ],
@@ -68,14 +62,17 @@ const NeuralLinkInterface: React.FC = () => {
 - Real-time fraud detection capabilities
 
 Help users analyze transactions, configure alerts, interpret risk scores, and optimize their fraud detection strategies. Always provide actionable insights and explain technical concepts clearly.`,
-          agentName: "FraudGuard AI Assistant"
+          agentName: "FraudGuard AI Assistant",
         },
       },
     ];
   });
 
   useEffect(() => {
-    localStorage.setItem('fraudguard_neural_sessions', JSON.stringify(sessions));
+    localStorage.setItem(
+      "fraudguard_neural_sessions",
+      JSON.stringify(sessions)
+    );
   }, [sessions]);
 
   const activeSession = sessions.find((s) => s.active) || sessions[0];
@@ -126,7 +123,7 @@ Help users analyze transactions, configure alerts, interpret risk scores, and op
     const agentMsg: Message = {
       id: Date.now().toString(),
       sender: "AGENT",
-      text: result.response,
+      text: result.text,
       timestamp: new Date().toLocaleTimeString(),
     };
 
@@ -153,11 +150,13 @@ Help users analyze transactions, configure alerts, interpret risk scores, and op
       settings: {
         ...DEFAULT_SETTINGS,
         customPrompt: activeSession.settings.customPrompt,
-        agentName: activeSession.settings.agentName
+        agentName: activeSession.settings.agentName,
       },
     };
 
-    setSessions((prev) => prev.map((s) => ({ ...s, active: false })).concat(newSession));
+    setSessions((prev) =>
+      prev.map((s) => ({ ...s, active: false })).concat(newSession)
+    );
   };
 
   const handleSessionSelect = (sessionId: string) => {
@@ -199,85 +198,108 @@ Help users analyze transactions, configure alerts, interpret risk scores, and op
     // STT cleanup
   };
 
+  const handleToggleSTT = () => {
+    if (isRecordingSTT) {
+      handleSTTStop();
+    } else {
+      handleSTTStart();
+    }
+  };
+
+  const handleToggleLive = () => {
+    if (isLiveActive) {
+      handleLiveStop();
+    } else {
+      handleLiveStart();
+    }
+  };
+
+  const handleFileUpload = (file: File) => {
+    // File upload implementation would go here
+    console.log("File uploaded:", file.name);
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 text-white">
-      {/* FraudGuard Context Header */}
-      <div className="bg-gradient-to-r from-red-900/50 to-purple-900/50 border-b border-red-500/30 p-3">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link
-              to="/"
-              className="flex items-center gap-2 px-3 py-1 bg-slate-800/50 rounded-lg hover:bg-slate-700/50 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm">Back to FraudGuard</span>
-            </Link>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center">
-              <Shield className="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold text-white">FraudGuard AI Assistant</h2>
-              <p className="text-xs text-gray-400">Neural Link Active - Full Context Access</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-green-400">
-            <Bot className="w-4 h-4" />
-            <span>Connected to FraudGuard Data</span>
-          </div>
-        </div>
-      </div>
-
       {/* Overlay */}
-      {isOverlayActive && <Overlay onClose={() => setIsOverlayActive(false)} />}
+      {isOverlayActive && (
+        <Overlay
+          active={isOverlayActive}
+          onActivate={() => setIsOverlayActive(false)}
+        />
+      )}
 
       {/* Header */}
       <Header
-        onMenuClick={() => setIsLeftPanelOpen(true)}
-        onSettingsClick={() => setIsRightPanelOpen(true)}
-        onNavClick={() => setIsNavDrawerOpen(true)}
-        isLiveActive={isLiveActive}
-        onLiveStart={handleLiveStart}
-        onLiveStop={handleLiveStop}
-        isRecordingSTT={isRecordingSTT}
-        onSTTStart={handleSTTStart}
-        onSTTStop={handleSTTStop}
+        onToggleLeft={() => setIsLeftPanelOpen(true)}
+        onToggleRight={() => setIsRightPanelOpen(true)}
+        onToggleNav={() => setIsNavDrawerOpen(true)}
+        onClear={() => {
+          // Clear current session messages
+          setSessions((prev) =>
+            prev.map((s) => (s.active ? { ...s, messages: [] } : s))
+          );
+        }}
+        onLock={() => {
+          // Lock/unlock functionality
+          console.log("Lock toggled");
+        }}
+        leftOpen={isLeftPanelOpen}
+        rightOpen={isRightPanelOpen}
       />
 
       {/* Main Content Area */}
-      <div className="flex">
+      <div className="flex flex-1">
         {/* Left Sidebar */}
         <Sidebar
-          isOpen={isLeftPanelOpen}
-          onClose={() => setIsLeftPanelOpen(false)}
           sessions={sessions}
-          activeSession={activeSession}
-          onSessionSelect={handleSessionSelect}
-          onNewSession={handleNewSession}
+          onSelect={handleSessionSelect}
+          onCreate={handleNewSession}
+          onDelete={(sessionId) => {
+            setSessions((prev) => prev.filter((s) => s.id !== sessionId));
+          }}
+          isOpen={isLeftPanelOpen}
         />
 
         {/* Chat Area */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-h-0">
           <ChatBox
             messages={activeSession.messages}
             onSend={handleSend}
             isThinking={isThinking}
-            settings={activeSession.settings}
-            onSettingsUpdate={handleSettingsUpdate}
+            isRecordingSTT={isRecordingSTT}
+            isLiveActive={isLiveActive}
+            onFileUpload={handleFileUpload}
+            onToggleSTT={handleToggleSTT}
+            onToggleLive={handleToggleLive}
+            agentSettings={activeSession.settings}
+            onUpdateSettings={handleSettingsUpdate}
           />
         </div>
 
         {/* Right Settings Panel */}
         <SettingsPanel
-          isOpen={isRightPanelOpen}
-          onClose={() => setIsRightPanelOpen(false)}
           settings={activeSession.settings}
-          onUpdate={handleSettingsUpdate}
+          onChange={handleSettingsUpdate}
+          onApplyPreset={(type) => {
+            // Apply preset functionality
+            console.log("Applying preset:", type);
+          }}
+          onReset={() => {
+            // Reset settings
+            handleSettingsUpdate(DEFAULT_SETTINGS);
+          }}
+          isOpen={isRightPanelOpen}
         />
 
         {/* Navigation Drawer */}
         <NavigationDrawer
           isOpen={isNavDrawerOpen}
           onClose={() => setIsNavDrawerOpen(false)}
+          onModuleSelect={(item) => {
+            // Handle module selection
+            console.log("Module selected:", item);
+          }}
         />
       </div>
 
