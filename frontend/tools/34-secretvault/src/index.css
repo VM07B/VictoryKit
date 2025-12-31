@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #422006 0%, #713f12 50%, #854d0e 100%);
+  min-height: 100vh;
+  color: #fef9c3;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(234, 179, 8, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #eab308, #ca8a04);
+  border-radius: 3px;
+}
+
+.vault-input {
+  @apply bg-yellow-950/50 border border-yellow-700/50 rounded-lg px-4 py-3 text-yellow-100 
+         placeholder-yellow-500/50 focus:outline-none focus:border-yellow-400 
+         focus:ring-2 focus:ring-yellow-400/30 transition-all duration-300;
+}
+
+.secret-badge {
+  @apply px-2 py-1 rounded text-xs font-medium;
+}
+.secret-badge.api-key {
+  @apply bg-purple-600/30 text-purple-300;
+}
+.secret-badge.password {
+  @apply bg-red-600/30 text-red-300;
+}
+.secret-badge.token {
+  @apply bg-blue-600/30 text-blue-300;
+}
+.secret-badge.certificate {
+  @apply bg-green-600/30 text-green-300;
+}
+
+.vault-card {
+  @apply p-4 rounded-xl border border-yellow-700/30 bg-yellow-900/20 transition-all;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

@@ -1,0 +1,314 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  min-height: 100vh;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* Compliance Card Styling */
+.compliance-card {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 27, 75, 0.6) 0%,
+    rgba(15, 23, 42, 0.8) 100%
+  );
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.compliance-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* Framework Badge */
+.framework-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.framework-badge.active {
+  background: rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.framework-badge.gdpr {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+}
+
+.framework-badge.hipaa {
+  background: rgba(236, 72, 153, 0.15);
+  border-color: rgba(236, 72, 153, 0.3);
+  color: #f472b6;
+}
+
+.framework-badge.pci {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.3);
+  color: #fbbf24;
+}
+
+.framework-badge.sox {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.framework-badge.iso27001 {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: #c084fc;
+}
+
+.framework-badge.nist {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: rgba(249, 115, 22, 0.3);
+  color: #fb923c;
+}
+
+/* Control Status */
+.control-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.control-status.compliant {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.control-status.partial {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.control-status.non-compliant {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.control-status.not-applicable {
+  background: rgba(100, 116, 139, 0.2);
+  color: #94a3b8;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* Progress Ring */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: rgba(99, 102, 241, 0.1);
+  stroke-width: 8;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+/* Control Category */
+.control-category {
+  padding: 12px;
+  background: rgba(30, 27, 75, 0.4);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.control-category:hover {
+  background: rgba(30, 27, 75, 0.6);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* Assessment Timeline */
+.timeline-item {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6366f1;
+}
+
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 20px;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.timeline-item:last-child::after {
+  display: none;
+}
+
+/* Severity Indicators */
+.severity-critical {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.severity-high {
+  color: #f97316;
+  background: rgba(249, 115, 22, 0.15);
+}
+
+.severity-medium {
+  color: #eab308;
+  background: rgba(234, 179, 8, 0.15);
+}
+
+.severity-low {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+/* Compliance Score Gauge */
+.gauge-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.gauge-background {
+  fill: none;
+  stroke: rgba(99, 102, 241, 0.1);
+  stroke-width: 12;
+}
+
+.gauge-fill {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease-out, stroke 0.5s ease;
+}
+
+/* Framework Icon Container */
+.framework-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* Evidence Upload */
+.evidence-dropzone {
+  border: 2px dashed rgba(99, 102, 241, 0.3);
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.evidence-dropzone:hover,
+.evidence-dropzone.active {
+  border-color: rgba(99, 102, 241, 0.6);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 27, 75, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* Requirement Row */
+.requirement-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(30, 27, 75, 0.3);
+  border-radius: 8px;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+.requirement-row:hover {
+  background: rgba(30, 27, 75, 0.5);
+}
+
+.requirement-row.checking {
+  animation: statusBlink 1s ease-in-out infinite;
+}
+
+/* Report Section */
+.report-section {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.report-header {
+  padding: 12px 16px;
+  background: rgba(99, 102, 241, 0.1);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+}

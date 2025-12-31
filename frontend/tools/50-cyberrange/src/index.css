@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #042f2e 0%, #083344 50%, #042f2e 100%);
+  min-height: 100vh;
+}
+
+.cyber-input {
+  @apply w-full px-4 py-3 rounded-xl bg-cyan-950/50 border border-cyan-700/30 text-cyan-100 placeholder-cyan-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all;
+}
+
+.cyber-card {
+  @apply p-3 rounded-xl bg-cyan-950/50 border border-cyan-700/30 transition-all hover:border-cyan-500/50;
+}
+
+.difficulty-badge {
+  @apply px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.difficulty-badge.easy { @apply bg-green-600 text-white; }
+.difficulty-badge.medium { @apply bg-yellow-600 text-black; }
+.difficulty-badge.hard { @apply bg-orange-600 text-white; }
+.difficulty-badge.expert { @apply bg-red-600 text-white; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }

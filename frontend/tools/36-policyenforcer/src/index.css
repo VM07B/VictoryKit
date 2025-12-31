@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #5b21b6 100%);
+  min-height: 100vh;
+  color: #ede9fe;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8b5cf6, #7c3aed);
+  border-radius: 3px;
+}
+
+.policy-input {
+  @apply bg-violet-950/50 border border-violet-700/50 rounded-lg px-4 py-3 text-violet-100 
+         placeholder-violet-500/50 focus:outline-none focus:border-violet-400 
+         focus:ring-2 focus:ring-violet-400/30 transition-all duration-300;
+}
+
+.policy-status {
+  @apply px-3 py-1 rounded-full text-xs font-bold uppercase;
+}
+.policy-status.compliant {
+  @apply bg-green-600 text-white;
+}
+.policy-status.non-compliant {
+  @apply bg-red-600 text-white;
+}
+.policy-status.warning {
+  @apply bg-yellow-600 text-white;
+}
+
+.policy-card {
+  @apply p-4 rounded-xl border border-violet-700/30 bg-violet-900/20 transition-all;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

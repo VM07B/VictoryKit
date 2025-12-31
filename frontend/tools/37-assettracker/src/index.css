@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #042f2e 0%, #134e4a 50%, #115e59 100%);
+  min-height: 100vh;
+  color: #ccfbf1;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(20, 184, 166, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #14b8a6, #0d9488);
+  border-radius: 3px;
+}
+
+.asset-input {
+  @apply bg-teal-950/50 border border-teal-700/50 rounded-lg px-4 py-3 text-teal-100 
+         placeholder-teal-500/50 focus:outline-none focus:border-teal-400 
+         focus:ring-2 focus:ring-teal-400/30 transition-all duration-300;
+}
+
+.asset-type {
+  @apply px-2 py-1 rounded text-xs font-medium;
+}
+.asset-type.server {
+  @apply bg-blue-600/30 text-blue-300;
+}
+.asset-type.workstation {
+  @apply bg-green-600/30 text-green-300;
+}
+.asset-type.network {
+  @apply bg-purple-600/30 text-purple-300;
+}
+.asset-type.cloud {
+  @apply bg-cyan-600/30 text-cyan-300;
+}
+
+.asset-card {
+  @apply p-4 rounded-xl border border-teal-700/30 bg-teal-900/20 transition-all;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

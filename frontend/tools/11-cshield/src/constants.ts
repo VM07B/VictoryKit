@@ -1,124 +1,149 @@
-import { SettingsState, NavItem } from './types';
+import { SettingsState } from "./types";
 
+// Provider catalog for the Neural Link
 export const PROVIDER_CONFIG = [
   {
-    id: 'gemini',
-    name: 'Google Gemini',
-    models: ['gemini-2.5-flash-preview', 'gemini-2.5-pro-preview', 'gemini-2.0-flash']
+    id: "gemini",
+    name: "Google Gemini",
+    models: ["gemini-3-flash-preview", "gemini-3-pro-preview"],
+  },
+  { id: "openai", name: "OpenAI", models: ["gpt-4o", "gpt-4o-mini"] },
+  {
+    id: "anthropic",
+    name: "Anthropic Claude",
+    models: ["claude-3-5-sonnet-20241022", "claude-3-haiku-20240307"],
   },
   {
-    id: 'openai',
-    name: 'OpenAI',
-    models: ['gpt-4o', 'gpt-4-turbo', 'gpt-4o-mini']
+    id: "mistral",
+    name: "Mistral",
+    models: ["mistral-large-latest", "mistral-medium"],
   },
-  {
-    id: 'anthropic',
-    name: 'Anthropic Claude',
-    models: ['claude-sonnet-4-20250514', 'claude-3-5-sonnet-20241022', 'claude-3-haiku-20240307']
-  },
-  {
-    id: 'xai',
-    name: 'xAI Grok',
-    models: ['grok-2', 'grok-2-mini']
-  },
-  {
-    id: 'mistral',
-    name: 'Mistral AI',
-    models: ['mistral-large-latest', 'mistral-medium', 'mistral-small']
-  },
-  {
-    id: 'meta',
-    name: 'Meta Llama',
-    models: ['llama-3.1-405b', 'llama-3.1-70b', 'llama-3.1-8b']
-  }
 ];
+
+// Base URLs (no localhost). Use env or same-origin relative path.
+const origin = (globalThis?.location?.origin || "").replace(/\/$/, "");
+export const API_BASE =
+  (import.meta.env.VITE_API_URL as string)?.replace(/\/$/, "") ||
+  `${origin}/api/v1/incidentresponse`;
+export const WS_BASE =
+  (import.meta.env.VITE_WS_URL as string) ||
+  `${origin.replace(/^http/, "ws")}/ws`;
 
 export const DEFAULT_SETTINGS: SettingsState = {
-  customPrompt: `You are FraudGuard AI, an expert in transaction fraud detection with deep knowledge of payment security, fraud patterns, risk analysis, and machine learning fraud models.
+  customPrompt: `You are IncidentResponse AI. You triage, classify, and coordinate response for security incidents.
 
-CAPABILITIES:
-- Analyze transactions for fraud indicators and calculate risk scores (0-100)
-- Detect suspicious patterns in transaction data
-- Provide actionable recommendations for risk mitigation
-- Generate detailed fraud reports
-- Create alerts for high-risk transactions
+Capabilities:
+- classify incidents (MITRE, severity, priority)
+- suggest containment/eradication steps
+- map indicators (IP, domain, hash) to risk
+- guide evidence handling and chain-of-custody
+- propose playbooks and tasking per severity
 
-AVAILABLE FUNCTIONS:
-- analyze_transaction: Analyze a transaction for fraud indicators
-- get_fraud_score: Get the fraud risk score for a transaction
-- open_risk_visualization: Open charts and graphs for analysis
-- get_transaction_history: Fetch transaction history with filters
-- create_alert: Create fraud monitoring alerts
-- export_report: Generate and export fraud reports
-
-Always be thorough in your analysis and explain findings in clear, non-technical language.`,
-  agentName: "FraudGuard AI",
-  temperature: 0.7,
-  maxTokens: 4096,
-  provider: 'gemini',
-  model: "gemini-2.5-flash-preview",
-  activeTool: 'fraud_analysis',
-  workspaceMode: 'CHAT',
-  portalUrl: 'https://www.google.com/search?igu=1',
+Always be concise, action-oriented, and cite the reasoning behind recommendations.`,
+  agentName: "IncidentResponse AI",
+  temperature: 0.4,
+  maxTokens: 2048,
+  provider: "gemini",
+  model: "gemini-3-flash-preview",
+  activeTool: "incident_triage",
+  workspaceMode: "CHAT",
+  portalUrl: "https://attack.mitre.org",
   canvas: {
-    content: "// FraudGuard Workspace\n\nReady for fraud analysis.",
-    type: 'text',
-    title: 'FraudGuard_Canvas'
-  }
+    content:
+      "// IncidentResponse Workspace\n\nDocument timeline, actions, and findings here.",
+    type: "text",
+    title: "IR_Workspace",
+  },
 };
 
-export const NAV_ITEMS: NavItem[] = [
-  { label: 'Fraud Analysis', icon: '🛡️', tool: 'fraud_analysis', description: 'Analyze transactions for fraud' },
-  { label: 'Risk Dashboard', icon: '📊', tool: 'risk_visualization', description: 'View risk charts and graphs' },
-  { label: 'Transaction History', icon: '📜', tool: 'transaction_history', description: 'Browse past transactions' },
-  { label: 'Alerts', icon: '🔔', tool: 'alerts', description: 'Manage fraud alerts' },
-  { label: 'Reports', icon: '📄', tool: 'reports', description: 'Generate fraud reports' },
-  { label: 'Web Portal', icon: '🌐', tool: 'browser', description: 'Open web browser' },
-  { label: 'Canvas', icon: '🖌️', tool: 'canvas', description: 'Collaborative workspace' },
-  { label: 'Web Search', icon: '🔍', tool: 'web_search', description: 'Search the web' }
+export const NAV_ITEMS = [
+  {
+    id: "triage",
+    label: "Triage",
+    icon: "search",
+    tool: "incident_triage",
+    description: "Initial incident assessment and classification",
+  },
+  {
+    id: "timeline",
+    label: "Timeline",
+    icon: "clock",
+    tool: "timeline",
+    description: "Chronological event timeline",
+  },
+  {
+    id: "forensics",
+    label: "Forensics",
+    icon: "shield",
+    tool: "forensics",
+    description: "Digital evidence collection and analysis",
+  },
+  {
+    id: "intel",
+    label: "Intel",
+    icon: "eye",
+    tool: "threat_intel",
+    description: "Threat intelligence and IOCs",
+  },
+  {
+    id: "alerts",
+    label: "Alerts",
+    icon: "alert-triangle",
+    tool: "alerts",
+    description: "Alert rules and notifications",
+  },
+  {
+    id: "tasks",
+    label: "Tasks",
+    icon: "check-square",
+    tool: "playbooks",
+    description: "Response tasks and playbooks",
+  },
+  {
+    id: "reports",
+    label: "Reports",
+    icon: "file-text",
+    tool: "reports",
+    description: "Incident reports and exports",
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    icon: "settings",
+    tool: "settings",
+    description: "Tool configuration",
+  },
 ];
 
-export const FRAUD_PRESETS: Record<string, { prompt: string; temp: number }> = {
-  thorough: { 
-    prompt: "Perform extremely detailed fraud analysis. Check every indicator, cross-reference patterns, and provide comprehensive risk assessment.", 
-    temp: 0.3 
+export const NEURAL_PRESETS = {
+  triage: {
+    name: "Incident Triage",
+    prompt:
+      "You are an incident response specialist focused on triaging security incidents. Classify severity, assess impact, and recommend immediate containment actions. Be concise and action-oriented.",
+    temp: 0.3,
   },
-  quick: { 
-    prompt: "Perform quick fraud screening. Focus on major red flags and provide a rapid risk assessment.", 
-    temp: 0.5 
+  forensics: {
+    name: "Digital Forensics",
+    prompt:
+      "You are a digital forensics expert. Focus on evidence collection, chain of custody, and technical analysis of security incidents. Provide detailed, methodical guidance.",
+    temp: 0.2,
   },
-  educational: { 
-    prompt: "Explain fraud analysis in educational terms. Help the user understand fraud patterns and detection methods.", 
-    temp: 0.7 
+  intel: {
+    name: "Threat Intelligence",
+    prompt:
+      "You are a threat intelligence analyst. Analyze indicators of compromise, correlate with known threats, and provide intelligence-driven recommendations for incident response.",
+    temp: 0.4,
   },
-  investigative: { 
-    prompt: "Take an investigative approach. Look for hidden patterns, connections, and potential fraud networks.", 
-    temp: 0.4 
-  }
-};
-
-export const RISK_COLORS = {
-  low: '#00ff88',
-  medium: '#ffaa00',
-  high: '#ff0055'
-};
-
-export const API_ENDPOINTS = {
-  fraudguard: {
-    analyze: '/api/fraudguard/analyze',
-    score: '/api/fraudguard/score',
-    transactions: '/api/fraudguard/transactions',
-    analytics: '/api/fraudguard/analytics',
-    alerts: '/api/fraudguard/alerts',
-    reports: '/api/fraudguard/reports'
+  containment: {
+    name: "Containment Specialist",
+    prompt:
+      "You specialize in incident containment and eradication. Provide step-by-step procedures to stop threat progression and remove malicious artifacts from affected systems.",
+    temp: 0.3,
   },
-  ml: {
-    predict: '/api/ml/predict',
-    score: '/api/ml/score',
-    train: '/api/ml/train'
+  recovery: {
+    name: "Recovery Expert",
+    prompt:
+      "You are a disaster recovery specialist. Focus on system restoration, data recovery, and ensuring business continuity after security incidents.",
+    temp: 0.4,
   },
-  ai: {
-    chat: '/api/ai/chat',
-    ws: '/ws/ai'
-  }
 };

@@ -25,11 +25,9 @@ import {
   Link2,
   Server,
 } from "lucide-react";
-import ThreatIntelForm from "./ThreatIntelForm";
-import ThreatIntelCard from "./ThreatIntelCard";
-import ThreatIntelHistory from "./ThreatIntelHistory";
-import CorrelationPanel from "./CorrelationPanel";
-import IOCSearch from "./IOCSearch";
+import { ThreatIntelForm } from "./ThreatIntelForm";
+import { LiveThreatPanel } from "./LiveThreatPanel";
+import { AnimatedThreatCard, ThreatResult } from "./AnimatedThreatCard";
 import { threatIntelAPI } from "../services/intelliscoutAPI";
 import { ThreatIntel, IntelStatistics } from "../types";
 

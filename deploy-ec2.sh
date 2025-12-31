@@ -69,6 +69,31 @@ ssh_cmd "
     cd $APP_DIR/backend/tools/08-securecode/api && npm install
     cd $APP_DIR/backend/tools/09-compliancecheck/api && npm install
     cd $APP_DIR/backend/tools/10-dataguardian/api && npm install
+    cd $APP_DIR/backend/tools/11-incidentresponse/api && npm install
+    cd $APP_DIR/backend/tools/12-loganalyzer/api && npm install
+    cd $APP_DIR/backend/tools/13-accesscontrol/api && npm install
+    cd $APP_DIR/backend/tools/14-encryptionmanager/api && npm install
+    cd $APP_DIR/backend/tools/15-backuprecovery/api && npm install
+    cd $APP_DIR/backend/tools/16-networkmonitor/api && npm install
+    cd $APP_DIR/backend/tools/17-endpointprotection/api && npm install
+    cd $APP_DIR/backend/tools/18-identitymanagement/api && npm install
+    cd $APP_DIR/backend/tools/19-auditcompliance/api && npm install
+    cd $APP_DIR/backend/tools/20-threatintelligence/api && npm install
+    cd $APP_DIR/backend/tools/21-wafmanager/api && npm install
+    cd $APP_DIR/backend/tools/22-apiguard/api && npm install
+    cd $APP_DIR/backend/tools/23-botdefender/api && npm install
+    cd $APP_DIR/backend/tools/24-ddosshield/api && npm install
+    cd $APP_DIR/backend/tools/25-sslmonitor/api && npm install
+    cd $APP_DIR/backend/tools/26-blueteamai/api && npm install
+    cd $APP_DIR/backend/tools/27-siemcommander/api && npm install
+    cd $APP_DIR/backend/tools/28-soarengine/api && npm install
+    cd $APP_DIR/backend/tools/29-riskscoreai/api && npm install
+    cd $APP_DIR/backend/tools/30-policyengine/api && npm install
+    cd $APP_DIR/backend/tools/41-iotsecure/api && npm install
+    cd $APP_DIR/backend/tools/42-mobiledefend/api && npm install
+    cd $APP_DIR/backend/tools/43-backupguard/api && npm install
+    cd $APP_DIR/backend/tools/44-drplan/api && npm install
+    cd $APP_DIR/backend/tools/45-privacyshield/api && npm install
 "
 
 echo ""
@@ -138,6 +163,206 @@ server {
         proxy_set_header X-Real-IP \$remote_addr;
     }
 
+    # IncidentResponse API
+    location /api/v1/incidentresponse {
+        proxy_pass http://localhost:4011;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # LogAnalyzer API
+    location /api/v1/loganalyzer {
+        proxy_pass http://localhost:4012;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # AccessControl API
+    location /api/v1/accesscontrol {
+        proxy_pass http://localhost:4013;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # EncryptionManager API
+    location /api/v1/encryptionmanager {
+        proxy_pass http://localhost:4014;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # BackupRecovery API
+    location /api/v1/backuprecovery {
+        proxy_pass http://localhost:4015;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # NetworkMonitor API
+    location /api/v1/networkmonitor {
+        proxy_pass http://localhost:4016;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # EndpointProtection API
+    location /api/v1/endpointprotection {
+        proxy_pass http://localhost:4017;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # IdentityManagement API
+    location /api/v1/identitymanagement {
+        proxy_pass http://localhost:4018;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # AuditCompliance API
+    location /api/v1/auditcompliance {
+        proxy_pass http://localhost:4019;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # ThreatIntelligence API
+    location /api/v1/threatintelligence {
+        proxy_pass http://localhost:4020;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # WAFManager API
+    location /api/v1/wafmanager {
+        proxy_pass http://localhost:4021;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # APIGuard API
+    location /api/v1/apiguard {
+        proxy_pass http://localhost:4022;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # BotDefender API
+    location /api/v1/botdefender {
+        proxy_pass http://localhost:4023;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # DDoSShield API
+    location /api/v1/ddosshield {
+        proxy_pass http://localhost:4024;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # SSLMonitor API
+    location /api/v1/sslmonitor {
+        proxy_pass http://localhost:4025;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # BlueTeamAI API
+    location /api/v1/blueteamai {
+        proxy_pass http://localhost:4026;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # SIEMCommander API
+    location /api/v1/siemcommander {
+        proxy_pass http://localhost:4027;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # SOAREngine API
+    location /api/v1/soarengine {
+        proxy_pass http://localhost:4028;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # RiskScoreAI API
+    location /api/v1/riskscoreai {
+        proxy_pass http://localhost:4029;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # PolicyEngine API
+    location /api/v1/policyengine {
+        proxy_pass http://localhost:4030;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # IoTSecure API
+    location /api/v1/iotsecure {
+        proxy_pass http://localhost:4041;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # MobileDefend API
+    location /api/v1/mobiledefend {
+        proxy_pass http://localhost:4042;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # BackupGuard API
+    location /api/v1/backupguard {
+        proxy_pass http://localhost:4043;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # DRPlan API
+    location /api/v1/drplan {
+        proxy_pass http://localhost:4044;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
+    # PrivacyShield API
+    location /api/v1/privacyshield {
+        proxy_pass http://localhost:4045;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+    }
+
     # Health check
     location /health {
         proxy_pass http://localhost:4004/health;
@@ -193,6 +418,131 @@ module.exports = {
       name: 'dataguardian-api',
       script: 'backend/tools/10-dataguardian/api/src/server.js',
       env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'incidentresponse-api',
+      script: 'backend/tools/11-incidentresponse/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'loganalyzer-api',
+      script: 'backend/tools/12-loganalyzer/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'accesscontrol-api',
+      script: 'backend/tools/13-accesscontrol/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'encryptionmanager-api',
+      script: 'backend/tools/14-encryptionmanager/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'backuprecovery-api',
+      script: 'backend/tools/15-backuprecovery/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'networkmonitor-api',
+      script: 'backend/tools/16-networkmonitor/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'endpointprotection-api',
+      script: 'backend/tools/17-endpointprotection/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'identitymanagement-api',
+      script: 'backend/tools/18-identitymanagement/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'auditcompliance-api',
+      script: 'backend/tools/19-auditcompliance/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'threatintelligence-api',
+      script: 'backend/tools/20-threatintelligence/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'wafmanager-api',
+      script: 'backend/tools/21-wafmanager/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'apiguard-api',
+      script: 'backend/tools/22-apiguard/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'botdefender-api',
+      script: 'backend/tools/23-botdefender/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'ddosshield-api',
+      script: 'backend/tools/24-ddosshield/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'sslmonitor-api',
+      script: 'backend/tools/25-sslmonitor/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'blueteamai-api',
+      script: 'backend/tools/26-blueteamai/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'siemcommander-api',
+      script: 'backend/tools/27-siemcommander/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'soarengine-api',
+      script: 'backend/tools/28-soarengine/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'riskscoreai-api',
+      script: 'backend/tools/29-riskscoreai/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'policyengine-api',
+      script: 'backend/tools/30-policyengine/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'iotsecure-api',
+      script: 'backend/tools/41-iotsecure/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'mobiledefend-api',
+      script: 'backend/tools/42-mobiledefend/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'backupguard-api',
+      script: 'backend/tools/43-backupguard/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'drplan-api',
+      script: 'backend/tools/44-drplan/api/src/server.js',
+      env: { NODE_ENV: 'production' }
+    },
+    {
+      name: 'privacyshield-api',
+      script: 'backend/tools/45-privacyshield/api/src/server.js',
+      env: { NODE_ENV: 'production' }
     }
   ]
 };
@@ -215,6 +565,31 @@ echo "   https://api.fyzo.xyz/api/v1/pentestai"
 echo "   https://api.fyzo.xyz/api/v1/securecode"
 echo "   https://api.fyzo.xyz/api/v1/compliancecheck"
 echo "   https://api.fyzo.xyz/api/v1/dataguardian"
+echo "   https://api.fyzo.xyz/api/v1/incidentresponse"
+echo "   https://api.fyzo.xyz/api/v1/loganalyzer"
+echo "   https://api.fyzo.xyz/api/v1/accesscontrol"
+echo "   https://api.fyzo.xyz/api/v1/encryptionmanager"
+echo "   https://api.fyzo.xyz/api/v1/backuprecovery"
+echo "   https://api.fyzo.xyz/api/v1/networkmonitor"
+echo "   https://api.fyzo.xyz/api/v1/endpointprotection"
+echo "   https://api.fyzo.xyz/api/v1/identitymanagement"
+echo "   https://api.fyzo.xyz/api/v1/auditcompliance"
+echo "   https://api.fyzo.xyz/api/v1/threatintelligence"
+echo "   https://api.fyzo.xyz/api/v1/wafmanager"
+echo "   https://api.fyzo.xyz/api/v1/apiguard"
+echo "   https://api.fyzo.xyz/api/v1/botdefender"
+echo "   https://api.fyzo.xyz/api/v1/ddosshield"
+echo "   https://api.fyzo.xyz/api/v1/sslmonitor"
+echo "   https://api.fyzo.xyz/api/v1/blueteamai"
+echo "   https://api.fyzo.xyz/api/v1/siemcommander"
+echo "   https://api.fyzo.xyz/api/v1/soarengine"
+echo "   https://api.fyzo.xyz/api/v1/riskscoreai"
+echo "   https://api.fyzo.xyz/api/v1/policyengine"
+echo "   https://api.fyzo.xyz/api/v1/iotsecure"
+echo "   https://api.fyzo.xyz/api/v1/mobiledefend"
+echo "   https://api.fyzo.xyz/api/v1/backupguard"
+echo "   https://api.fyzo.xyz/api/v1/drplan"
+echo "   https://api.fyzo.xyz/api/v1/privacyshield"
 echo ""
 echo "🧪 Test: curl https://api.fyzo.xyz/health"
 echo ""

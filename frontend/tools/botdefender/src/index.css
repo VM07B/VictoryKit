@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply bg-gray-900 text-gray-100 antialiased;
+}
+.matrix-bg {
+  background: linear-gradient(180deg, #0a0e17 0%, #060912 100%);
+}
+.cyber-card {
+  @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg;
+}
+.cyber-input {
+  @apply w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none;
+}

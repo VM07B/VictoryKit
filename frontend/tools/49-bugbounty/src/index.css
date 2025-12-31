@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #1a1505 0%, #422006 50%, #1a1505 100%);
+  min-height: 100vh;
+}
+
+.bounty-input {
+  @apply w-full px-4 py-3 rounded-xl bg-yellow-950/50 border border-yellow-700/30 text-yellow-100 placeholder-yellow-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all;
+}
+
+.bounty-card {
+  @apply p-3 rounded-xl bg-yellow-950/50 border border-yellow-700/30 transition-all hover:border-yellow-500/50;
+}
+
+.severity-badge {
+  @apply px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.severity-badge.critical { @apply bg-red-600 text-white; }
+.severity-badge.high { @apply bg-orange-600 text-white; }
+.severity-badge.medium { @apply bg-yellow-600 text-black; }
+.severity-badge.low { @apply bg-blue-600 text-white; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }

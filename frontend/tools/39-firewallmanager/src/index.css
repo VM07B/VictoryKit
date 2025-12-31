@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #991b1b 100%);
+  min-height: 100vh;
+  color: #fee2e2;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+  border-radius: 3px;
+}
+
+.firewall-input {
+  @apply bg-red-950/50 border border-red-700/50 rounded-lg px-4 py-3 text-red-100 
+         placeholder-red-500/50 focus:outline-none focus:border-red-400 
+         focus:ring-2 focus:ring-red-400/30 transition-all duration-300;
+}
+
+.rule-action {
+  @apply px-3 py-1 rounded text-xs font-bold uppercase;
+}
+.rule-action.allow {
+  @apply bg-green-600 text-white;
+}
+.rule-action.deny {
+  @apply bg-red-600 text-white;
+}
+.rule-action.drop {
+  @apply bg-gray-600 text-white;
+}
+
+.firewall-card {
+  @apply p-4 rounded-xl border border-red-700/30 bg-red-900/20 transition-all;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

@@ -6,7 +6,36 @@
       "dependsOn": [
         "MalwareHunter API (4004)",
         "PhishGuard API (4005)",
-        "VulnScan API (4006)"
+        "VulnScan API (4006)",
+        "PenTestAI API (4007)",
+        "SecureCode API (4008)",
+        "ComplianceCheck API (4009)",
+        "DataGuardian API (4010)",
+        "IncidentResponse API (4011)",
+        "LogAnalyzer API (4012)",
+        "AccessControl API (4013)",
+        "EncryptionManager API (4014)",
+        "BackupRecovery API (4015)",
+        "NetworkMonitor API (4016)",
+        "EndpointProtection API (4017)",
+        "IdentityManagement API (4018)",
+        "AuditCompliance API (4019)",
+        "ThreatIntelligence API (4020)",
+        "WAFManager API (4021)",
+        "APIGuard API (4022)",
+        "BotDefender API (4023)",
+        "DDoSShield API (4024)",
+        "SSLMonitor API (4025)",
+        "BlueTeamAI API (4026)",
+        "SIEMCommander API (4027)",
+        "SOAREngine API (4028)",
+        "RiskScoreAI API (4029)",
+        "PolicyEngine API (4030)",
+        "IoTSecure API (4041)",
+        "MobileDefend API (4042)",
+        "BackupGuard API (4043)",
+        "DRPlan API (4044)",
+        "PrivacyShield API (4045)"
       ],
       "dependsOrder": "parallel",
       "problemMatcher": []
@@ -14,7 +43,7 @@
     {
       "label": "📦 Install All Dependencies",
       "type": "shell",
-      "command": "cd backend/shared && npm install && cd ../tools/04-malwarehunter/api && npm install && cd ../../05-phishguard/api && npm install && cd ../../06-vulnscan/api && npm install",
+      "command": "cd backend/shared && npm install && cd ../tools/04-malwarehunter/api && npm install && cd ../../05-phishguard/api && npm install && cd ../../06-vulnscan/api && npm install && cd ../../07-pentestai/api && npm install && cd ../../08-securecode/api && npm install && cd ../../09-compliancecheck/api && npm install && cd ../../10-dataguardian/api && npm install && cd ../../11-incidentresponse/api && npm install && cd ../../12-loganalyzer/api && npm install && cd ../../13-accesscontrol/api && npm install && cd ../../14-encryptionmanager/api && npm install && cd ../../15-cryptovault/api && npm install && cd ../../16-accesscontrol/api && npm install && cd ../../17-audittrail/api && npm install && cd ../../18-threatmodel/api && npm install && cd ../../19-riskassess/api && npm install && cd ../../20-securityscore/api && npm install && cd ../../21-wafmanager/api && npm install && cd ../../22-apiguard/api && npm install && cd ../../23-botdefender/api && npm install && cd ../../24-ddosshield/api && npm install && cd ../../25-sslmonitor/api && npm install && cd ../../26-blueteamai/api && npm install && cd ../../27-siemcommander/api && npm install && cd ../../28-soarengine/api && npm install && cd ../../29-riskscoreai/api && npm install && cd ../../30-policyengine/api && npm install",
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "shared" }
     },
@@ -36,19 +65,31 @@
       "label": "MalwareHunter API (4004)",
       "type": "shell",
       "command": "npm start",
-      "options": { "cwd": "${workspaceFolder}/backend/tools/04-malwarehunter/api" },
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/04-malwarehunter/api"
+      },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
     },
     {
       "label": "PhishGuard API (4005)",
       "type": "shell",
       "command": "npm start",
-      "options": { "cwd": "${workspaceFolder}/backend/tools/05-phishguard/api" },
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/05-phishguard/api"
+      },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
     },
     {
       "label": "VulnScan API (4006)",
@@ -57,7 +98,11 @@
       "options": { "cwd": "${workspaceFolder}/backend/tools/06-vulnscan/api" },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
     },
     {
       "label": "PenTestAI API (4007)",
@@ -66,34 +111,431 @@
       "options": { "cwd": "${workspaceFolder}/backend/tools/07-pentestai/api" },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
     },
     {
       "label": "SecureCode API (4008)",
       "type": "shell",
       "command": "npm start",
-      "options": { "cwd": "${workspaceFolder}/backend/tools/08-securecode/api" },
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/08-securecode/api"
+      },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
     },
     {
       "label": "ComplianceCheck API (4009)",
       "type": "shell",
       "command": "npm start",
-      "options": { "cwd": "${workspaceFolder}/backend/tools/09-compliancecheck/api" },
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/09-compliancecheck/api"
+      },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
     },
     {
       "label": "DataGuardian API (4010)",
       "type": "shell",
       "command": "npm start",
-      "options": { "cwd": "${workspaceFolder}/backend/tools/10-dataguardian/api" },
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/10-dataguardian/api"
+      },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "group": "apis" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "IncidentResponse API (4011)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/11-incidentresponse/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "LogAnalyzer API (4012)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/12-loganalyzer/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "AccessControl API (4013)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/13-accesscontrol/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "EncryptionManager API (4014)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/14-encryptionmanager/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "BackupRecovery API (4015)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/15-backuprecovery/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "NetworkMonitor API (4016)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/16-networkmonitor/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "EndpointProtection API (4017)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/17-endpointprotection/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "IdentityManagement API (4018)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/18-identitymanagement/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "AuditCompliance API (4019)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/19-auditcompliance/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "ThreatIntelligence API (4020)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/20-threatintelligence/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "WAFManager API (4021)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/21-wafmanager/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "APIGuard API (4022)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/22-apiguard/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "BotDefender API (4023)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/23-botdefender/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "DDoSShield API (4024)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/24-ddosshield/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "SSLMonitor API (4025)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/25-sslmonitor/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "BlueTeamAI API (4026)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/26-blueteamai/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "SIEMCommander API (4027)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/27-siemcommander/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "SOAREngine API (4028)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/28-soarengine/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "RiskScoreAI API (4029)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/29-riskscoreai/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "PolicyEngine API (4030)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/30-policyengine/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "IoTSecure API (4041)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/41-iotsecure/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "MobileDefend API (4042)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/42-mobiledefend/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "BackupGuard API (4043)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/43-backupguard/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "DRPlan API (4044)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/44-drplan/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
+    },
+    {
+      "label": "PrivacyShield API (4045)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/tools/45-privacyshield/api"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "apis"
+      }
     }
   ]
 }

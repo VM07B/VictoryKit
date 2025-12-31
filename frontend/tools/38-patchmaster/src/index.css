@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #500724 0%, #831843 50%, #9d174d 100%);
+  min-height: 100vh;
+  color: #fce7f3;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(236, 72, 153, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ec4899, #db2777);
+  border-radius: 3px;
+}
+
+.patch-input {
+  @apply bg-pink-950/50 border border-pink-700/50 rounded-lg px-4 py-3 text-pink-100 
+         placeholder-pink-500/50 focus:outline-none focus:border-pink-400 
+         focus:ring-2 focus:ring-pink-400/30 transition-all duration-300;
+}
+
+.patch-status {
+  @apply px-3 py-1 rounded-full text-xs font-bold uppercase;
+}
+.patch-status.critical {
+  @apply bg-red-600 text-white;
+}
+.patch-status.important {
+  @apply bg-orange-600 text-white;
+}
+.patch-status.moderate {
+  @apply bg-yellow-600 text-white;
+}
+.patch-status.low {
+  @apply bg-green-600 text-white;
+}
+
+.patch-card {
+  @apply p-4 rounded-xl border border-pink-700/30 bg-pink-900/20 transition-all;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

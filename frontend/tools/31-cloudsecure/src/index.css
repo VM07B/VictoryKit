@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #082f49 0%, #0c4a6e 50%, #075985 100%);
+  min-height: 100vh;
+  color: #e0f2fe;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(14, 165, 233, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #0284c7);
+  border-radius: 3px;
+}
+
+.cloud-input {
+  @apply bg-sky-950/50 border border-sky-700/50 rounded-lg px-4 py-3 text-sky-100 
+         placeholder-sky-500/50 focus:outline-none focus:border-sky-400 
+         focus:ring-2 focus:ring-sky-400/30 transition-all duration-300;
+}
+
+.provider-badge {
+  @apply px-3 py-1 rounded-full text-xs font-medium transition-all duration-300;
+}
+.provider-badge.aws {
+  @apply bg-orange-500/20 text-orange-300 border border-orange-500/30;
+}
+.provider-badge.azure {
+  @apply bg-blue-500/20 text-blue-300 border border-blue-500/30;
+}
+.provider-badge.gcp {
+  @apply bg-red-500/20 text-red-300 border border-red-500/30;
+}
+
+.finding-card {
+  @apply p-4 rounded-xl border transition-all duration-300;
+}
+.finding-card.critical {
+  @apply bg-red-900/30 border-red-600/30;
+}
+.finding-card.high {
+  @apply bg-orange-900/30 border-orange-600/30;
+}
+.finding-card.medium {
+  @apply bg-yellow-900/30 border-yellow-600/30;
+}
+.finding-card.low {
+  @apply bg-green-900/30 border-green-600/30;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

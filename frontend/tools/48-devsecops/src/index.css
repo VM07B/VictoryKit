@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #1c0f05 0%, #431407 50%, #1c0f05 100%);
+  min-height: 100vh;
+}
+
+.pipeline-input {
+  @apply w-full px-4 py-3 rounded-xl bg-orange-950/50 border border-orange-700/30 text-orange-100 placeholder-orange-500 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all;
+}
+
+.pipeline-card {
+  @apply p-3 rounded-xl bg-orange-950/50 border border-orange-700/30 transition-all hover:border-orange-500/50;
+}
+
+.stage-badge {
+  @apply px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.stage-badge.passed { @apply bg-green-600 text-white; }
+.stage-badge.failed { @apply bg-red-600 text-white; }
+.stage-badge.running { @apply bg-orange-600 text-white animate-pulse; }
+.stage-badge.pending { @apply bg-gray-600 text-white; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }

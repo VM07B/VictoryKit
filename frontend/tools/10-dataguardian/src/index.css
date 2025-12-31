@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #166534 100%);
+  min-height: 100vh;
+  color: #f0fdf4;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(22, 101, 52, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+}
+
+/* Glowing Input Fields */
+.guardian-input {
+  @apply bg-green-950/50 border border-green-700/50 rounded-lg px-4 py-3 text-green-100 
+         placeholder-green-500/50 focus:outline-none focus:border-green-400 
+         focus:ring-2 focus:ring-green-400/30 transition-all duration-300;
+}
+
+.guardian-input:focus {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+}
+
+/* Privacy Category Badges */
+.privacy-badge {
+  @apply px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer;
+}
+
+.privacy-badge.pii {
+  @apply bg-red-500/20 text-red-300 border border-red-500/30;
+}
+
+.privacy-badge.pii.active {
+  @apply bg-red-500 text-white shadow-lg shadow-red-500/30;
+}
+
+.privacy-badge.phi {
+  @apply bg-purple-500/20 text-purple-300 border border-purple-500/30;
+}
+
+.privacy-badge.phi.active {
+  @apply bg-purple-500 text-white shadow-lg shadow-purple-500/30;
+}
+
+.privacy-badge.pci {
+  @apply bg-amber-500/20 text-amber-300 border border-amber-500/30;
+}
+
+.privacy-badge.pci.active {
+  @apply bg-amber-500 text-white shadow-lg shadow-amber-500/30;
+}
+
+.privacy-badge.confidential {
+  @apply bg-blue-500/20 text-blue-300 border border-blue-500/30;
+}
+
+.privacy-badge.confidential.active {
+  @apply bg-blue-500 text-white shadow-lg shadow-blue-500/30;
+}
+
+/* Data Classification Tags */
+.classification-tag {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold;
+}
+
+.classification-tag.restricted {
+  @apply bg-red-900/50 text-red-200 border border-red-600/50;
+}
+
+.classification-tag.confidential {
+  @apply bg-orange-900/50 text-orange-200 border border-orange-600/50;
+}
+
+.classification-tag.internal {
+  @apply bg-yellow-900/50 text-yellow-200 border border-yellow-600/50;
+}
+
+.classification-tag.public {
+  @apply bg-green-900/50 text-green-200 border border-green-600/50;
+}
+
+/* Risk Level Indicators */
+.risk-indicator {
+  @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium;
+}
+
+.risk-indicator.critical {
+  @apply bg-red-900/30 text-red-300 border-l-4 border-red-500;
+}
+
+.risk-indicator.high {
+  @apply bg-orange-900/30 text-orange-300 border-l-4 border-orange-500;
+}
+
+.risk-indicator.medium {
+  @apply bg-yellow-900/30 text-yellow-300 border-l-4 border-yellow-500;
+}
+
+.risk-indicator.low {
+  @apply bg-green-900/30 text-green-300 border-l-4 border-green-500;
+}
+
+/* Protection Status Cards */
+.protection-card {
+  @apply p-4 rounded-xl border transition-all duration-300;
+}
+
+.protection-card.protected {
+  @apply bg-green-900/30 border-green-600/30;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+}
+
+.protection-card.warning {
+  @apply bg-yellow-900/30 border-yellow-600/30;
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.1);
+}
+
+.protection-card.danger {
+  @apply bg-red-900/30 border-red-600/30;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.1);
+}
+
+/* Data Flow Animation */
+.data-flow-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #22c55e,
+    #4ade80,
+    #22c55e,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: dataFlow 3s linear infinite;
+  height: 2px;
+}
+
+/* Shield Animation */
+.shield-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shield-container::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(34, 197, 94, 0.3) 0%,
+    transparent 70%
+  );
+  animation: protectWave 2s ease-out infinite;
+}
+
+/* Scan Progress Bar */
+.scan-progress {
+  @apply h-2 bg-green-950 rounded-full overflow-hidden;
+}
+
+.scan-progress-bar {
+  @apply h-full rounded-full transition-all duration-300;
+  background: linear-gradient(90deg, #16a34a, #22c55e, #4ade80);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+/* Finding Highlight */
+.finding-highlight {
+  @apply relative overflow-hidden;
+}
+
+.finding-highlight::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(34, 197, 94, 0.2),
+    transparent
+  );
+  animation: privacyScan 1.5s ease-in-out infinite;
+}
+
+/* Encryption Status */
+.encryption-badge {
+  @apply inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-medium;
+}
+
+.encryption-badge.encrypted {
+  @apply bg-green-900/50 text-green-300;
+}
+
+.encryption-badge.unencrypted {
+  @apply bg-red-900/50 text-red-300;
+}
+
+.encryption-badge.partial {
+  @apply bg-yellow-900/50 text-yellow-300;
+}
+
+/* Data Source Icons */
+.source-icon {
+  @apply w-10 h-10 rounded-lg flex items-center justify-center;
+}
+
+.source-icon.database {
+  @apply bg-blue-900/50 text-blue-300;
+}
+
+.source-icon.cloud {
+  @apply bg-cyan-900/50 text-cyan-300;
+}
+
+.source-icon.file {
+  @apply bg-purple-900/50 text-purple-300;
+}
+
+.source-icon.api {
+  @apply bg-green-900/50 text-green-300;
+}
+
+/* Hover Effects */
+.guardian-hover {
+  @apply transition-all duration-300;
+}
+
+.guardian-hover:hover {
+  @apply transform -translate-y-1;
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
+}
+
+/* Result Score Ring */
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.score-ring-bg {
+  stroke: rgba(22, 101, 52, 0.3);
+}
+
+.score-ring-progress {
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+/* Pulse Dot for Active Scanning */
+.pulse-dot {
+  @apply w-2 h-2 rounded-full bg-green-400;
+  animation: shieldPulse 1s ease-in-out infinite;
+}
+
+/* Grid Pattern Background */
+.grid-pattern {
+  background-image: linear-gradient(
+      rgba(34, 197, 94, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}

@@ -43,8 +43,7 @@ const FraudGuardTool: React.FC = () => {
     const interval = setInterval(() => {
       setSystemStats((prev) => ({
         totalScans: prev.totalScans + Math.floor(Math.random() * 3),
-        fraudsDetected:
-          prev.fraudsDetected + (Math.random() > 0.9 ? 1 : 0),
+        fraudsDetected: prev.fraudsDetected + (Math.random() > 0.9 ? 1 : 0),
         accuracy: 99.5 + Math.random() * 0.4,
         avgResponseTime: 0.6 + Math.random() * 0.4,
       }));
@@ -82,7 +81,7 @@ const FraudGuardTool: React.FC = () => {
   const handleViewTransaction = useCallback((transaction: Transaction) => {
     setLastAnalysis({
       score: transaction.fraud_score || 0,
-      risk_level: transaction.risk_level || 'low',
+      risk_level: transaction.risk_level || "low",
       recommendation: `Review transaction ${transaction.id}`,
       indicators: [],
     });
@@ -135,8 +134,14 @@ const FraudGuardTool: React.FC = () => {
       {/* Animated background effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div
+          className="absolute top-1/2 -left-40 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
+        <div
+          className="absolute -bottom-40 right-1/3 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        />
       </div>
 
       {/* Header with live stats */}
@@ -156,7 +161,9 @@ const FraudGuardTool: React.FC = () => {
               <div className="flex items-center gap-2 text-sm">
                 <Radio className="w-3 h-3 text-green-400 animate-pulse" />
                 <span className="text-green-400">LIVE</span>
-                <span className="text-gray-400">• AI-Powered Fraud Detection</span>
+                <span className="text-gray-400">
+                  • AI-Powered Fraud Detection
+                </span>
               </div>
             </div>
           </div>
@@ -166,22 +173,30 @@ const FraudGuardTool: React.FC = () => {
             <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-lg border border-slate-700/50">
               <Activity className="w-4 h-4 text-cyan-400" />
               <span className="text-xs text-gray-400">Scans</span>
-              <span className="text-sm font-mono text-white">{systemStats.totalScans.toLocaleString()}</span>
+              <span className="text-sm font-mono text-white">
+                {systemStats.totalScans.toLocaleString()}
+              </span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-lg border border-slate-700/50">
               <AlertTriangle className="w-4 h-4 text-red-400" />
               <span className="text-xs text-gray-400">Frauds</span>
-              <span className="text-sm font-mono text-red-400">{systemStats.fraudsDetected}</span>
+              <span className="text-sm font-mono text-red-400">
+                {systemStats.fraudsDetected}
+              </span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-lg border border-slate-700/50">
               <CheckCircle2 className="w-4 h-4 text-green-400" />
               <span className="text-xs text-gray-400">Accuracy</span>
-              <span className="text-sm font-mono text-green-400">{systemStats.accuracy.toFixed(1)}%</span>
+              <span className="text-sm font-mono text-green-400">
+                {systemStats.accuracy.toFixed(1)}%
+              </span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-lg border border-slate-700/50">
               <Clock className="w-4 h-4 text-yellow-400" />
               <span className="text-xs text-gray-400">Avg</span>
-              <span className="text-sm font-mono text-yellow-400">{systemStats.avgResponseTime.toFixed(1)}s</span>
+              <span className="text-sm font-mono text-yellow-400">
+                {systemStats.avgResponseTime.toFixed(1)}s
+              </span>
             </div>
           </div>
 
@@ -221,7 +236,11 @@ const FraudGuardTool: React.FC = () => {
                     <div className="absolute inset-x-2 bottom-0 h-4 bg-gradient-to-t from-red-500/20 to-transparent blur-sm" />
                   </>
                 )}
-                <Icon className={`w-4 h-4 ${currentView === id ? 'text-red-400' : ''}`} />
+                <Icon
+                  className={`w-4 h-4 ${
+                    currentView === id ? "text-red-400" : ""
+                  }`}
+                />
                 {label}
               </button>
             ))}
@@ -239,8 +258,8 @@ const FraudGuardTool: React.FC = () => {
                 Real-Time Fraud Detection
               </h2>
               <p className="text-gray-400 max-w-2xl mx-auto">
-                Advanced AI-powered analysis with live streaming results. Watch as our neural network
-                processes each transaction in real-time.
+                Advanced AI-powered analysis with live streaming results. Watch
+                as our neural network processes each transaction in real-time.
               </p>
             </div>
 
@@ -273,8 +292,8 @@ const FraudGuardTool: React.FC = () => {
                 <AnimatedFraudScoreCard
                   data={lastAnalysis}
                   isAnalyzing={isAnalyzing}
-                  onViewDetails={() => console.log('View details')}
-                  onExport={() => console.log('Export report')}
+                  onViewDetails={() => console.log("View details")}
+                  onExport={() => console.log("Export report")}
                 />
               </div>
             </div>

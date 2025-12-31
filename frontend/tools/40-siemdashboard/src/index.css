@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
+  min-height: 100vh;
+  color: #e2e8f0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(100, 116, 139, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #64748b, #475569);
+  border-radius: 3px;
+}
+
+.siem-input {
+  @apply bg-slate-950/50 border border-slate-700/50 rounded-lg px-4 py-3 text-slate-100 
+         placeholder-slate-500/50 focus:outline-none focus:border-slate-400 
+         focus:ring-2 focus:ring-slate-400/30 transition-all duration-300;
+}
+
+.event-severity {
+  @apply px-2 py-1 rounded text-xs font-bold uppercase;
+}
+.event-severity.critical {
+  @apply bg-red-600 text-white;
+}
+.event-severity.high {
+  @apply bg-orange-600 text-white;
+}
+.event-severity.medium {
+  @apply bg-yellow-600 text-white;
+}
+.event-severity.low {
+  @apply bg-blue-600 text-white;
+}
+.event-severity.info {
+  @apply bg-gray-600 text-white;
+}
+
+.event-card {
+  @apply p-3 rounded-lg border border-slate-700/30 bg-slate-800/30 transition-all;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

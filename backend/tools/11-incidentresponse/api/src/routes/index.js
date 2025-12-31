@@ -9,6 +9,7 @@ const incidentController = require("../controllers/incidentController");
 const playbookController = require("../controllers/playbookController");
 const taskController = require("../controllers/taskController");
 const evidenceController = require("../controllers/evidenceController");
+const forensicsController = require("../controllers/forensicsController");
 
 // Incident routes
 router.post("/incidents", incidentController.createIncident);
@@ -38,6 +39,25 @@ router.post("/evidence", evidenceController.createEvidence);
 router.get("/evidence", evidenceController.getEvidence);
 router.get("/evidence/:id", evidenceController.getEvidenceById);
 router.post("/evidence/:id/analyze", evidenceController.analyzeEvidence);
+
+// Forensics routes
+router.post(
+  "/forensics/incidents/:id/analyze",
+  forensicsController.analyzeIncident
+);
+router.post("/forensics/indicators", forensicsController.analyzeIndicators);
+router.post(
+  "/forensics/evidence/:id/analyze",
+  forensicsController.analyzeEvidence
+);
+router.get(
+  "/forensics/mitre/:techniqueId",
+  forensicsController.getMitreTechnique
+);
+router.get(
+  "/forensics/playbooks/templates",
+  forensicsController.getPlaybookTemplates
+);
 
 // Dashboard
 router.get("/dashboard", incidentController.getDashboard);

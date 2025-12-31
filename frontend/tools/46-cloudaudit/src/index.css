@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #1a0a1f 0%, #2d1a3d 50%, #1a0a1f 100%);
+  min-height: 100vh;
+}
+
+.audit-input {
+  @apply w-full px-4 py-3 rounded-xl bg-fuchsia-950/50 border border-fuchsia-700/30 text-fuchsia-100 placeholder-fuchsia-500 focus:outline-none focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-500/20 transition-all;
+}
+
+.audit-card {
+  @apply p-3 rounded-xl bg-fuchsia-950/50 border border-fuchsia-700/30 transition-all hover:border-fuchsia-500/50;
+}
+
+.log-entry {
+  @apply px-3 py-2 rounded-lg bg-fuchsia-950/30 border-l-2 border-fuchsia-500 text-sm;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }

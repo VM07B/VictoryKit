@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #431407 0%, #7c2d12 50%, #9a3412 100%);
+  min-height: 100vh;
+  color: #ffedd5;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(249, 115, 22, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f97316, #ea580c);
+  border-radius: 3px;
+}
+
+.risk-input {
+  @apply bg-orange-950/50 border border-orange-700/50 rounded-lg px-4 py-3 text-orange-100 
+         placeholder-orange-500/50 focus:outline-none focus:border-orange-400 
+         focus:ring-2 focus:ring-orange-400/30 transition-all duration-300;
+}
+
+.risk-cell {
+  @apply p-3 rounded-lg text-center font-bold transition-all cursor-pointer;
+}
+.risk-cell.extreme {
+  @apply bg-red-600 text-white;
+}
+.risk-cell.high {
+  @apply bg-orange-600 text-white;
+}
+.risk-cell.medium {
+  @apply bg-yellow-600 text-white;
+}
+.risk-cell.low {
+  @apply bg-green-600 text-white;
+}
+
+.risk-card {
+  @apply p-4 rounded-xl border transition-all duration-300;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}

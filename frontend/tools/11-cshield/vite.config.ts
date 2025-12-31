@@ -7,25 +7,13 @@ export default defineConfig({
   plugins: [react()],
   
   server: {
-    port: 3001,
+    port: 3011,
     host: true,
     cors: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:4001',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-      '/ws': {
-        target: 'ws://localhost:6001',
-        ws: true,
-        changeOrigin: true,
-      },
-    },
   },
 
   preview: {
-    port: 3001,
+    port: 3011,
     host: true,
   },
 
@@ -48,15 +36,19 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@components': path.resolve(__dirname, './src/components'),
       '@services': path.resolve(__dirname, './src/services'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+    },
+  },
+});
       '@types': path.resolve(__dirname, './src/types'),
     },
   },
 
   define: {
-    'import.meta.env.VITE_APP_NAME': JSON.stringify('FraudGuard'),
-    'import.meta.env.VITE_API_URL': JSON.stringify('http://localhost:4001'),
-    'import.meta.env.VITE_WS_URL': JSON.stringify('ws://localhost:6001'),
-    'import.meta.env.VITE_ML_URL': JSON.stringify('http://localhost:8001'),
+    'import.meta.env.VITE_APP_NAME': JSON.stringify('IncidentResponse'),
+    'import.meta.env.VITE_API_URL': JSON.stringify('https://cshield.fyzo.xyz/api/v1/incidentresponse'),
+    'import.meta.env.VITE_WS_URL': JSON.stringify('wss://cshield.fyzo.xyz/ws'),
+    'import.meta.env.VITE_ML_URL': JSON.stringify('https://cshield.fyzo.xyz/ml'),
   },
 
   optimizeDeps: {

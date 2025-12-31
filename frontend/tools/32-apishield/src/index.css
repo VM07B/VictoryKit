@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #4a044e 0%, #701a75 50%, #86198f 100%);
+  min-height: 100vh;
+  color: #fae8ff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(217, 70, 239, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d946ef, #c026d3);
+  border-radius: 3px;
+}
+
+.api-input {
+  @apply bg-fuchsia-950/50 border border-fuchsia-700/50 rounded-lg px-4 py-3 text-fuchsia-100 
+         placeholder-fuchsia-500/50 focus:outline-none focus:border-fuchsia-400 
+         focus:ring-2 focus:ring-fuchsia-400/30 transition-all duration-300;
+}
+
+.method-badge {
+  @apply px-2 py-1 rounded text-xs font-bold;
+}
+.method-badge.get {
+  @apply bg-green-600 text-white;
+}
+.method-badge.post {
+  @apply bg-blue-600 text-white;
+}
+.method-badge.put {
+  @apply bg-yellow-600 text-white;
+}
+.method-badge.delete {
+  @apply bg-red-600 text-white;
+}
+
+.vuln-card {
+  @apply p-4 rounded-xl border transition-all duration-300;
+}
+.vuln-card.critical {
+  @apply bg-red-900/30 border-red-600/30;
+}
+.vuln-card.high {
+  @apply bg-orange-900/30 border-orange-600/30;
+}
+
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
