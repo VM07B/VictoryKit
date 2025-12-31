@@ -21,6 +21,16 @@ class ScanController {
 
       await scan.save();
 
+      // Trigger external security integrations
+      mlService.integrateWithSecurityStack(scan._id, {
+        target: targetIdentifier,
+        scanType,
+        userId: req.user.id
+      }).catch(error => {
+        console.error('Integration error:', error);
+        // Don't fail the scan if integration fails
+      });
+
       setImmediate(async () => {
         try {
           // Simulate vulnerability scanning
