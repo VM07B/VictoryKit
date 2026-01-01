@@ -52,7 +52,7 @@ async function sendEmail(options) {
 
   const mailOptions = {
     from:
-      options.from || process.env.SMTP_FROM || "VictoryKit <noreply@fyzo.xyz>",
+      options.from || process.env.SMTP_FROM || "VictoryKit <noreply@maula.ai>",
     to: options.to,
     cc: options.cc,
     bcc: options.bcc,

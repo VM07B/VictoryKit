@@ -2,7 +2,7 @@
 
 **The world's first AI-powered security services platform**
 
-🌐 **Domain**: [fyzo.xyz](https://fyzo.xyz)
+🌐 **Domain**: [maula.ai](https://maula.ai)
 
 ---
 
@@ -52,9 +52,9 @@ cp deploy-config.sh.example deploy-config.sh
 
 ### Production URLs
 
-- **Main Dashboard**: [fyzo.xyz](https://fyzo.xyz)
-- **FraudGuard**: [fguard.fyzo.xyz](https://fguard.fyzo.xyz)
-- **All Tools**: https://{tool}.fyzo.xyz
+- **Main Dashboard**: [maula.ai](https://maula.ai)
+- **FraudGuard**: [fguard.maula.ai](https://fguard.maula.ai)
+- **All Tools**: https://{tool}.maula.ai
 
 [📖 Detailed Deployment Guide](DEPLOYMENT-README.md)
 
@@ -239,6 +239,6 @@ See [LICENSE](LICENSE) file.
 
 **MAULA.AI** - Where security meets AI 🦾
 
-**Domain**: fyzo.xyz  
+**Domain**: maula.ai  
 **Repository**: VictoryKit  
 **Status**: Planning Complete ✅

@@ -156,10 +156,10 @@ update_nginx() {
     ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/nginx/sites-available/$subdomain > /dev/null <<EOF
 server {
     listen 443 ssl http2;
-    server_name $subdomain.fyzo.xyz;
+    server_name $subdomain.maula.ai;
 
-    ssl_certificate /etc/letsencrypt/live/fyzo.xyz/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/fyzo.xyz/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/maula.ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/maula.ai/privkey.pem;
 
     # Security headers
     add_header X-Frame-Options \"SAMEORIGIN\" always;
@@ -209,7 +209,7 @@ EOF"
 # Redirect HTTP to HTTPS
 server {
     listen 80;
-    server_name $subdomain.fyzo.xyz;
+    server_name $subdomain.maula.ai;
     return 301 https://\\\$server_name\\\$request_uri;
 }
 EOF"
@@ -328,17 +328,17 @@ EOF"
 test_deployment() {
     local subdomain=$1
 
-    log_info "Testing deployment for $subdomain.fyzo.xyz..."
+    log_info "Testing deployment for $subdomain.maula.ai..."
 
     # Test HTTPS
-    if curl -s -o /dev/null -w "%{http_code}" "https://$subdomain.fyzo.xyz" | grep -q "200"; then
+    if curl -s -o /dev/null -w "%{http_code}" "https://$subdomain.maula.ai" | grep -q "200"; then
         log_success "HTTPS endpoint responding"
     else
         log_warning "HTTPS endpoint not responding"
     fi
 
     # Test API health
-    if curl -s "https://$subdomain.fyzo.xyz/api/health" > /dev/null; then
+    if curl -s "https://$subdomain.maula.ai/api/health" > /dev/null; then
         log_success "API health endpoint responding"
     else
         log_warning "API health endpoint not responding"
@@ -380,8 +380,8 @@ main() {
             [ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"
             
             # First, ensure the base directory and repo exist
-            sudo mkdir -p /var/www/fyzo.xyz/repo
-            sudo chown -R ubuntu:ubuntu /var/www/fyzo.xyz
+            sudo mkdir -p /var/www/maula.ai/repo
+            sudo chown -R ubuntu:ubuntu /var/www/maula.ai
             
             # Sync the project files using scp + tar
             echo "Syncing project files to EC2..."
@@ -393,9 +393,9 @@ main() {
 
             # Extract on remote server
             ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "
-                sudo mkdir -p /var/www/fyzo.xyz/repo
-                sudo tar -xzf /tmp/victorykit-deploy.tar.gz -C /var/www/fyzo.xyz/repo
-                sudo chown -R ubuntu:ubuntu /var/www/fyzo.xyz/repo
+                sudo mkdir -p /var/www/maula.ai/repo
+                sudo tar -xzf /tmp/victorykit-deploy.tar.gz -C /var/www/maula.ai/repo
+                sudo chown -R ubuntu:ubuntu /var/www/maula.ai/repo
                 rm /tmp/victorykit-deploy.tar.gz
             "
 
@@ -403,13 +403,13 @@ main() {
             rm -f /tmp/victorykit-deploy.tar.gz
 
             # Now, build the dashboard
-            cd /var/www/fyzo.xyz/repo/frontend/main-dashboard
+            cd /var/www/maula.ai/repo/frontend/main-dashboard
             npm install
             npm run build
             
             # Copy build output to serving directory
-            sudo mkdir -p /var/www/fyzo.xyz/live
-            sudo cp -r out/. /var/www/fyzo.xyz/live/
+            sudo mkdir -p /var/www/maula.ai/live
+            sudo cp -r out/. /var/www/maula.ai/live/
         "
         
         ssh -i "$EC2_KEY" -o StrictHostKeyChecking=no "$EC2_HOST" "sudo tee /etc/systemd/system/dashboard.service > /dev/null <<EOF
@@ -420,7 +420,7 @@ After=network.target
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory=/var/www/fyzo.xyz/live
+WorkingDirectory=/var/www/maula.ai/live
 ExecStart=/usr/bin/serve -s . -l 3000
 Restart=always
 
@@ -442,7 +442,7 @@ EOF"
             # Check if frontend was actually built (directory exists)
             if [ -d "frontend/tools/$tool/dist" ]; then
                 # Deploy frontend
-                deploy_tool "$tool" "$subdomain.fyzo.xyz" "$port"
+                deploy_tool "$tool" "$subdomain.maula.ai" "$port"
                 
                 # Update Nginx
                 update_nginx "$tool" "$subdomain" "$port" "$api_port" "$ai_port"
@@ -469,7 +469,7 @@ EOF"
     done
 
     log_success "🎉 MAULA.AI deployment completed successfully!"
-    log_info "Access your platform at: https://fyzo.xyz"
+    log_info "Access your platform at: https://maula.ai"
 }
 
 # Run main function

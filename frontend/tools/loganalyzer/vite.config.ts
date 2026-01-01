@@ -10,8 +10,8 @@ export default defineConfig({
   },
   define: {
     __API_BASE__: JSON.stringify(
-      "https://loganalyzer.fyzo.xyz/api/v1/loganalyzer"
+      "https://loganalyzer.maula.ai/api/v1/loganalyzer"
     ),
-    __WS_BASE__: JSON.stringify("wss://loganalyzer.fyzo.xyz/ws"),
+    __WS_BASE__: JSON.stringify("wss://loganalyzer.maula.ai/ws"),
   },
 });

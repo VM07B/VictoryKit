@@ -1,7 +1,7 @@
 import { SettingsState, NavItem } from "./types";
 
-export const API_BASE = "https://api.apiguard.fyzo.xyz/api/v1/apiguard";
-export const WS_BASE = "wss://ws.apiguard.fyzo.xyz";
+export const API_BASE = "https://api.apiguard.maula.ai/api/v1/apiguard";
+export const WS_BASE = "wss://ws.apiguard.maula.ai";
 
 export const SYSTEM_PROMPT = `You are APIGuard AI, an expert API security assistant. You help users:
 - Monitor and protect API endpoints
@@ -29,7 +29,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://apiguard.fyzo.xyz",
+  portalUrl: "https://apiguard.maula.ai",
   canvas: {
     content: "// API Security Configuration\n\nReady for endpoint analysis.",
     type: "code",

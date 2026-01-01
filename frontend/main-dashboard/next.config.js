@@ -4,7 +4,7 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
-    domains: ["maula.ai", "fyzo.xyz"],
+    domains: ["maula.ai", "maula.ai"],
   },
 };
 

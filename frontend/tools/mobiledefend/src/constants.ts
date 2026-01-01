@@ -1,4 +1,4 @@
-export const API_BASE = "https://api.mobiledefend.fyzo.xyz/api/v1/mobiledefend";
+export const API_BASE = "https://api.mobiledefend.maula.ai/api/v1/mobiledefend";
 
 export const TOOL_NAME = "MobileDefend";
 export const TOOL_DESCRIPTION = "Mobile Security Platform";

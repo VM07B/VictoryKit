@@ -77,11 +77,11 @@ export default function OptimizedToolSection({
     tl.fromTo(contentRef.current,
       { 
         opacity: 0, 
-        scale: 0.85, 
-        y: '15vh', 
-        filter: 'blur(10px)',
+        scale: 0.5, 
+        y: '30vh', 
+        filter: 'blur(20px)',
         transformPerspective: 1000,
-        rotateX: 5
+        rotateX: 10
       },
       { 
         opacity: 1, 
@@ -90,8 +90,8 @@ export default function OptimizedToolSection({
         filter: 'blur(0px)',
         transformPerspective: 1000,
         rotateX: 0,
-        duration: 0.3,
-        ease: 'power2.out'
+        duration: 0.8,
+        ease: 'power3.out'
       },
       0
     );

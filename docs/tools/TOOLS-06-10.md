@@ -988,7 +988,7 @@ frontend/src/
         ▼           ▼           ▼           ▼           ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    NGINX REVERSE PROXY                          │
-│                    (api.fyzo.xyz:443)                           │
+│                    (api.maula.ai:443)                           │
 └───────┬───────────┬───────────┬───────────┬───────────┬─────────┘
         │           │           │           │           │
         ▼           ▼           ▼           ▼           ▼
@@ -1079,11 +1079,11 @@ curl http://localhost:4009/health  # ComplianceCheck ✅
 curl http://localhost:4010/health  # DataGuardian ✅
 
 # Via Nginx (if configured)
-curl http://api.fyzo.xyz/vulnscan/health
-curl http://api.fyzo.xyz/pentestai/health
-curl http://api.fyzo.xyz/securecode/health
-curl http://api.fyzo.xyz/compliancecheck/health
-curl http://api.fyzo.xyz/dataguardian/health
+curl http://api.maula.ai/vulnscan/health
+curl http://api.maula.ai/pentestai/health
+curl http://api.maula.ai/securecode/health
+curl http://api.maula.ai/compliancecheck/health
+curl http://api.maula.ai/dataguardian/health
 
 # PM2 Status
 pm2 status

@@ -11,6 +11,16 @@ import {
   BarChart3,
   Clock,
   CheckCircle2,
+  Globe,
+  FileSearch,
+  Settings,
+  Bell,
+  User,
+  LogOut,
+  Search,
+  Moon,
+  Sun,
+  Command,
 } from "lucide-react";
 import TransactionForm from "./TransactionForm";
 import { AnimatedFraudScoreCard } from "./AnimatedFraudScoreCard";
@@ -18,25 +28,44 @@ import { LiveAnalysisPanel } from "./LiveAnalysisPanel";
 import RiskVisualization from "./RiskVisualization";
 import TransactionHistory from "./TransactionHistory";
 import AlertsPanel from "./AlertsPanel";
-import { transactionAPI, alertsAPI } from "../services/fraudguardAPI";
-import { Transaction, Alert, FraudScore } from "../types";
+import RealTimeDashboard from "./RealTimeDashboard";
+import ThreatIntelPanel from "./ThreatIntelPanel";
+import InvestigationCenter from "./InvestigationCenter";
+import { transactionAPI, alertsAPI, healthAPI } from "../services/fraudguardAPI";
+import { Transaction, Alert, FraudScore, SystemHealth } from "../types";
+
+type ViewType = "analyze" | "history" | "alerts" | "analytics" | "dashboard" | "threat-intel" | "investigations";
 
 const FraudGuardTool: React.FC = () => {
-  const [currentView, setCurrentView] = useState<
-    "analyze" | "history" | "alerts" | "analytics"
-  >("analyze");
+  const [currentView, setCurrentView] = useState<ViewType>("dashboard");
   const [lastAnalysis, setLastAnalysis] = useState<FraudScore | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [pendingTransaction, setPendingTransaction] = useState<any>(null);
+  const [systemHealth, setSystemHealth] = useState<SystemHealth | null>(null);
+  const [showCommandPalette, setShowCommandPalette] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(3);
+  const [darkMode, setDarkMode] = useState(true);
   const [systemStats, setSystemStats] = useState({
     totalScans: 12847,
     fraudsDetected: 234,
     accuracy: 99.7,
     avgResponseTime: 0.8,
   });
+
+  // Keyboard shortcut for command palette
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setShowCommandPalette(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Simulate live stats updates
   useEffect(() => {
@@ -48,7 +77,22 @@ const FraudGuardTool: React.FC = () => {
         avgResponseTime: 0.6 + Math.random() * 0.4,
       }));
     }, 3000);
-    return () => clearInterval(interval);
+
+    // Load system health
+    const loadHealth = async () => {
+      try {
+        const health = await healthAPI.check();
+        setSystemHealth(health);
+      } catch (error) {
+        console.error('Health check failed:', error);
+      }
+    };
+    loadHealth();
+    const healthInterval = setInterval(loadHealth, 30000);
+    return () => {
+      clearInterval(interval);
+      clearInterval(healthInterval);
+    };
   }, []);
 
   // Load initial data
@@ -214,17 +258,20 @@ const FraudGuardTool: React.FC = () => {
       {/* Navigation with glow effect */}
       <nav className="relative bg-slate-900/50 backdrop-blur border-b border-red-500/20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex space-x-2">
+          <div className="flex space-x-1 overflow-x-auto">
             {[
+              { id: "dashboard", label: "Dashboard", icon: BarChart3 },
               { id: "analyze", label: "Live Analysis", icon: Zap },
-              { id: "history", label: "Transaction History", icon: BarChart3 },
-              { id: "alerts", label: "Alerts & Rules", icon: AlertTriangle },
-              { id: "analytics", label: "Risk Analytics", icon: TrendingUp },
+              { id: "history", label: "Transactions", icon: Activity },
+              { id: "threat-intel", label: "Threat Intel", icon: Globe },
+              { id: "investigations", label: "Investigations", icon: FileSearch },
+              { id: "alerts", label: "Alerts", icon: AlertTriangle },
+              { id: "analytics", label: "Analytics", icon: TrendingUp },
             ].map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
-                onClick={() => setCurrentView(id as any)}
-                className={`relative flex items-center gap-2 px-5 py-4 font-medium text-sm transition-all duration-300 ${
+                onClick={() => setCurrentView(id as ViewType)}
+                className={`relative flex items-center gap-2 px-4 py-4 font-medium text-sm transition-all whitespace-nowrap ${
                   currentView === id
                     ? "text-white"
                     : "text-gray-400 hover:text-white"

@@ -1,6 +1,6 @@
 import { SettingsState, NavItem } from "./types";
-export const API_BASE = "https://api.sslmonitor.fyzo.xyz/api/v1/sslmonitor";
-export const WS_BASE = "wss://ws.sslmonitor.fyzo.xyz";
+export const API_BASE = "https://api.sslmonitor.maula.ai/api/v1/sslmonitor";
+export const WS_BASE = "wss://ws.sslmonitor.maula.ai";
 export const SYSTEM_PROMPT = `You are SSLMonitor AI, an expert SSL/TLS certificate monitoring assistant. You help users:
 - Scan and analyze SSL/TLS certificates
 - Monitor certificate expiration dates
@@ -21,7 +21,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://sslmonitor.fyzo.xyz",
+  portalUrl: "https://sslmonitor.maula.ai",
   canvas: {
     content: "// SSL Certificate Analysis\n\nReady for monitoring.",
     type: "code",

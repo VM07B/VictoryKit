@@ -10,7 +10,7 @@
 
 1. **Auth Service** (port 5000) - Authentication for all 50 tools
 2. **API Gateway** (port 4000) - Request routing and rate limiting
-3. **Main Landing Site** (port 3000, fyzo.xyz) - Homepage with 50 tool cards
+3. **Main Landing Site** (port 3000, maula.ai) - Homepage with 50 tool cards
 4. **MongoDB Atlas** - Database cluster with `maula_auth_db`
 5. **Nginx Configuration** - Reverse proxy for all subdomains
 6. **Cloudflare DNS** - Domain setup with wildcard for 50 subdomains
@@ -118,7 +118,7 @@ VictoryKit/
 │           └─ README.md
 │
 ├─ frontend/
-│   └─ main-dashboard/                        # 🏠 Main Landing Site (fyzo.xyz)
+│   └─ main-dashboard/                        # 🏠 Main Landing Site (maula.ai)
 │       ├─ app/
 │       │   ├─ layout.tsx                     # Root layout
 │       │   ├─ page.tsx                       # Homepage with 50 tool cards
@@ -196,9 +196,9 @@ VictoryKit/
 │   ├─ nginx/
 │   │   ├─ nginx.conf                         # Main Nginx config
 │   │   ├─ sites-available/
-│   │   │   ├─ fyzo.xyz.conf                  # Main site config
-│   │   │   ├─ auth.fyzo.xyz.conf             # Auth service config
-│   │   │   └─ api.fyzo.xyz.conf              # API gateway config
+│   │   │   ├─ maula.ai.conf                  # Main site config
+│   │   │   ├─ auth.maula.ai.conf             # Auth service config
+│   │   │   └─ api.maula.ai.conf              # API gateway config
 │   │   └─ ssl/
 │   │       ├─ README.md                      # SSL certificate instructions
 │   │       └─ certbot-setup.sh               # Let's Encrypt setup script
@@ -446,7 +446,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://fyzo.xyz',
+    'https://maula.ai',
     /\.maula\.ai$/ // All subdomains
   ],
   credentials: true
@@ -618,9 +618,9 @@ npm install lucide-react axios swr
 import ToolCard from '@/components/ToolCard';
 
 const tools = [
-  { id: 1, name: 'FraudGuard', description: 'AI-powered fraud detection', category: 'Fraud Detection', logo: '/logos/fraudguard.svg', subdomain: 'fguard.fyzo.xyz' },
-  { id: 2, name: 'SmartScore', description: 'Risk scoring engine', category: 'Fraud Detection', logo: '/logos/smartscore.svg', subdomain: 'sscore.fyzo.xyz' },
-  { id: 11, name: 'IPIntel', description: 'IP intelligence analysis', category: 'IP & Network', logo: '/logos/ipintel.svg', subdomain: 'ipintel.fyzo.xyz' },
+  { id: 1, name: 'FraudGuard', description: 'AI-powered fraud detection', category: 'Fraud Detection', logo: '/logos/fraudguard.svg', subdomain: 'fguard.maula.ai' },
+  { id: 2, name: 'SmartScore', description: 'Risk scoring engine', category: 'Fraud Detection', logo: '/logos/smartscore.svg', subdomain: 'sscore.maula.ai' },
+  { id: 11, name: 'IPIntel', description: 'IP intelligence analysis', category: 'IP & Network', logo: '/logos/ipintel.svg', subdomain: 'ipintel.maula.ai' },
   // ... (add all 50 tools)
 ];
 
@@ -731,22 +731,22 @@ export default function ToolCard({ tool }: { tool: Tool }) {
 
 ### Step 6: Nginx Configuration
 
-**File:** `infrastructure/nginx/sites-available/fyzo.xyz.conf`
+**File:** `infrastructure/nginx/sites-available/maula.ai.conf`
 
 ```nginx
-# Main site - fyzo.xyz
+# Main site - maula.ai
 server {
     listen 80;
-    server_name fyzo.xyz www.fyzo.xyz;
+    server_name maula.ai www.maula.ai;
     return 301 https://$server_name$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name fyzo.xyz www.fyzo.xyz;
+    server_name maula.ai www.maula.ai;
     
-    ssl_certificate /etc/letsencrypt/live/fyzo.xyz/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/fyzo.xyz/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/maula.ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/maula.ai/privkey.pem;
     
     location / {
         proxy_pass http://localhost:3000;
@@ -761,13 +761,13 @@ server {
     }
 }
 
-# Auth service - auth.fyzo.xyz
+# Auth service - auth.maula.ai
 server {
     listen 443 ssl http2;
-    server_name auth.fyzo.xyz;
+    server_name auth.maula.ai;
     
-    ssl_certificate /etc/letsencrypt/live/fyzo.xyz/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/fyzo.xyz/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/maula.ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/maula.ai/privkey.pem;
     
     location / {
         proxy_pass http://localhost:5000;
@@ -776,13 +776,13 @@ server {
     }
 }
 
-# API Gateway - api.fyzo.xyz
+# API Gateway - api.maula.ai
 server {
     listen 443 ssl http2;
-    server_name api.fyzo.xyz;
+    server_name api.maula.ai;
     
-    ssl_certificate /etc/letsencrypt/live/fyzo.xyz/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/fyzo.xyz/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/maula.ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/maula.ai/privkey.pem;
     
     location / {
         proxy_pass http://localhost:4000;
@@ -803,11 +803,11 @@ sudo apt install nginx
 sudo apt install certbot python3-certbot-nginx
 
 # Copy config
-sudo cp infrastructure/nginx/sites-available/fyzo.xyz.conf /etc/nginx/sites-available/
-sudo ln -s /etc/nginx/sites-available/fyzo.xyz.conf /etc/nginx/sites-enabled/
+sudo cp infrastructure/nginx/sites-available/maula.ai.conf /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/maula.ai.conf /etc/nginx/sites-enabled/
 
 # Get SSL certificate
-sudo certbot --nginx -d fyzo.xyz -d www.fyzo.xyz -d auth.fyzo.xyz -d api.fyzo.xyz
+sudo certbot --nginx -d maula.ai -d www.maula.ai -d auth.maula.ai -d api.maula.ai
 
 # Test config
 sudo nginx -t
@@ -822,14 +822,14 @@ sudo systemctl restart nginx
 
 1. **Add Domain:**
    - Login to Cloudflare
-   - Add site: fyzo.xyz
+   - Add site: maula.ai
    - Update nameservers at your domain registrar
 
 2. **Create DNS Records:**
    ```
    A     @            <AWS-EC2-IP>    Proxied (orange cloud)
    A     www          <AWS-EC2-IP>    Proxied
-   CNAME *            fyzo.xyz        Proxied (wildcard for all 50 subdomains)
+   CNAME *            maula.ai        Proxied (wildcard for all 50 subdomains)
    ```
 
 3. **SSL/TLS Settings:**
@@ -884,7 +884,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=https://api.fyzo.xyz
+      - NEXT_PUBLIC_API_URL=https://api.maula.ai
     restart: always
     
   redis:
@@ -920,10 +920,10 @@ docker-compose -f docker-compose.phase1.yml down
 
 ```bash
 # Health check
-curl https://auth.fyzo.xyz/health
+curl https://auth.maula.ai/health
 
 # Register user
-curl -X POST https://auth.fyzo.xyz/api/auth/register \
+curl -X POST https://auth.maula.ai/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
@@ -933,7 +933,7 @@ curl -X POST https://auth.fyzo.xyz/api/auth/register \
   }'
 
 # Login
-curl -X POST https://auth.fyzo.xyz/api/auth/login \
+curl -X POST https://auth.maula.ai/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
@@ -945,7 +945,7 @@ curl -X POST https://auth.fyzo.xyz/api/auth/login \
 ### Test 2: API Gateway
 
 ```bash
-curl https://api.fyzo.xyz/health
+curl https://api.maula.ai/health
 # Should return: { "status": "healthy", "service": "api-gateway" }
 ```
 
@@ -953,11 +953,11 @@ curl https://api.fyzo.xyz/health
 
 ```bash
 # Check if site loads
-curl -I https://fyzo.xyz
+curl -I https://maula.ai
 # Should return: HTTP/2 200
 
 # Visit in browser
-open https://fyzo.xyz
+open https://maula.ai
 # Should see homepage with 50 tool cards
 ```
 
@@ -965,11 +965,11 @@ open https://fyzo.xyz
 
 ```bash
 # Check SSL
-openssl s_client -connect fyzo.xyz:443 -servername fyzo.xyz
+openssl s_client -connect maula.ai:443 -servername maula.ai
 
 # Check all subdomains
-curl -I https://auth.fyzo.xyz
-curl -I https://api.fyzo.xyz
+curl -I https://auth.maula.ai
+curl -I https://api.maula.ai
 ```
 
 ### Test 5: MongoDB Connection
@@ -990,7 +990,7 @@ node -e "const mongoose = require('mongoose'); mongoose.connect(process.env.MONG
 - [ ] MongoDB Atlas cluster created
 - [ ] Database `maula_auth_db` accessible
 - [ ] Redis running on port 6379
-- [ ] Nginx configured for 3 domains (fyzo.xyz, auth.fyzo.xyz, api.fyzo.xyz)
+- [ ] Nginx configured for 3 domains (maula.ai, auth.maula.ai, api.maula.ai)
 - [ ] SSL certificates installed (Let's Encrypt)
 - [ ] Cloudflare DNS configured with wildcard subdomain
 - [ ] All services accessible via HTTPS

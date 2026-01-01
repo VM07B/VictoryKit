@@ -71,7 +71,7 @@ echo "5️⃣  Testing User Registration..."
 REGISTER_RESPONSE=$(curl -s -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@fyzo.xyz",
+    "email": "test@maula.ai",
     "password": "TestPass123!",
     "firstName": "Test",
     "lastName": "User"
@@ -79,7 +79,7 @@ REGISTER_RESPONSE=$(curl -s -X POST http://localhost:5000/api/auth/register \
 
 if echo "$REGISTER_RESPONSE" | grep -q "success"; then
     echo -e "${GREEN}✅ Registration endpoint working${NC}"
-    echo "   User created: test@fyzo.xyz"
+    echo "   User created: test@maula.ai"
 else
     echo -e "${YELLOW}⚠️  Registration response: $REGISTER_RESPONSE${NC}"
     echo "   (User might already exist - this is OK)"
@@ -91,7 +91,7 @@ echo "6️⃣  Testing User Login..."
 LOGIN_RESPONSE=$(curl -s -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@fyzo.xyz",
+    "email": "test@maula.ai",
     "password": "TestPass123!"
   }')
 
@@ -108,7 +108,7 @@ if echo "$LOGIN_RESPONSE" | grep -q "accessToken"; then
     ME_RESPONSE=$(curl -s http://localhost:5000/api/auth/me \
       -H "Authorization: Bearer $ACCESS_TOKEN")
     
-    if echo "$ME_RESPONSE" | grep -q "test@fyzo.xyz"; then
+    if echo "$ME_RESPONSE" | grep -q "test@maula.ai"; then
         echo -e "${GREEN}✅ Protected endpoint working${NC}"
         echo "   User data retrieved successfully"
     else
@@ -126,7 +126,7 @@ echo "8️⃣  Testing API Gateway Proxy..."
 GATEWAY_LOGIN=$(curl -s -X POST http://localhost:4000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test@fyzo.xyz",
+    "email": "test@maula.ai",
     "password": "TestPass123!"
   }')
 
@@ -150,7 +150,7 @@ echo "  🔐 Auth Service:    http://localhost:5000"
 echo "  🌉 API Gateway:     http://localhost:4000"
 echo ""
 echo "Test user credentials:"
-echo "  📧 Email:     test@fyzo.xyz"
+echo "  📧 Email:     test@maula.ai"
 echo "  🔑 Password:  TestPass123!"
 echo ""
 echo "Next steps:"

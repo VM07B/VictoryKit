@@ -46,9 +46,9 @@ export default defineConfig({
 
   define: {
     'import.meta.env.VITE_APP_NAME': JSON.stringify('IncidentResponse'),
-    'import.meta.env.VITE_API_URL': JSON.stringify('https://cshield.fyzo.xyz/api/v1/incidentresponse'),
-    'import.meta.env.VITE_WS_URL': JSON.stringify('wss://cshield.fyzo.xyz/ws'),
-    'import.meta.env.VITE_ML_URL': JSON.stringify('https://cshield.fyzo.xyz/ml'),
+    'import.meta.env.VITE_API_URL': JSON.stringify('https://cshield.maula.ai/api/v1/incidentresponse'),
+    'import.meta.env.VITE_WS_URL': JSON.stringify('wss://cshield.maula.ai/ws'),
+    'import.meta.env.VITE_ML_URL': JSON.stringify('https://cshield.maula.ai/ml'),
   },
 
   optimizeDeps: {

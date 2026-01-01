@@ -1,4 +1,4 @@
-export const API_BASE = "https://api.iotsecure.fyzo.xyz/api/v1/iotsecure";
+export const API_BASE = "https://api.iotsecure.maula.ai/api/v1/iotsecure";
 
 export const TOOL_NAME = "IoTSecure";
 export const TOOL_DESCRIPTION = "IoT Device Security Platform";

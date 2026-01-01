@@ -2,7 +2,7 @@ import axios from "axios";
 import { LogEntry, LogAnalysis, LogAlert } from "../types";
 
 const API_BASE =
-  __API_BASE__ || "https://loganalyzer.fyzo.xyz/api/v1/loganalyzer";
+  __API_BASE__ || "https://loganalyzer.maula.ai/api/v1/loganalyzer";
 
 class LogAnalyzerAPI {
   private api = axios.create({

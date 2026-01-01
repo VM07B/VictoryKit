@@ -1,4 +1,4 @@
-export const API_BASE = "https://api.drplan.fyzo.xyz/api/v1/drplan";
+export const API_BASE = "https://api.drplan.maula.ai/api/v1/drplan";
 
 export const TOOL_NAME = "DRPlan";
 export const TOOL_DESCRIPTION = "Disaster Recovery Planning Platform";

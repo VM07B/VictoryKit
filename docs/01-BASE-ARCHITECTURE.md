@@ -8,7 +8,7 @@
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐             │
 │  │   DNS        │  │   CDN        │  │  DDoS Shield │             │
 │  └──────────────┘  └──────────────┘  └──────────────┘             │
-│                     fyzo.xyz                                        │
+│                     maula.ai                                        │
 └─────────────────────────┬───────────────────────────────────────────┘
                           │
                           ▼
@@ -17,7 +17,7 @@
 │  ┌─────────────────────────────────────────────────────────────┐   │
 │  │                     NGINX (Reverse Proxy)                    │   │
 │  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │   │
-│  │  │ fyzo.xyz │  │api.maula │  │tool1.api │  │tool2.api │   │   │
+│  │  │ maula.ai │  │api.maula │  │tool1.api │  │tool2.api │   │   │
 │  │  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘   │   │
 │  └───────┼─────────────┼─────────────┼─────────────┼──────────┘   │
 │          │             │             │             │              │
@@ -80,7 +80,7 @@
 
 ### User Authentication Flow
 ```
-1. User → fyzo.xyz
+1. User → maula.ai
 2. Cloudflare → AWS EC2
 3. Nginx → Frontend Container
 4. Login → Auth Service (Node.js)
@@ -90,7 +90,7 @@
 
 ### Tool Usage Flow (Example: IPIntel)
 ```
-1. User → ipintel.fyzo.xyz
+1. User → ipintel.maula.ai
 2. Cloudflare → AWS EC2
 3. Nginx → IPIntel Frontend Container
 4. User inputs IP address
@@ -108,7 +108,7 @@
 
 ### API Integration Flow (External Developer)
 ```
-1. Developer → api.fyzo.xyz/ipintel/check
+1. Developer → api.maula.ai/ipintel/check
 2. Cloudflare → AWS EC2
 3. Nginx → API Gateway
 4. API Gateway → IPIntel Backend
@@ -164,21 +164,21 @@ Layer 7: API Keys (Per-tool authentication)
 ## 🌍 Domain Structure
 
 ```
-fyzo.xyz               → Main Dashboard
-api.fyzo.xyz           → Unified API Gateway
-docs.fyzo.xyz          → Documentation
-admin.fyzo.xyz         → Admin Panel
+maula.ai               → Main Dashboard
+api.maula.ai           → Unified API Gateway
+docs.maula.ai          → Documentation
+admin.maula.ai         → Admin Panel
 
 # Individual Tool Subdomains
-fraudguard.fyzo.xyz    → Tool 1
-deviceprint.fyzo.xyz   → Tool 2
-ipintel.fyzo.xyz       → Tool 11
+fraudguard.maula.ai    → Tool 1
+deviceprint.maula.ai   → Tool 2
+ipintel.maula.ai       → Tool 11
 ... (50 tools)
 
 # API Endpoints
-api.fyzo.xyz/fraudguard/
-api.fyzo.xyz/deviceprint/
-api.fyzo.xyz/ipintel/
+api.maula.ai/fraudguard/
+api.maula.ai/deviceprint/
+api.maula.ai/ipintel/
 ... (50 APIs)
 ```
 

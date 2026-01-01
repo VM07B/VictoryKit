@@ -1,6 +1,6 @@
 import { SettingsState, NavItem } from "./types";
-export const API_BASE = "https://api.ddosshield.fyzo.xyz/api/v1/ddosshield";
-export const WS_BASE = "wss://ws.ddosshield.fyzo.xyz";
+export const API_BASE = "https://api.ddosshield.maula.ai/api/v1/ddosshield";
+export const WS_BASE = "wss://ws.ddosshield.maula.ai";
 export const SYSTEM_PROMPT = `You are DDoSShield AI, an expert DDoS attack detection and mitigation assistant. You help users:
 - Detect and classify DDoS attacks (volumetric, protocol, application layer)
 - Configure mitigation rules and rate limiting
@@ -20,7 +20,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://ddosshield.fyzo.xyz",
+  portalUrl: "https://ddosshield.maula.ai",
   canvas: {
     content: "// DDoS Mitigation Config\n\nReady for defense.",
     type: "code",

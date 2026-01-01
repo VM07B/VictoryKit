@@ -8,7 +8,7 @@ Build 50+ AI-powered security tools as standalone services, each with:
 - Independent frontend, backend, and database
 
 ## 🌐 Domain
-**fyzo.xyz**
+**maula.ai**
 
 ## 🏗️ Platform Architecture
 
@@ -16,7 +16,7 @@ Build 50+ AI-powered security tools as standalone services, each with:
 MAULA.AI ECOSYSTEM
 │
 ├─ 🌐 Cloudflare (DNS + CDN + DDoS Protection)
-│   └─ fyzo.xyz → AWS EC2
+│   └─ maula.ai → AWS EC2
 │
 ├─ ☁️  AWS EC2 (Ubuntu Server)
 │   ├─ Nginx (Reverse Proxy + Load Balancer)
@@ -150,9 +150,9 @@ MAULA.AI ECOSYSTEM
 - 🎯 **Tool-Specific Training**: Each tool's AI knows its domain expertise
 
 **User Experience Flow:**
-1. User visits fyzo.xyz → Clicks FraudGuard card
+1. User visits maula.ai → Clicks FraudGuard card
 2. Sees tool introduction page → Clicks "Access Tool"
-3. Opens fguard.fyzo.xyz → Neural Link Interface loads
+3. Opens fguard.maula.ai → Neural Link Interface loads
 4. User types: "Analyze this transaction for fraud risks"
 5. AI assistant autonomously:
    - Opens transaction analysis tab
@@ -178,7 +178,7 @@ MAULA.AI ECOSYSTEM
 ### Platform-Wide Features:
 ✅ Single Sign-On (SSO) across all 50 tool subdomains  
 ✅ Unified billing system (central grid station)  
-✅ API key management (auth.fyzo.xyz)  
+✅ API key management (auth.maula.ai)  
 ✅ Rate limiting & quotas  
 ✅ Admin dashboard  
 ✅ Analytics & monitoring  
@@ -230,7 +230,7 @@ MAULA.AI ECOSYSTEM
 7. **City Architecture**: 50 independent buildings + 1 central grid (auth/billing)
 8. **Autonomous Agents**: AI performs multi-step tasks without user intervention
 9. **Real-Time**: WebSocket-powered instant communication
-10. **Subdomain Isolation**: Each tool on own subdomain (fguard.fyzo.xyz, ipintel.fyzo.xyz, etc.)
+10. **Subdomain Isolation**: Each tool on own subdomain (fguard.maula.ai, ipintel.maula.ai, etc.)
 
 ---
 
@@ -238,9 +238,9 @@ MAULA.AI ECOSYSTEM
 
 ### Phase 1: Central Grid Station (Foundation)
 Build the core infrastructure that powers all 50 tools:
-- ✅ Auth Service (auth.fyzo.xyz) - JWT, SSO, user management
-- ✅ API Gateway (api.fyzo.xyz) - Request routing, rate limiting
-- ✅ Main Landing Site (fyzo.xyz) - 50 tool cards, tool detail pages
+- ✅ Auth Service (auth.maula.ai) - JWT, SSO, user management
+- ✅ API Gateway (api.maula.ai) - Request routing, rate limiting
+- ✅ Main Landing Site (maula.ai) - 50 tool cards, tool detail pages
 - ✅ MongoDB Atlas setup (51 databases: 1 auth + 50 tools)
 - ✅ Nginx configuration (50+ subdomain routing)
 
@@ -251,7 +251,7 @@ Build ONE tool 100% complete to validate the pattern:
 - ✅ Backend: API + ML engine + AI endpoints
 - ✅ Database: Tool schemas + conversation storage
 - ✅ AI Integration: Custom function calling
-- ✅ Deploy to subdomain (fguard.fyzo.xyz)
+- ✅ Deploy to subdomain (fguard.maula.ai)
 - ✅ Test end-to-end: Auth → Tool → AI → Multi-tab
 
 ### Phase 3: Replicate Pattern (49 Tools)

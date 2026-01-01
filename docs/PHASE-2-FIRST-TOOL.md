@@ -8,7 +8,7 @@
 
 ## 📋 What You'll Build in Phase 2
 
-1. **FraudGuard Frontend** (port 3001, fguard.fyzo.xyz) - Neural Link Interface + Fraud UI
+1. **FraudGuard Frontend** (port 3001, fguard.maula.ai) - Neural Link Interface + Fraud UI
 2. **FraudGuard API Service** (port 4001) - Transaction endpoints
 3. **FraudGuard ML Engine** (port 8001) - Python fraud detection model
 4. **FraudGuard AI Assistant** (port 6001) - WebSocket + 6 LLMs + Function calling
@@ -225,7 +225,7 @@ VictoryKit/
 ├─ infrastructure/
 │   └─ nginx/
 │       └─ sites-available/
-│           └─ fguard.fyzo.xyz.conf            # Nginx config for FraudGuard
+│           └─ fguard.maula.ai.conf            # Nginx config for FraudGuard
 │
 └─ docker-compose.phase2.yml                   # Docker Compose for Phase 2
 ```
@@ -259,7 +259,7 @@ npm install recharts react-pdf jspdf chart.js react-chartjs-2 date-fns
 {
   "toolName": "FraudGuard",
   "tagline": "AI-Powered Fraud Detection",
-  "subdomain": "fguard.fyzo.xyz",
+  "subdomain": "fguard.maula.ai",
   "port": 3001,
   "apiPort": 4001,
   "mlPort": 8001,
@@ -719,7 +719,7 @@ export const FraudScoreCard: React.FC<FraudScoreCardProps> = ({
 
 ## ✅ PHASE 2 COMPLETION CHECKLIST
 
-- [ ] FraudGuard Frontend deployed to fguard.fyzo.xyz (port 3001)
+- [ ] FraudGuard Frontend deployed to fguard.maula.ai (port 3001)
 - [ ] FraudGuard API Service running (port 4001)
 - [ ] FraudGuard ML Engine running (port 8001)
 - [ ] FraudGuard AI Assistant running (port 6001)
@@ -730,9 +730,9 @@ export const FraudScoreCard: React.FC<FraudScoreCardProps> = ({
 - [ ] End-to-end fraud analysis flow working
 - [ ] Multi-tab autonomous workspace working
 - [ ] Voice input (STT, Live Audio) working
-- [ ] Nginx configured for fguard.fyzo.xyz
+- [ ] Nginx configured for fguard.maula.ai
 - [ ] SSL certificate working
-- [ ] Auth integration working (SSO from fyzo.xyz)
+- [ ] Auth integration working (SSO from maula.ai)
 
 ---
 

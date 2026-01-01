@@ -1,6 +1,6 @@
 import { SettingsState, NavItem } from "./types";
-export const API_BASE = "https://api.soarengine.fyzo.xyz/api/v1/soarengine";
-export const WS_BASE = "wss://ws.soarengine.fyzo.xyz";
+export const API_BASE = "https://api.soarengine.maula.ai/api/v1/soarengine";
+export const WS_BASE = "wss://ws.soarengine.maula.ai";
 export const SYSTEM_PROMPT = `You are SOAREngine AI, an expert Security Orchestration, Automation and Response assistant. You help users:
 - Create and manage automated response playbooks
 - Configure integrations with security tools
@@ -20,7 +20,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://soarengine.fyzo.xyz",
+  portalUrl: "https://soarengine.maula.ai",
   canvas: {
     content: "# Playbook Design\n\nReady for automation.",
     type: "code",

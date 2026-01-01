@@ -1,6 +1,6 @@
 import { SettingsState, NavItem } from "./types";
-export const API_BASE = "https://api.blueteamai.fyzo.xyz/api/v1/blueteamai";
-export const WS_BASE = "wss://ws.blueteamai.fyzo.xyz";
+export const API_BASE = "https://api.blueteamai.maula.ai/api/v1/blueteamai";
+export const WS_BASE = "wss://ws.blueteamai.maula.ai";
 export const SYSTEM_PROMPT = `You are BlueTeamAI, an expert defensive security operations assistant. You help users:
 - Conduct proactive threat hunting operations
 - Respond to and investigate security incidents
@@ -21,7 +21,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://blueteamai.fyzo.xyz",
+  portalUrl: "https://blueteamai.maula.ai",
   canvas: {
     content: "// Threat Hunt Playbook\n\nReady for defense.",
     type: "code",

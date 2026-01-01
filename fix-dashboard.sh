@@ -164,7 +164,7 @@ EOF
 
     # Remove any conflicting configs
     sudo rm -f /etc/nginx/sites-enabled/default 2>/dev/null || true
-    sudo rm -f /etc/nginx/sites-enabled/fyzo.xyz 2>/dev/null || true
+    sudo rm -f /etc/nginx/sites-enabled/maula.ai 2>/dev/null || true
     
     # Enable the site
     sudo ln -sf /etc/nginx/sites-available/maula.ai /etc/nginx/sites-enabled/

@@ -1,5 +1,5 @@
 export const API_BASE =
-  "https://api.privacyshield.fyzo.xyz/api/v1/privacyshield";
+  "https://api.privacyshield.maula.ai/api/v1/privacyshield";
 
 export const TOOL_NAME = "PrivacyShield";
 export const TOOL_DESCRIPTION = "Privacy Protection & Compliance Platform";

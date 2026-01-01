@@ -47,7 +47,7 @@ const SSLMonitorDashboard: React.FC = () => {
       setCertificates([
         {
           _id: "1",
-          domain: "api.fyzo.xyz",
+          domain: "api.maula.ai",
           issuer: "Let's Encrypt",
           validFrom: "2024-01-01",
           validTo: "2024-04-01",
@@ -61,7 +61,7 @@ const SSLMonitorDashboard: React.FC = () => {
         },
         {
           _id: "2",
-          domain: "dashboard.fyzo.xyz",
+          domain: "dashboard.maula.ai",
           issuer: "Let's Encrypt",
           validFrom: "2024-01-01",
           validTo: "2024-02-01",
@@ -75,7 +75,7 @@ const SSLMonitorDashboard: React.FC = () => {
         },
         {
           _id: "3",
-          domain: "legacy.fyzo.xyz",
+          domain: "legacy.maula.ai",
           issuer: "DigiCert",
           validFrom: "2023-01-01",
           validTo: "2024-01-10",
@@ -89,7 +89,7 @@ const SSLMonitorDashboard: React.FC = () => {
         },
         {
           _id: "4",
-          domain: "secure.fyzo.xyz",
+          domain: "secure.maula.ai",
           issuer: "Cloudflare",
           validFrom: "2024-01-01",
           validTo: "2024-12-31",

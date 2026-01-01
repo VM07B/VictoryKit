@@ -29,10 +29,10 @@
 
 ## 🏗️ Complete Site Structure
 
-### 1. **Main Landing Site** → `fyzo.xyz`
+### 1. **Main Landing Site** → `maula.ai`
 
 ```
-fyzo.xyz/
+maula.ai/
 ├─ Home Page
 │  └─ 50 Tool Cards (Grid Layout)
 │     ├─ Card: FraudGuard
@@ -48,10 +48,10 @@ fyzo.xyz/
 │  │  ├─ API Documentation
 │  │  └─ Buttons:
 │  │     ├─ [← Back to Home]
-│  │     └─ [Access Tool →] (redirects to fguard.fyzo.xyz)
+│  │     └─ [Access Tool →] (redirects to fguard.maula.ai)
 │  │
 │  ├─ /tools/ipintel
-│  │  └─ [Access Tool →] (redirects to ipintel.fyzo.xyz)
+│  │  └─ [Access Tool →] (redirects to ipintel.maula.ai)
 │  │
 │  └─ ... (48 more detail pages)
 │
@@ -84,10 +84,10 @@ Each tool is a **completely independent site** with its own:
 
 ## 🏢 Building 1: FraudGuard Example
 
-### Subdomain: `fguard.fyzo.xyz`
+### Subdomain: `fguard.maula.ai`
 
 ```
-fguard.fyzo.xyz/
+fguard.maula.ai/
 │
 ├─ Frontend (Neural Link Interface + Tool-Specific UI)
 │  ├─ Multi-Tab Workspace
@@ -142,10 +142,10 @@ fguard.fyzo.xyz/
 
 ## 🏢 Building 2: IPIntel Example
 
-### Subdomain: `ipintel.fyzo.xyz`
+### Subdomain: `ipintel.maula.ai`
 
 ```
-ipintel.fyzo.xyz/
+ipintel.maula.ai/
 │
 ├─ Frontend (Neural Link Interface + Tool-Specific UI)
 │  ├─ Multi-Tab Workspace
@@ -211,7 +211,7 @@ Every building follows the same structure:
 
 ## ⚡ The Central Grid Station (Shared Services)
 
-### Subdomain: `auth.fyzo.xyz` & `api.fyzo.xyz`
+### Subdomain: `auth.maula.ai` & `api.maula.ai`
 
 ```
 Central Services (Grid Station)
@@ -254,11 +254,11 @@ Every building (tool) connects to this grid for:
 
 ### Authentication Flow
 ```
-1. User visits fguard.fyzo.xyz
+1. User visits fguard.maula.ai
 2. FraudGuard checks JWT token
-3. If no token → redirect to auth.fyzo.xyz/login
+3. If no token → redirect to auth.maula.ai/login
 4. User logs in → Central Auth issues JWT
-5. Redirect back to fguard.fyzo.xyz with token
+5. Redirect back to fguard.maula.ai with token
 6. FraudGuard validates token with Central Auth
 7. User can now use FraudGuard
 ```
@@ -287,7 +287,7 @@ Return result to user
 ```
 VictoryKit/
 │
-├─ main-site/                        # fyzo.xyz
+├─ main-site/                        # maula.ai
 │  ├─ frontend/
 │  │  ├─ pages/
 │  │  │  ├─ index.tsx                # Homepage with 50 cards
@@ -320,7 +320,7 @@ VictoryKit/
 │
 ├─ tools/                            # 50 Buildings
 │  │
-│  ├─ 01-fraudguard/                 # fguard.fyzo.xyz
+│  ├─ 01-fraudguard/                 # fguard.maula.ai
 │  │  ├─ frontend/
 │  │  │  ├─ neural-link-interface/  # Copied & customized
 │  │  │  ├─ components/
@@ -352,10 +352,10 @@ VictoryKit/
 │  │     └─ schemas/
 │  │        └─ fraudguard-schema.ts
 │  │
-│  ├─ 02-smartscore/                # smartscore.fyzo.xyz
+│  ├─ 02-smartscore/                # smartscore.maula.ai
 │  │  └─ ... (same structure)
 │  │
-│  ├─ 11-ipintel/                   # ipintel.fyzo.xyz
+│  ├─ 11-ipintel/                   # ipintel.maula.ai
 │  │  ├─ frontend/
 │  │  │  ├─ neural-link-interface/
 │  │  │  ├─ components/
@@ -396,22 +396,22 @@ VictoryKit/
 ```
 Type    Name                    Target
 ──────  ────────────────────    ────────────────
-A       fyzo.xyz                → AWS_EC2_IP
-CNAME   fguard.fyzo.xyz         → AWS_EC2_IP
-CNAME   smartscore.fyzo.xyz     → AWS_EC2_IP
-CNAME   checkoutshield.fyzo.xyz → AWS_EC2_IP
-CNAME   fraudflow.fyzo.xyz      → AWS_EC2_IP
-CNAME   riskengine.fyzo.xyz     → AWS_EC2_IP
-CNAME   deviceprint.fyzo.xyz    → AWS_EC2_IP
-CNAME   trustdevice.fyzo.xyz    → AWS_EC2_IP
-CNAME   bioscan.fyzo.xyz        → AWS_EC2_IP
-CNAME   multiauth.fyzo.xyz      → AWS_EC2_IP
-CNAME   verifyme.fyzo.xyz       → AWS_EC2_IP
-CNAME   ipintel.fyzo.xyz        → AWS_EC2_IP
-CNAME   proxydetect.fyzo.xyz    → AWS_EC2_IP
+A       maula.ai                → AWS_EC2_IP
+CNAME   fguard.maula.ai         → AWS_EC2_IP
+CNAME   smartscore.maula.ai     → AWS_EC2_IP
+CNAME   checkoutshield.maula.ai → AWS_EC2_IP
+CNAME   fraudflow.maula.ai      → AWS_EC2_IP
+CNAME   riskengine.maula.ai     → AWS_EC2_IP
+CNAME   deviceprint.maula.ai    → AWS_EC2_IP
+CNAME   trustdevice.maula.ai    → AWS_EC2_IP
+CNAME   bioscan.maula.ai        → AWS_EC2_IP
+CNAME   multiauth.maula.ai      → AWS_EC2_IP
+CNAME   verifyme.maula.ai       → AWS_EC2_IP
+CNAME   ipintel.maula.ai        → AWS_EC2_IP
+CNAME   proxydetect.maula.ai    → AWS_EC2_IP
 ... (43 more subdomains)
-CNAME   auth.fyzo.xyz           → AWS_EC2_IP
-CNAME   api.fyzo.xyz            → AWS_EC2_IP
+CNAME   auth.maula.ai           → AWS_EC2_IP
+CNAME   api.maula.ai            → AWS_EC2_IP
 ```
 
 ---
@@ -421,7 +421,7 @@ CNAME   api.fyzo.xyz            → AWS_EC2_IP
 ```nginx
 # Main site
 server {
-    server_name fyzo.xyz;
+    server_name maula.ai;
     location / {
         proxy_pass http://localhost:3000;
     }
@@ -429,7 +429,7 @@ server {
 
 # Tool 1: FraudGuard
 server {
-    server_name fguard.fyzo.xyz;
+    server_name fguard.maula.ai;
     location / {
         proxy_pass http://localhost:3001;
     }
@@ -440,7 +440,7 @@ server {
 
 # Tool 11: IPIntel
 server {
-    server_name ipintel.fyzo.xyz;
+    server_name ipintel.maula.ai;
     location / {
         proxy_pass http://localhost:3011;
     }
@@ -453,7 +453,7 @@ server {
 
 # Central Auth
 server {
-    server_name auth.fyzo.xyz;
+    server_name auth.maula.ai;
     location / {
         proxy_pass http://localhost:5000;
     }
@@ -461,7 +461,7 @@ server {
 
 # Central API Gateway
 server {
-    server_name api.fyzo.xyz;
+    server_name api.maula.ai;
     location / {
         proxy_pass http://localhost:5001;
     }
@@ -476,13 +476,13 @@ server {
 
 1. **Visit Main Site**
    ```
-   User → fyzo.xyz
+   User → maula.ai
    Sees 50 tool cards in grid
    ```
 
 2. **Click FraudGuard Card**
    ```
-   User → fyzo.xyz/tools/fraudguard
+   User → maula.ai/tools/fraudguard
    Sees:
    - FraudGuard introduction
    - Features list
@@ -493,12 +493,12 @@ server {
 
 3. **Click "Access Tool"**
    ```
-   Redirect → fguard.fyzo.xyz
+   Redirect → fguard.maula.ai
    ```
 
 4. **FraudGuard Site Loads**
    ```
-   fguard.fyzo.xyz
+   fguard.maula.ai
    ├─ Neural Link Interface appears
    ├─ AI greets: "FraudGuard AI ready. Upload transaction data."
    └─ Tool-specific UI shows
@@ -526,7 +526,7 @@ server {
 ```
 ┌────────────────────────────────────────────────┐
 │          Central Grid Station                  │
-│         (auth.fyzo.xyz)                        │
+│         (auth.maula.ai)                        │
 │  ┌──────────────────────────────────────┐     │
 │  │  User Database                       │     │
 │  │  ├─ user@example.com                 │     │
@@ -574,7 +574,7 @@ SessionGuard:        3050 (frontend), 4050 (backend)
 ### Phase 1: Build the Grid
 1. Central auth service
 2. Central billing service
-3. Main landing site (fyzo.xyz)
+3. Main landing site (maula.ai)
 
 ### Phase 2: First Building
 1. FraudGuard (complete)

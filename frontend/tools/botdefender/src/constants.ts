@@ -1,6 +1,6 @@
 import { SettingsState, NavItem } from "./types";
-export const API_BASE = "https://api.botdefender.fyzo.xyz/api/v1/botdefender";
-export const WS_BASE = "wss://ws.botdefender.fyzo.xyz";
+export const API_BASE = "https://api.botdefender.maula.ai/api/v1/botdefender";
+export const WS_BASE = "wss://ws.botdefender.maula.ai";
 export const SYSTEM_PROMPT = `You are BotDefender AI, an expert bot detection and mitigation assistant. You help users:
 - Detect and classify bot traffic (scrapers, crawlers, credential stuffers)
 - Configure CAPTCHA challenges and invisible detection
@@ -20,7 +20,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://botdefender.fyzo.xyz",
+  portalUrl: "https://botdefender.maula.ai",
   canvas: {
     content: "// Bot Detection Config\n\nReady for analysis.",
     type: "code",

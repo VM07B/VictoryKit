@@ -65,16 +65,16 @@ pm2 save
 
 | Tool | URL |
 |------|-----|
-| MalwareHunter | `https://api.fyzo.xyz/api/v1/malwarehunter` |
-| PhishGuard | `https://api.fyzo.xyz/api/v1/phishguard` |
-| VulnScan | `https://api.fyzo.xyz/api/v1/vulnscan` |
-| Health Check | `https://api.fyzo.xyz/health` |
+| MalwareHunter | `https://api.maula.ai/api/v1/malwarehunter` |
+| PhishGuard | `https://api.maula.ai/api/v1/phishguard` |
+| VulnScan | `https://api.maula.ai/api/v1/vulnscan` |
+| Health Check | `https://api.maula.ai/health` |
 
 ## 🧪 Test
 
 ```bash
-curl https://api.fyzo.xyz/health
-curl https://api.fyzo.xyz/api/v1/malwarehunter/health
+curl https://api.maula.ai/health
+curl https://api.maula.ai/api/v1/malwarehunter/health
 ```
 
 ---
@@ -85,7 +85,7 @@ curl https://api.fyzo.xyz/api/v1/malwarehunter/health
 |------|------|-------|
 | A | @ | 18.140.156.40 |
 | A | * | 18.140.156.40 |
-| CNAME | api | fyzo.xyz |
+| CNAME | api | maula.ai |
 
 ---
 
@@ -94,5 +94,5 @@ curl https://api.fyzo.xyz/api/v1/malwarehunter/health
 ```bash
 # On EC2
 sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d fyzo.xyz -d api.fyzo.xyz -d www.fyzo.xyz
+sudo certbot --nginx -d maula.ai -d api.maula.ai -d www.maula.ai
 ```

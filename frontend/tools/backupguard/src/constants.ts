@@ -1,4 +1,4 @@
-export const API_BASE = "https://api.backupguard.fyzo.xyz/api/v1/backupguard";
+export const API_BASE = "https://api.backupguard.maula.ai/api/v1/backupguard";
 
 export const TOOL_NAME = "BackupGuard";
 export const TOOL_DESCRIPTION = "Backup Security & Protection Platform";

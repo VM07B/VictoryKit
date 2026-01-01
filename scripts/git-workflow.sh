@@ -33,7 +33,7 @@ phase1_commit() {
 🌉 API Gateway (Port 4000)
 - http-proxy-middleware for request routing
 - Rate limiting (100 req/15min)
-- CORS configuration for *.fyzo.xyz
+- CORS configuration for *.maula.ai
 - Health check endpoint
 
 🎨 Main Dashboard (Port 3000)

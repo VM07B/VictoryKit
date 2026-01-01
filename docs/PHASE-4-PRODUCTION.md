@@ -61,14 +61,14 @@ VictoryKit/
 │   ├─ nginx/
 │   │   ├─ nginx.conf                        # Main Nginx config
 │   │   ├─ sites-available/
-│   │   │   ├─ fyzo.xyz.conf                 # Main site
-│   │   │   ├─ fguard.fyzo.xyz.conf          # FraudGuard
-│   │   │   ├─ iscout.fyzo.xyz.conf          # IntelliScout
+│   │   │   ├─ maula.ai.conf                 # Main site
+│   │   │   ├─ fguard.maula.ai.conf          # FraudGuard
+│   │   │   ├─ iscout.maula.ai.conf          # IntelliScout
 │   │   │   └─ ... (51 total configs)
 │   │   │
 │   │   ├─ ssl/
-│   │   │   ├─ fyzo.xyz/                     # SSL certs for main site
-│   │   │   ├─ fguard.fyzo.xyz/              # SSL certs for FraudGuard
+│   │   │   ├─ maula.ai/                     # SSL certs for main site
+│   │   │   ├─ fguard.maula.ai/              # SSL certs for FraudGuard
 │   │   │   └─ ... (51 total cert directories)
 │   │   │
 │   │   └─ snippets/
@@ -225,7 +225,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - VITE_API_URL=https://api.fyzo.xyz
+      - VITE_API_URL=https://api.maula.ai
     restart: always
     networks:
       - maula-network
@@ -241,8 +241,8 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=production
-      - VITE_API_URL=https://fguard.fyzo.xyz/api
-      - VITE_WS_URL=wss://fguard.fyzo.xyz/ws
+      - VITE_API_URL=https://fguard.maula.ai/api
+      - VITE_WS_URL=wss://fguard.maula.ai/ws
     restart: always
     networks:
       - maula-network
@@ -726,7 +726,7 @@ jobs:
           username: ${{ secrets.PRODUCTION_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /var/www/fyzo.xyz
+            cd /var/www/maula.ai
             docker-compose pull ${{ steps.tool-info.outputs.name }}-frontend ${{ steps.tool-info.outputs.name }}-api ${{ steps.tool-info.outputs.name }}-ml ${{ steps.tool-info.outputs.name }}-ai
             docker-compose up -d ${{ steps.tool-info.outputs.name }}-frontend ${{ steps.tool-info.outputs.name }}-api ${{ steps.tool-info.outputs.name }}-ml ${{ steps.tool-info.outputs.name }}-ai
             docker system prune -af
@@ -735,7 +735,7 @@ jobs:
       - name: Health check
         run: |
           sleep 30
-          curl -f https://${{ steps.tool-info.outputs.name }}.fyzo.xyz/health || exit 1
+          curl -f https://${{ steps.tool-info.outputs.name }}.maula.ai/health || exit 1
 ```
 
 ---
@@ -752,9 +752,9 @@ jobs:
 # ===========================
 
 DOMAINS=(
-  "fyzo.xyz"
-  "fguard.fyzo.xyz"
-  "iscout.fyzo.xyz"
+  "maula.ai"
+  "fguard.maula.ai"
+  "iscout.maula.ai"
   # ... (All 51 domains)
 )
 
@@ -765,7 +765,7 @@ for DOMAIN in "${DOMAINS[@]}"; do
     --nginx \
     --non-interactive \
     --agree-tos \
-    --email admin@fyzo.xyz \
+    --email admin@maula.ai \
     -d $DOMAIN
   
   if [ $? -eq 0 ]; then
@@ -913,9 +913,9 @@ echo "✅ All databases backed up to S3"
 ./scripts/test-all-domains.sh
 
 # Expected output:
-# ✅ fyzo.xyz - Status: 200 - Response time: 120ms
-# ✅ fguard.fyzo.xyz - Status: 200 - Response time: 145ms
-# ✅ iscout.fyzo.xyz - Status: 200 - Response time: 132ms
+# ✅ maula.ai - Status: 200 - Response time: 120ms
+# ✅ fguard.maula.ai - Status: 200 - Response time: 145ms
+# ✅ iscout.maula.ai - Status: 200 - Response time: 132ms
 # ...
 # ✅ All 51 domains responding successfully
 ```

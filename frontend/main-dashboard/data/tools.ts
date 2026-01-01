@@ -40,7 +40,7 @@ export const tools: Tool[] = [
       "Custom rule configuration"
     ],
     category: "Fraud Detection",
-    subdomain: "fguard.fyzo.xyz",
+    subdomain: "fguard.maula.ai",
     color: "from-red-500 to-pink-500",
     gradient: "linear-gradient(135deg, #ef4444, #ec4899)",
     icon: "shield-alert",
@@ -62,7 +62,7 @@ export const tools: Tool[] = [
       "Automated intelligence feeds"
     ],
     category: "Intelligence",
-    subdomain: "iscout.fyzo.xyz",
+    subdomain: "iscout.maula.ai",
     color: "from-blue-500 to-cyan-500",
     gradient: "linear-gradient(135deg, #3b82f6, #06b6d4)",
     icon: "radar",
@@ -84,7 +84,7 @@ export const tools: Tool[] = [
       "Automated threat hunting"
     ],
     category: "Threat Detection",
-    subdomain: "tradar.fyzo.xyz",
+    subdomain: "tradar.maula.ai",
     color: "from-orange-500 to-red-500",
     gradient: "linear-gradient(135deg, #f97316, #ef4444)",
     icon: "target",
@@ -106,7 +106,7 @@ export const tools: Tool[] = [
       "YARA rule matching"
     ],
     category: "Malware",
-    subdomain: "mhunter.fyzo.xyz",
+    subdomain: "mhunter.maula.ai",
     color: "from-purple-500 to-pink-500",
     gradient: "linear-gradient(135deg, #a855f7, #ec4899)",
     icon: "bug",
@@ -128,7 +128,7 @@ export const tools: Tool[] = [
       "Real-time blocklist updates"
     ],
     category: "Phishing",
-    subdomain: "pguard.fyzo.xyz",
+    subdomain: "pguard.maula.ai",
     color: "from-green-500 to-emerald-500",
     gradient: "linear-gradient(135deg, #22c55e, #10b981)",
     icon: "fish-off",
@@ -150,7 +150,7 @@ export const tools: Tool[] = [
       "Remediation workflows"
     ],
     category: "Vulnerability",
-    subdomain: "vscan.fyzo.xyz",
+    subdomain: "vscan.maula.ai",
     color: "from-yellow-500 to-orange-500",
     gradient: "linear-gradient(135deg, #eab308, #f97316)",
     icon: "scan",
@@ -172,7 +172,7 @@ export const tools: Tool[] = [
       "Continuous red teaming"
     ],
     category: "Penetration Testing",
-    subdomain: "pentest.fyzo.xyz",
+    subdomain: "pentest.maula.ai",
     color: "from-red-500 to-rose-500",
     gradient: "linear-gradient(135deg, #ef4444, #f43f5e)",
     icon: "crosshair",
@@ -194,7 +194,7 @@ export const tools: Tool[] = [
       "Dependency analysis"
     ],
     category: "Code Security",
-    subdomain: "scode.fyzo.xyz",
+    subdomain: "scode.maula.ai",
     color: "from-indigo-500 to-purple-500",
     gradient: "linear-gradient(135deg, #6366f1, #a855f7)",
     icon: "code",
@@ -216,7 +216,7 @@ export const tools: Tool[] = [
       "Audit-ready reporting"
     ],
     category: "Compliance",
-    subdomain: "compliance.fyzo.xyz",
+    subdomain: "compliance.maula.ai",
     color: "from-teal-500 to-cyan-500",
     gradient: "linear-gradient(135deg, #14b8a6, #06b6d4)",
     icon: "clipboard-check",
@@ -238,7 +238,7 @@ export const tools: Tool[] = [
       "Access monitoring"
     ],
     category: "Data Protection",
-    subdomain: "dguardian.fyzo.xyz",
+    subdomain: "dguardian.maula.ai",
     color: "from-blue-500 to-indigo-500",
     gradient: "linear-gradient(135deg, #3b82f6, #6366f1)",
     icon: "database",
@@ -260,7 +260,7 @@ export const tools: Tool[] = [
       "Crypto agility"
     ],
     category: "Cryptography",
-    subdomain: "cshield.fyzo.xyz",
+    subdomain: "cshield.maula.ai",
     color: "from-violet-500 to-purple-500",
     gradient: "linear-gradient(135deg, #8b5cf6, #a855f7)",
     icon: "key",
@@ -282,7 +282,7 @@ export const tools: Tool[] = [
       "Identity governance"
     ],
     category: "IAM",
-    subdomain: "iamctrl.fyzo.xyz",
+    subdomain: "iamctrl.maula.ai",
     color: "from-pink-500 to-rose-500",
     gradient: "linear-gradient(135deg, #ec4899, #f43f5e)",
     icon: "user-check",
@@ -304,7 +304,7 @@ export const tools: Tool[] = [
       "Forensic search"
     ],
     category: "Logging",
-    subdomain: "logintel.fyzo.xyz",
+    subdomain: "logintel.maula.ai",
     color: "from-amber-500 to-orange-500",
     gradient: "linear-gradient(135deg, #f59e0b, #f97316)",
     icon: "file-text",
@@ -326,7 +326,7 @@ export const tools: Tool[] = [
       "Traffic analysis"
     ],
     category: "Network",
-    subdomain: "ndefender.fyzo.xyz",
+    subdomain: "ndefender.maula.ai",
     color: "from-cyan-500 to-blue-500",
     gradient: "linear-gradient(135deg, #06b6d4, #3b82f6)",
     icon: "network",
@@ -348,7 +348,7 @@ export const tools: Tool[] = [
       "Automated response"
     ],
     category: "Endpoint",
-    subdomain: "eshield.fyzo.xyz",
+    subdomain: "eshield.maula.ai",
     color: "from-lime-500 to-green-500",
     gradient: "linear-gradient(135deg, #84cc16, #22c55e)",
     icon: "laptop",
@@ -370,7 +370,7 @@ export const tools: Tool[] = [
       "Cloud compliance"
     ],
     category: "Cloud",
-    subdomain: "csecure.fyzo.xyz",
+    subdomain: "csecure.maula.ai",
     color: "from-sky-500 to-blue-500",
     gradient: "linear-gradient(135deg, #0ea5e9, #3b82f6)",
     icon: "cloud",
@@ -392,7 +392,7 @@ export const tools: Tool[] = [
       "Rate limiting"
     ],
     category: "API",
-    subdomain: "aguardian.fyzo.xyz",
+    subdomain: "aguardian.maula.ai",
     color: "from-fuchsia-500 to-pink-500",
     gradient: "linear-gradient(135deg, #d946ef, #ec4899)",
     icon: "plug",
@@ -414,7 +414,7 @@ export const tools: Tool[] = [
       "Container forensics"
     ],
     category: "Container",
-    subdomain: "cwatch.fyzo.xyz",
+    subdomain: "cwatch.maula.ai",
     color: "from-emerald-500 to-teal-500",
     gradient: "linear-gradient(135deg, #10b981, #14b8a6)",
     icon: "box",
@@ -436,7 +436,7 @@ export const tools: Tool[] = [
       "Security gates"
     ],
     category: "DevSecOps",
-    subdomain: "devsecops.fyzo.xyz",
+    subdomain: "devsecops.maula.ai",
     color: "from-rose-500 to-red-500",
     gradient: "linear-gradient(135deg, #f43f5e, #ef4444)",
     icon: "git-branch",
@@ -458,7 +458,7 @@ export const tools: Tool[] = [
       "Post-incident reporting"
     ],
     category: "Incident Response",
-    subdomain: "incident.fyzo.xyz",
+    subdomain: "incident.maula.ai",
     color: "from-red-600 to-orange-600",
     gradient: "linear-gradient(135deg, #dc2626, #ea580c)",
     icon: "alert-triangle",
@@ -480,7 +480,7 @@ export const tools: Tool[] = [
       "Chain of custody"
     ],
     category: "Forensics",
-    subdomain: "forensics.fyzo.xyz",
+    subdomain: "forensics.maula.ai",
     color: "from-slate-500 to-gray-500",
     gradient: "linear-gradient(135deg, #64748b, #6b7280)",
     icon: "microscope",
@@ -502,7 +502,7 @@ export const tools: Tool[] = [
       "STIX/TAXII support"
     ],
     category: "Intelligence",
-    subdomain: "tintel.fyzo.xyz",
+    subdomain: "tintel.maula.ai",
     color: "from-red-500 to-pink-600",
     gradient: "linear-gradient(135deg, #ef4444, #db2777)",
     icon: "eye",
@@ -524,7 +524,7 @@ export const tools: Tool[] = [
       "Risk scoring"
     ],
     category: "Behavior",
-    subdomain: "bwatch.fyzo.xyz",
+    subdomain: "bwatch.maula.ai",
     color: "from-purple-600 to-indigo-600",
     gradient: "linear-gradient(135deg, #9333ea, #4f46e5)",
     icon: "activity",
@@ -546,7 +546,7 @@ export const tools: Tool[] = [
       "Pattern visualization"
     ],
     category: "Anomaly",
-    subdomain: "anomaly.fyzo.xyz",
+    subdomain: "anomaly.maula.ai",
     color: "from-orange-600 to-red-600",
     gradient: "linear-gradient(135deg, #ea580c, #dc2626)",
     icon: "bar-chart",
@@ -568,7 +568,7 @@ export const tools: Tool[] = [
       "Defense validation"
     ],
     category: "Red Team",
-    subdomain: "redteam.fyzo.xyz",
+    subdomain: "redteam.maula.ai",
     color: "from-red-700 to-rose-700",
     gradient: "linear-gradient(135deg, #b91c1c, #be123c)",
     icon: "skull",
@@ -590,7 +590,7 @@ export const tools: Tool[] = [
       "Defense metrics"
     ],
     category: "Blue Team",
-    subdomain: "blueteam.fyzo.xyz",
+    subdomain: "blueteam.maula.ai",
     color: "from-blue-700 to-cyan-700",
     gradient: "linear-gradient(135deg, #1d4ed8, #0e7490)",
     icon: "shield",
@@ -612,7 +612,7 @@ export const tools: Tool[] = [
       "Investigation workbench"
     ],
     category: "SIEM",
-    subdomain: "siem.fyzo.xyz",
+    subdomain: "siem.maula.ai",
     color: "from-indigo-600 to-purple-600",
     gradient: "linear-gradient(135deg, #4f46e5, #9333ea)",
     icon: "monitor",
@@ -634,7 +634,7 @@ export const tools: Tool[] = [
       "Metrics & reporting"
     ],
     category: "SOAR",
-    subdomain: "soar.fyzo.xyz",
+    subdomain: "soar.maula.ai",
     color: "from-violet-600 to-purple-700",
     gradient: "linear-gradient(135deg, #7c3aed, #7e22ce)",
     icon: "workflow",
@@ -656,7 +656,7 @@ export const tools: Tool[] = [
       "Board reporting"
     ],
     category: "Risk",
-    subdomain: "riskscore.fyzo.xyz",
+    subdomain: "riskscore.maula.ai",
     color: "from-yellow-600 to-amber-600",
     gradient: "linear-gradient(135deg, #ca8a04, #d97706)",
     icon: "gauge",
@@ -678,7 +678,7 @@ export const tools: Tool[] = [
       "Compliance mapping"
     ],
     category: "Policy",
-    subdomain: "policy.fyzo.xyz",
+    subdomain: "policy.maula.ai",
     color: "from-teal-600 to-cyan-600",
     gradient: "linear-gradient(135deg, #0d9488, #0891b2)",
     icon: "file-cog",
@@ -700,7 +700,7 @@ export const tools: Tool[] = [
       "Remediation tracking"
     ],
     category: "Audit",
-    subdomain: "audit.fyzo.xyz",
+    subdomain: "audit.maula.ai",
     color: "from-blue-600 to-indigo-700",
     gradient: "linear-gradient(135deg, #2563eb, #4338ca)",
     icon: "clipboard-list",
@@ -722,7 +722,7 @@ export const tools: Tool[] = [
       "Adaptive access"
     ],
     category: "Zero Trust",
-    subdomain: "zerotrust.fyzo.xyz",
+    subdomain: "zerotrust.maula.ai",
     color: "from-gray-600 to-slate-700",
     gradient: "linear-gradient(135deg, #4b5563, #334155)",
     icon: "lock",
@@ -744,7 +744,7 @@ export const tools: Tool[] = [
       "Audit logging"
     ],
     category: "Password",
-    subdomain: "pvault.fyzo.xyz",
+    subdomain: "pvault.maula.ai",
     color: "from-green-600 to-emerald-700",
     gradient: "linear-gradient(135deg, #16a34a, #047857)",
     icon: "vault",
@@ -766,7 +766,7 @@ export const tools: Tool[] = [
       "Anti-spoofing"
     ],
     category: "Biometric",
-    subdomain: "biometric.fyzo.xyz",
+    subdomain: "biometric.maula.ai",
     color: "from-pink-600 to-rose-700",
     gradient: "linear-gradient(135deg, #db2777, #be123c)",
     icon: "fingerprint",
@@ -788,7 +788,7 @@ export const tools: Tool[] = [
       "Quarantine management"
     ],
     category: "Email",
-    subdomain: "emailguard.fyzo.xyz",
+    subdomain: "emailguard.maula.ai",
     color: "from-sky-600 to-blue-700",
     gradient: "linear-gradient(135deg, #0284c7, #1d4ed8)",
     icon: "mail",
@@ -810,7 +810,7 @@ export const tools: Tool[] = [
       "Usage reporting"
     ],
     category: "Web",
-    subdomain: "webfilter.fyzo.xyz",
+    subdomain: "webfilter.maula.ai",
     color: "from-lime-600 to-green-700",
     gradient: "linear-gradient(135deg, #65a30d, #15803d)",
     icon: "globe",
@@ -832,7 +832,7 @@ export const tools: Tool[] = [
       "Query analytics"
     ],
     category: "DNS",
-    subdomain: "dnsshield.fyzo.xyz",
+    subdomain: "dnsshield.maula.ai",
     color: "from-cyan-600 to-teal-700",
     gradient: "linear-gradient(135deg, #0891b2, #0f766e)",
     icon: "server",
@@ -854,7 +854,7 @@ export const tools: Tool[] = [
       "Policy automation"
     ],
     category: "Firewall",
-    subdomain: "firewall.fyzo.xyz",
+    subdomain: "firewall.maula.ai",
     color: "from-orange-700 to-red-800",
     gradient: "linear-gradient(135deg, #c2410c, #991b1b)",
     icon: "flame",
@@ -876,7 +876,7 @@ export const tools: Tool[] = [
       "Session recording"
     ],
     category: "VPN",
-    subdomain: "vpnguard.fyzo.xyz",
+    subdomain: "vpnguard.maula.ai",
     color: "from-indigo-700 to-purple-800",
     gradient: "linear-gradient(135deg, #4338ca, #6b21a8)",
     icon: "shield-check",
@@ -898,7 +898,7 @@ export const tools: Tool[] = [
       "Location tracking"
     ],
     category: "Wireless",
-    subdomain: "wireless.fyzo.xyz",
+    subdomain: "wireless.maula.ai",
     color: "from-violet-700 to-fuchsia-800",
     gradient: "linear-gradient(135deg, #6d28d9, #a21caf)",
     icon: "wifi",
@@ -920,7 +920,7 @@ export const tools: Tool[] = [
       "Network segmentation"
     ],
     category: "IoT",
-    subdomain: "iotsecure.fyzo.xyz",
+    subdomain: "iotsecure.maula.ai",
     color: "from-emerald-700 to-teal-800",
     gradient: "linear-gradient(135deg, #047857, #115e59)",
     icon: "cpu",
@@ -942,7 +942,7 @@ export const tools: Tool[] = [
       "Device compliance"
     ],
     category: "Mobile",
-    subdomain: "mdefend.fyzo.xyz",
+    subdomain: "mdefend.maula.ai",
     color: "from-blue-700 to-sky-800",
     gradient: "linear-gradient(135deg, #1d4ed8, #0369a1)",
     icon: "smartphone",
@@ -964,7 +964,7 @@ export const tools: Tool[] = [
       "Compliance retention"
     ],
     category: "Backup",
-    subdomain: "backup.fyzo.xyz",
+    subdomain: "backup.maula.ai",
     color: "from-amber-700 to-orange-800",
     gradient: "linear-gradient(135deg, #b45309, #9a3412)",
     icon: "hard-drive",
@@ -986,7 +986,7 @@ export const tools: Tool[] = [
       "RTO/RPO management"
     ],
     category: "DR",
-    subdomain: "drplan.fyzo.xyz",
+    subdomain: "drplan.maula.ai",
     color: "from-red-800 to-rose-900",
     gradient: "linear-gradient(135deg, #991b1b, #881337)",
     icon: "refresh-cw",
@@ -1008,7 +1008,7 @@ export const tools: Tool[] = [
       "Data mapping"
     ],
     category: "Privacy",
-    subdomain: "privacy.fyzo.xyz",
+    subdomain: "privacy.maula.ai",
     color: "from-slate-700 to-gray-800",
     gradient: "linear-gradient(135deg, #334155, #1f2937)",
     icon: "eye-off",
@@ -1030,7 +1030,7 @@ export const tools: Tool[] = [
       "Vendor assessment"
     ],
     category: "GDPR",
-    subdomain: "gdpr.fyzo.xyz",
+    subdomain: "gdpr.maula.ai",
     color: "from-teal-700 to-cyan-800",
     gradient: "linear-gradient(135deg, #0f766e, #0e7490)",
     icon: "eu",
@@ -1052,7 +1052,7 @@ export const tools: Tool[] = [
       "Training management"
     ],
     category: "HIPAA",
-    subdomain: "hipaa.fyzo.xyz",
+    subdomain: "hipaa.maula.ai",
     color: "from-green-700 to-lime-800",
     gradient: "linear-gradient(135deg, #15803d, #4d7c0f)",
     icon: "heart-pulse",
@@ -1074,7 +1074,7 @@ export const tools: Tool[] = [
       "Compliance reporting"
     ],
     category: "PCI-DSS",
-    subdomain: "pcidss.fyzo.xyz",
+    subdomain: "pcidss.maula.ai",
     color: "from-purple-700 to-violet-800",
     gradient: "linear-gradient(135deg, #7e22ce, #5b21b6)",
     icon: "credit-card",
@@ -1096,7 +1096,7 @@ export const tools: Tool[] = [
       "Vulnerability tracking"
     ],
     category: "Bug Bounty",
-    subdomain: "bugbounty.fyzo.xyz",
+    subdomain: "bugbounty.maula.ai",
     color: "from-yellow-700 to-amber-800",
     gradient: "linear-gradient(135deg, #a16207, #92400e)",
     icon: "bug",
@@ -1118,7 +1118,7 @@ export const tools: Tool[] = [
       "Progress tracking"
     ],
     category: "Education",
-    subdomain: "cyberedu.fyzo.xyz",
+    subdomain: "cyberedu.maula.ai",
     color: "from-pink-700 to-rose-800",
     gradient: "linear-gradient(135deg, #be185d, #9f1239)",
     icon: "graduation-cap",

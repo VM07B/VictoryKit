@@ -847,7 +847,7 @@ frontend/src/
         ▼           ▼           ▼           ▼           ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    NGINX REVERSE PROXY                          │
-│                    (api.fyzo.xyz:443)                           │
+│                    (api.maula.ai:443)                           │
 └───────┬───────────┬───────────┬───────────┬───────────┬─────────┘
         │           │           │           │           │
         ▼           ▼           ▼           ▼           ▼
@@ -932,11 +932,11 @@ frontend/src/
 
 ```bash
 # Health checks
-curl http://api.fyzo.xyz/fraudguard/health
-curl http://api.fyzo.xyz/intelliscout/health
-curl http://api.fyzo.xyz/threatradar/health
-curl http://api.fyzo.xyz/malwarehunter/health
-curl http://api.fyzo.xyz/phishguard/health
+curl http://api.maula.ai/fraudguard/health
+curl http://api.maula.ai/intelliscout/health
+curl http://api.maula.ai/threatradar/health
+curl http://api.maula.ai/malwarehunter/health
+curl http://api.maula.ai/phishguard/health
 
 # Direct port testing (from EC2)
 curl http://localhost:4001/health

@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 4012;
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "https://loganalyzer.fyzo.xyz",
+    origin: process.env.CORS_ORIGIN || "https://loganalyzer.maula.ai",
     credentials: true,
   })
 );

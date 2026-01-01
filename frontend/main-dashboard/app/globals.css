@@ -52,6 +52,11 @@ body {
     animation: shimmer 2s linear infinite;
     background-size: 200% 100%;
   }
+
+  .animate-gradient-x {
+    animation: gradient-x 15s ease infinite;
+    background-size: 200% 200%;
+  }
 }
 
 @keyframes float {
@@ -60,6 +65,15 @@ body {
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
 

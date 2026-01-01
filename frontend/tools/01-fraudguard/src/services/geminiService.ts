@@ -1,15 +1,27 @@
 import { GoogleGenAI, Type, FunctionDeclaration } from "@google/genai";
-import { SettingsState, CanvasState } from "../types";
+import { SettingsState, CanvasState, FraudScore, Transaction } from "../types";
 import { getToolDefinitions, executeTool } from "./fraudguard-tools";
+import { FRAUDGUARD_SYSTEM_PROMPT } from "../constants";
+
+// Production API Key management
+const getApiKey = (): string => {
+  // Priority: Environment variable > localStorage > fallback
+  return (
+    import.meta.env.VITE_GEMINI_API_KEY ||
+    import.meta.env.GEMINI_API_KEY ||
+    localStorage.getItem('gemini_api_key') ||
+    ''
+  );
+};
 
 const navigatePortalTool: FunctionDeclaration = {
   name: "navigate_portal",
   parameters: {
     type: Type.OBJECT,
-    description: "Opens a specific URL in the user's Neural Portal.",
+    description: "Opens a specific URL in the user's Neural Portal for investigation.",
     properties: {
       url: { type: Type.STRING, description: "The full URL to navigate to." },
-      reason: { type: Type.STRING, description: "Explanation." },
+      reason: { type: Type.STRING, description: "Why this URL is relevant to the fraud investigation." },
     },
     required: ["url"],
   },
@@ -20,7 +32,7 @@ const updateCanvasTool: FunctionDeclaration = {
   parameters: {
     type: Type.OBJECT,
     description:
-      "Updates the content of the Neural Canvas workspace. Use this to write documents, code, create mockups, or display media (video/images).",
+      "Updates the Neural Canvas workspace with fraud analysis results, reports, or visualizations.",
     properties: {
       content: {
         type: Type.STRING,
@@ -28,7 +40,7 @@ const updateCanvasTool: FunctionDeclaration = {
       },
       type: {
         type: Type.STRING,
-        enum: ["text", "code", "html", "video", "image"],
+        enum: ["text", "code", "html", "video", "image", "report", "chart"],
         description: "The type of content being synchronized.",
       },
       language: {
@@ -45,9 +57,112 @@ const updateCanvasTool: FunctionDeclaration = {
   },
 };
 
+// Advanced fraud-specific tool declarations
+const generateFraudReportTool: FunctionDeclaration = {
+  name: "generate_fraud_report",
+  parameters: {
+    type: Type.OBJECT,
+    description: "Generate a comprehensive fraud analysis report with risk assessment and recommendations.",
+    properties: {
+      transaction_ids: { 
+        type: Type.ARRAY, 
+        items: { type: Type.STRING },
+        description: "List of transaction IDs to include in the report." 
+      },
+      report_type: { 
+        type: Type.STRING, 
+        enum: ["summary", "detailed", "executive", "technical"],
+        description: "Type of report to generate." 
+      },
+      include_visualizations: { type: Type.BOOLEAN, description: "Include charts and graphs." },
+      include_recommendations: { type: Type.BOOLEAN, description: "Include actionable recommendations." },
+    },
+    required: ["transaction_ids", "report_type"],
+  },
+};
+
+const queryThreatIntelTool: FunctionDeclaration = {
+  name: "query_threat_intel",
+  parameters: {
+    type: Type.OBJECT,
+    description: "Query threat intelligence databases for IP, email, or device reputation.",
+    properties: {
+      query_type: { 
+        type: Type.STRING, 
+        enum: ["ip", "email", "device", "card_bin"],
+        description: "Type of entity to query." 
+      },
+      value: { type: Type.STRING, description: "The value to look up." },
+      include_history: { type: Type.BOOLEAN, description: "Include historical data." },
+    },
+    required: ["query_type", "value"],
+  },
+};
+
+const createInvestigationTool: FunctionDeclaration = {
+  name: "create_investigation",
+  parameters: {
+    type: Type.OBJECT,
+    description: "Create a new fraud investigation case for suspicious transactions.",
+    properties: {
+      title: { type: Type.STRING, description: "Investigation title." },
+      description: { type: Type.STRING, description: "Detailed description of the suspected fraud." },
+      transaction_ids: { 
+        type: Type.ARRAY, 
+        items: { type: Type.STRING },
+        description: "Related transaction IDs." 
+      },
+      priority: { 
+        type: Type.STRING, 
+        enum: ["low", "medium", "high", "critical"],
+        description: "Investigation priority level." 
+      },
+    },
+    required: ["title", "description"],
+  },
+};
+
+const blockEntityTool: FunctionDeclaration = {
+  name: "block_entity",
+  parameters: {
+    type: Type.OBJECT,
+    description: "Block an IP, email, device, or card from future transactions.",
+    properties: {
+      entity_type: { 
+        type: Type.STRING, 
+        enum: ["ip", "email", "device", "card"],
+        description: "Type of entity to block." 
+      },
+      value: { type: Type.STRING, description: "The value to block." },
+      reason: { type: Type.STRING, description: "Reason for blocking." },
+      duration_hours: { type: Type.NUMBER, description: "Block duration in hours (0 = permanent)." },
+    },
+    required: ["entity_type", "value", "reason"],
+  },
+};
+
+const analyzeFraudPatternTool: FunctionDeclaration = {
+  name: "analyze_fraud_pattern",
+  parameters: {
+    type: Type.OBJECT,
+    description: "Analyze transaction patterns to detect fraud rings or coordinated attacks.",
+    properties: {
+      pattern_type: { 
+        type: Type.STRING, 
+        enum: ["velocity", "geographic", "device_cluster", "amount_pattern", "time_pattern"],
+        description: "Type of pattern to analyze." 
+      },
+      time_range_hours: { type: Type.NUMBER, description: "Time range in hours to analyze." },
+      min_transactions: { type: Type.NUMBER, description: "Minimum transactions to consider." },
+    },
+    required: ["pattern_type"],
+  },
+};
+
 export const callGemini = async (
   prompt: string,
-  settings: SettingsState
+  settings: SettingsState,
+  context?: { transaction?: Transaction; previousAnalysis?: FraudScore }
 ): Promise<{
   text: string;
   isImage?: boolean;
@@ -55,28 +170,50 @@ export const callGemini = async (
   navigationUrl?: string;
   canvasUpdate?: Partial<CanvasState>;
   toolResults?: any[];
+  processingTime?: number;
+  tokensUsed?: number;
 }> => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) return { text: "ERROR: API_KEY not provisioned." };
+  const apiKey = getApiKey();
+  if (!apiKey) return { text: "ERROR: GEMINI_API_KEY not configured. Please set up your API key in environment variables." };
 
-  // Fix: Create instance right before use to ensure updated key selection
   const ai = new GoogleGenAI({ apiKey });
 
   try {
     let modelToUse = settings.model;
+    
+    // Build context-aware system prompt
+    let systemPrompt = settings.customPrompt || FRAUDGUARD_SYSTEM_PROMPT;
+    
+    // Inject transaction context if available
+    if (context?.transaction) {
+      systemPrompt += `\n\n[CURRENT_TRANSACTION_CONTEXT]:
+Transaction ID: ${context.transaction.transaction_id}
+Amount: ${context.transaction.currency} ${context.transaction.amount}
+User IP: ${context.transaction.user_ip}
+Device: ${context.transaction.device_fingerprint?.substring(0, 16)}...
+Country: ${context.transaction.country}
+Timestamp: ${context.transaction.timestamp}`;
+    }
+
+    if (context?.previousAnalysis) {
+      systemPrompt += `\n\n[PREVIOUS_ANALYSIS]:
+Fraud Score: ${context.previousAnalysis.score}/100
+Risk Level: ${context.previousAnalysis.risk_level?.toUpperCase()}
+Confidence: ${context.previousAnalysis.confidence}%
+Top Indicators: ${context.previousAnalysis.indicators?.slice(0, 3).map(i => i.type).join(', ')}`;
+    }
+
     const config: any = {
-      systemInstruction:
-        settings.customPrompt +
-        `
-\n\nWORKAL_CAPABILITIES:
-1. NEURAL_PORTAL: Use 'navigate_portal' to open sites/media.
-2. CANVAS_SYNC: Use 'update_canvas' to manage the shared workspace. This tab supports:
-   - 'text': Collaborative documents.
-   - 'code': Programming with syntax support.
-   - 'html': Live rendered web layouts.
-   - 'video': Embedded video streams (provide URL).
-   - 'image': Full-screen visual assets (provide URL/Base64).
-If the user mentions a document, file, or media they want to "work on", push it to the Canvas Sync tab immediately.`,
+      systemInstruction: systemPrompt + `
+
+FRAUDGUARD_CAPABILITIES:
+1. NEURAL_PORTAL: Use 'navigate_portal' to open threat intel sites, WHOIS lookups, or IP reputation checkers.
+2. CANVAS_SYNC: Use 'update_canvas' to generate fraud reports, visualizations, and analysis documents.
+3. FRAUD_TOOLS: Execute analyze_transaction, get_fraud_score, query_threat_intel, create_investigation.
+4. BLOCKING: Use block_entity to immediately blacklist suspicious IPs, emails, devices, or cards.
+5. PATTERNS: Use analyze_fraud_pattern to detect coordinated attacks and fraud rings.
+
+Always provide actionable intelligence with specific recommendations. Reference confidence scores and explain your reasoning.`,
       temperature: settings.temperature,
       maxOutputTokens: settings.maxTokens,
       tools: [
@@ -84,13 +221,18 @@ If the user mentions a document, file, or media they want to "work on", push it 
           functionDeclarations: [
             navigatePortalTool,
             updateCanvasTool,
+            generateFraudReportTool,
+            queryThreatIntelTool,
+            createInvestigationTool,
+            blockEntityTool,
+            analyzeFraudPatternTool,
             ...getToolDefinitions(),
           ],
         },
       ],
     };
 
-    // Fix: Adjusted tool configuration logic. googleSearch is mutually exclusive with other tool categories.
+    // Enhanced tool configuration based on active mode
     if (
       settings.activeTool === "web_search" ||
       settings.activeTool === "browser" ||
@@ -100,9 +242,8 @@ If the user mentions a document, file, or media they want to "work on", push it 
       modelToUse = "gemini-3-pro-preview";
     }
 
-    // Fix: When using thinkingConfig, set thinkingBudget
     if (settings.activeTool === "thinking") {
-      config.thinkingConfig = { thinkingBudget: 1024 };
+      config.thinkingConfig = { thinkingBudget: 2048 };
     }
 
     const response = await ai.models.generateContent({
@@ -111,7 +252,6 @@ If the user mentions a document, file, or media they want to "work on", push it 
       config: config,
     });
 
-    // Fix: Extract function calls using the built-in property
     const functionCalls = response.functionCalls;
     let navigationUrl: string | undefined;
     let canvasUpdate: Partial<CanvasState> | undefined;
@@ -119,33 +259,40 @@ If the user mentions a document, file, or media they want to "work on", push it 
 
     if (functionCalls) {
       for (const call of functionCalls) {
-        if (call.name === "navigate_portal") {
-          navigationUrl = call.args.url as string;
-        } else if (call.name === "update_canvas") {
+        const toolStartTime = performance.now();
+        const args = call.args || {};
+        const toolName = call.name || '';
+        
+        if (toolName === "navigate_portal") {
+          navigationUrl = args.url as string;
+        } else if (toolName === "update_canvas") {
           canvasUpdate = {
-            content: call.args.content as string,
-            type: call.args.type as any,
-            language: call.args.language as string,
-            title: (call.args.title as string) || settings.canvas.title,
+            content: args.content as string,
+            type: args.type as any,
+            language: args.language as string,
+            title: (args.title as string) || settings.canvas.title,
+            lastModified: new Date().toISOString(),
           };
-        } else {
-          // Handle FraudGuard tools
+        } else if (toolName) {
+          // Handle all fraud detection tools
           try {
-            const result = await executeTool(call.name, call.args);
+            const result = await executeTool(toolName, args);
             toolResults.push({
-              tool: call.name,
+              tool: toolName,
               result: result,
-              params: call.args,
+              params: args,
+              executionTime: performance.now() - toolStartTime,
             });
           } catch (error) {
-            console.error(`Error executing tool ${call.name}:`, error);
+            console.error(`Error executing tool ${toolName}:`, error);
             toolResults.push({
-              tool: call.name,
+              tool: toolName,
               result: {
                 success: false,
                 error: error instanceof Error ? error.message : "Unknown error",
               },
-              params: call.args,
+              params: args,
+              executionTime: performance.now() - toolStartTime,
             });
           }
         }

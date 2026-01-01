@@ -59,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5" />
-                <span>support@fyzo.xyz</span>
+                <span>support@maula.ai</span>
               </li>
             </ul>
             <div className="mt-8 p-6 bg-white/5 rounded-xl border border-white/10">

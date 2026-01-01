@@ -21,55 +21,55 @@ Replicate FraudGuard pattern to create:
 ## 🛠️ Tool List (All 49 Tools)
 
 ```
-02 - IntelliScout        (iscout.fyzo.xyz)     - Intelligence Gathering
-03 - ThreatRadar         (tradar.fyzo.xyz)     - Threat Detection
-04 - MalwareHunter       (mhunter.fyzo.xyz)    - Malware Analysis
-05 - PhishGuard          (pguard.fyzo.xyz)     - Phishing Detection
-06 - VulnScan            (vscan.fyzo.xyz)      - Vulnerability Scanner
-07 - PenTestAI           (pentest.fyzo.xyz)    - Penetration Testing
-08 - SecureCode          (scode.fyzo.xyz)      - Code Security Audit
-09 - ComplianceCheck     (compliance.fyzo.xyz) - Compliance Monitoring
-10 - DataGuardian        (dguardian.fyzo.xyz)  - Data Protection
-11 - CryptoShield        (cshield.fyzo.xyz)    - Cryptography Tools
-12 - IAMControl          (iamctrl.fyzo.xyz)    - Identity & Access
-13 - LogIntel            (logintel.fyzo.xyz)   - Log Analysis
-14 - NetDefender         (ndefender.fyzo.xyz)  - Network Security
-15 - EndpointShield      (eshield.fyzo.xyz)    - Endpoint Protection
-16 - CloudSecure         (csecure.fyzo.xyz)    - Cloud Security
-17 - APIGuardian         (aguardian.fyzo.xyz)  - API Security
-18 - ContainerWatch      (cwatch.fyzo.xyz)     - Container Security
-19 - DevSecOps           (devsecops.fyzo.xyz)  - DevSecOps Tools
-20 - IncidentCommand     (incident.fyzo.xyz)   - Incident Response
-21 - ForensicsLab        (forensics.fyzo.xyz)  - Digital Forensics
-22 - ThreatIntel         (tintel.fyzo.xyz)     - Threat Intelligence
-23 - BehaviorWatch       (bwatch.fyzo.xyz)     - Behavior Analysis
-24 - AnomalyDetect       (anomaly.fyzo.xyz)    - Anomaly Detection
-25 - RedTeamAI           (redteam.fyzo.xyz)    - Red Team Tools
-26 - BlueTeamAI          (blueteam.fyzo.xyz)   - Blue Team Tools
-27 - SIEMCommander       (siem.fyzo.xyz)       - SIEM Integration
-28 - SOAREngine          (soar.fyzo.xyz)       - Security Orchestration
-29 - RiskScoreAI         (riskscore.fyzo.xyz)  - Risk Assessment
-30 - PolicyEngine        (policy.fyzo.xyz)     - Policy Management
-31 - AuditTracker        (audit.fyzo.xyz)      - Audit Management
-32 - ZeroTrustAI         (zerotrust.fyzo.xyz)  - Zero Trust Security
-33 - PasswordVault       (pvault.fyzo.xyz)     - Password Security
-34 - BiometricAI         (biometric.fyzo.xyz)  - Biometric Security
-35 - EmailGuard          (emailguard.fyzo.xyz) - Email Security
-36 - WebFilter           (webfilter.fyzo.xyz)  - Web Filtering
-37 - DNSShield           (dnsshield.fyzo.xyz)  - DNS Security
-38 - FirewallAI          (firewall.fyzo.xyz)   - Firewall Management
-39 - VPNGuardian         (vpnguard.fyzo.xyz)   - VPN Security
-40 - WirelessWatch       (wireless.fyzo.xyz)   - Wireless Security
-41 - IoTSecure           (iotsecure.fyzo.xyz)  - IoT Security
-42 - MobileDefend        (mdefend.fyzo.xyz)    - Mobile Security
-43 - BackupGuard         (backup.fyzo.xyz)     - Backup Security
-44 - DRPlan              (drplan.fyzo.xyz)     - Disaster Recovery
-45 - PrivacyShield       (privacy.fyzo.xyz)    - Privacy Protection
-46 - GDPRCompliance      (gdpr.fyzo.xyz)       - GDPR Compliance
-47 - HIPAAGuard          (hipaa.fyzo.xyz)      - HIPAA Compliance
-48 - PCI-DSS             (pcidss.fyzo.xyz)     - PCI-DSS Compliance
-49 - BugBountyAI         (bugbounty.fyzo.xyz)  - Bug Bounty Platform
-50 - CyberEduAI          (cyberedu.fyzo.xyz)   - Cybersecurity Training
+02 - IntelliScout        (iscout.maula.ai)     - Intelligence Gathering
+03 - ThreatRadar         (tradar.maula.ai)     - Threat Detection
+04 - MalwareHunter       (mhunter.maula.ai)    - Malware Analysis
+05 - PhishGuard          (pguard.maula.ai)     - Phishing Detection
+06 - VulnScan            (vscan.maula.ai)      - Vulnerability Scanner
+07 - PenTestAI           (pentest.maula.ai)    - Penetration Testing
+08 - SecureCode          (scode.maula.ai)      - Code Security Audit
+09 - ComplianceCheck     (compliance.maula.ai) - Compliance Monitoring
+10 - DataGuardian        (dguardian.maula.ai)  - Data Protection
+11 - CryptoShield        (cshield.maula.ai)    - Cryptography Tools
+12 - IAMControl          (iamctrl.maula.ai)    - Identity & Access
+13 - LogIntel            (logintel.maula.ai)   - Log Analysis
+14 - NetDefender         (ndefender.maula.ai)  - Network Security
+15 - EndpointShield      (eshield.maula.ai)    - Endpoint Protection
+16 - CloudSecure         (csecure.maula.ai)    - Cloud Security
+17 - APIGuardian         (aguardian.maula.ai)  - API Security
+18 - ContainerWatch      (cwatch.maula.ai)     - Container Security
+19 - DevSecOps           (devsecops.maula.ai)  - DevSecOps Tools
+20 - IncidentCommand     (incident.maula.ai)   - Incident Response
+21 - ForensicsLab        (forensics.maula.ai)  - Digital Forensics
+22 - ThreatIntel         (tintel.maula.ai)     - Threat Intelligence
+23 - BehaviorWatch       (bwatch.maula.ai)     - Behavior Analysis
+24 - AnomalyDetect       (anomaly.maula.ai)    - Anomaly Detection
+25 - RedTeamAI           (redteam.maula.ai)    - Red Team Tools
+26 - BlueTeamAI          (blueteam.maula.ai)   - Blue Team Tools
+27 - SIEMCommander       (siem.maula.ai)       - SIEM Integration
+28 - SOAREngine          (soar.maula.ai)       - Security Orchestration
+29 - RiskScoreAI         (riskscore.maula.ai)  - Risk Assessment
+30 - PolicyEngine        (policy.maula.ai)     - Policy Management
+31 - AuditTracker        (audit.maula.ai)      - Audit Management
+32 - ZeroTrustAI         (zerotrust.maula.ai)  - Zero Trust Security
+33 - PasswordVault       (pvault.maula.ai)     - Password Security
+34 - BiometricAI         (biometric.maula.ai)  - Biometric Security
+35 - EmailGuard          (emailguard.maula.ai) - Email Security
+36 - WebFilter           (webfilter.maula.ai)  - Web Filtering
+37 - DNSShield           (dnsshield.maula.ai)  - DNS Security
+38 - FirewallAI          (firewall.maula.ai)   - Firewall Management
+39 - VPNGuardian         (vpnguard.maula.ai)   - VPN Security
+40 - WirelessWatch       (wireless.maula.ai)   - Wireless Security
+41 - IoTSecure           (iotsecure.maula.ai)  - IoT Security
+42 - MobileDefend        (mdefend.maula.ai)    - Mobile Security
+43 - BackupGuard         (backup.maula.ai)     - Backup Security
+44 - DRPlan              (drplan.maula.ai)     - Disaster Recovery
+45 - PrivacyShield       (privacy.maula.ai)    - Privacy Protection
+46 - GDPRCompliance      (gdpr.maula.ai)       - GDPR Compliance
+47 - HIPAAGuard          (hipaa.maula.ai)      - HIPAA Compliance
+48 - PCI-DSS             (pcidss.maula.ai)     - PCI-DSS Compliance
+49 - BugBountyAI         (bugbounty.maula.ai)  - Bug Bounty Platform
+50 - CyberEduAI          (cyberedu.maula.ai)   - Cybersecurity Training
 ```
 
 ---
@@ -105,7 +105,7 @@ ML_PORT=$((8000 + TOOL_NUM))
 AI_PORT=$((6000 + TOOL_NUM))
 
 DB_NAME="${SUBDOMAIN}_db"
-DOMAIN="${SUBDOMAIN}.fyzo.xyz"
+DOMAIN="${SUBDOMAIN}.maula.ai"
 
 echo "==========================================="
 echo "Creating Tool: $TOOL_NAME"

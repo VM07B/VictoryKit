@@ -1,8 +1,8 @@
-# SSL Wildcard Certificate Setup for \*.fyzo.xyz (Namecheap DNS)
+# SSL Wildcard Certificate Setup for \*.maula.ai (Namecheap DNS)
 
 ## Prerequisites
 
-- Domain fyzo.xyz configured with Namecheap DNS
+- Domain maula.ai configured with Namecheap DNS
 - SSH access to EC2 instance
 - Certbot installed on EC2
 - Access to Namecheap DNS management
@@ -25,20 +25,20 @@
 3. Request wildcard certificate using manual DNS validation:
 
    ```bash
-   sudo certbot certonly --manual --preferred-challenges dns -d '*.fyzo.xyz' -d fyzo.xyz
+   sudo certbot certonly --manual --preferred-challenges dns -d '*.maula.ai' -d maula.ai
    ```
 
 4. Certbot will display TXT records that need to be added to your DNS. Example:
 
    ```
    Please deploy a DNS TXT record under the name:
-   _acme-challenge.fyzo.xyz
+   _acme-challenge.maula.ai
 
    With the value:
    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
    ```
 
-5. Log into your Namecheap account and go to Domain List → fyzo.xyz → Advanced DNS
+5. Log into your Namecheap account and go to Domain List → maula.ai → Advanced DNS
 
 6. Add the TXT record:
 
@@ -68,13 +68,13 @@
 ## Nginx Configuration
 
 Your Nginx config already references:
-/etc/letsencrypt/live/fyzo.xyz/fullchain.pem
-/etc/letsencrypt/live/fyzo.xyz/privkey.pem
+/etc/letsencrypt/live/maula.ai/fullchain.pem
+/etc/letsencrypt/live/maula.ai/privkey.pem
 
 The wildcard certificate will be stored in the same location and will cover:
 
-- fyzo.xyz
-- \*.fyzo.xyz (all subdomains)
+- maula.ai
+- \*.maula.ai (all subdomains)
 
 ## Certificate Renewal
 
@@ -88,6 +88,6 @@ sudo crontab -e
 
 ## Troubleshooting
 
-- **DNS not propagated**: Wait longer and check with `dig TXT _acme-challenge.fyzo.xyz`
+- **DNS not propagated**: Wait longer and check with `dig TXT _acme-challenge.maula.ai`
 - **Certificate not generated**: Check that TXT records are correct and propagated
 - **Permission issues**: Make sure you're running certbot with sudo

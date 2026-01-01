@@ -3,7 +3,7 @@
 ## 🎯 Project at a Glance
 
 **Name**: MAULA.AI (VictoryKit)  
-**Domain**: fyzo.xyz  
+**Domain**: maula.ai  
 **Tagline**: The world's first AI-powered security services platform  
 
 ---
@@ -146,18 +146,18 @@
 ## 🌐 Domain Structure
 
 ```
-fyzo.xyz                  → Main dashboard
-api.fyzo.xyz              → Unified API gateway
-docs.fyzo.xyz             → Documentation
-admin.fyzo.xyz            → Admin panel
+maula.ai                  → Main dashboard
+api.maula.ai              → Unified API gateway
+docs.maula.ai             → Documentation
+admin.maula.ai            → Admin panel
 
-fraudguard.fyzo.xyz       → Tool 1
-smartscore.fyzo.xyz       → Tool 2
-ipintel.fyzo.xyz          → Tool 11
+fraudguard.maula.ai       → Tool 1
+smartscore.maula.ai       → Tool 2
+ipintel.maula.ai          → Tool 11
 ... (50 tool subdomains)
 
-api.fyzo.xyz/fraudguard   → Tool 1 API
-api.fyzo.xyz/ipintel      → Tool 11 API
+api.maula.ai/fraudguard   → Tool 1 API
+api.maula.ai/ipintel      → Tool 11 API
 ... (50 API endpoints)
 ```
 
@@ -351,7 +351,7 @@ Save to MongoDB
 
 - **Repo**: https://github.com/VM07B/VictoryKit
 - **Docs**: /docs/
-- **Domain** (Future): https://fyzo.xyz
+- **Domain** (Future): https://maula.ai
 
 ---
 

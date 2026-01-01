@@ -6,7 +6,7 @@ FraudGuard is a comprehensive fraud detection and prevention system built as par
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    fguard.fyzo.xyz                               │
+│                    fguard.maula.ai                               │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐   │
@@ -322,7 +322,7 @@ VictoryKit/
 │
 ├── infrastructure/
 │   ├── nginx/sites-available/
-│   │   └── fguard.fyzo.xyz.conf
+│   │   └── fguard.maula.ai.conf
 │   └── mongo/init/
 │       └── init-fraudguard.js
 │

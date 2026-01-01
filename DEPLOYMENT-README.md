@@ -49,21 +49,21 @@ TOOLS_CONFIG=(
 
 ### Main Dashboard
 
-- **URL:** https://fyzo.xyz
+- **URL:** https://maula.ai
 - **Port:** 3000
-- **Path:** `/var/www/fyzo.xyz`
+- **Path:** `/var/www/maula.ai`
 
 ### Tools
 
 Each tool gets deployed as a subdomain:
 
-- **Frontend:** `https://{subdomain}.fyzo.xyz`
-- **API:** `https://{subdomain}.fyzo.xyz/api`
-- **WebSocket:** `wss://{subdomain}.fyzo.xyz/ws`
+- **Frontend:** `https://{subdomain}.maula.ai`
+- **API:** `https://{subdomain}.maula.ai/api`
+- **WebSocket:** `wss://{subdomain}.maula.ai/ws`
 
 ### Current Tools
 
-- **FraudGuard:** https://fguard.fyzo.xyz
+- **FraudGuard:** https://fguard.maula.ai
   - Frontend: Port 3001
   - API: Port 4001
   - ML Engine: Port 8001
@@ -104,8 +104,8 @@ sudo ufw allow 22,80,443
 
 ```
 /var/www/
-├── fyzo.xyz/           # Main dashboard
-├── fguard.fyzo.xyz/    # FraudGuard frontend
+├── maula.ai/           # Main dashboard
+├── fguard.maula.ai/    # FraudGuard frontend
 ├── fraudguard-api/     # FraudGuard API
 ├── fraudguard-ml/      # FraudGuard ML engine
 └── fraudguard-ai/      # FraudGuard AI assistant
@@ -118,8 +118,8 @@ sudo ufw allow 22,80,443
 └── fraudguard-ai.service
 
 /etc/nginx/sites-enabled/
-├── fyzo.xyz
-└── fguard.fyzo.xyz
+├── maula.ai
+└── fguard.maula.ai
 ```
 
 ## 🔍 Troubleshooting
@@ -136,9 +136,9 @@ sudo journalctl -u fraudguard-frontend -f
 ### Test Endpoints
 
 ```bash
-curl https://fyzo.xyz
-curl https://fguard.fyzo.xyz
-curl https://fguard.fyzo.xyz/api/health
+curl https://maula.ai
+curl https://fguard.maula.ai
+curl https://fguard.maula.ai/api/health
 ```
 
 ### Common Issues

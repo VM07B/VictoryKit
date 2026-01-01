@@ -1,7 +1,7 @@
 import { SettingsState, NavItem } from "./types";
 export const API_BASE =
-  "https://api.siemcommander.fyzo.xyz/api/v1/siemcommander";
-export const WS_BASE = "wss://ws.siemcommander.fyzo.xyz";
+  "https://api.siemcommander.maula.ai/api/v1/siemcommander";
+export const WS_BASE = "wss://ws.siemcommander.maula.ai";
 export const SYSTEM_PROMPT = `You are SIEMCommander AI, an expert Security Information and Event Management assistant. You help users:
 - Search and analyze security logs across multiple sources
 - Create and manage correlation rules
@@ -22,7 +22,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://siemcommander.fyzo.xyz",
+  portalUrl: "https://siemcommander.maula.ai",
   canvas: {
     content: "// Log Query\n\nReady for analysis.",
     type: "code",

@@ -1,7 +1,7 @@
 import { SettingsState, NavItem } from "./types";
 
-export const API_BASE = "https://api.wafmanager.fyzo.xyz/api/v1/wafmanager";
-export const WS_BASE = "wss://ws.wafmanager.fyzo.xyz";
+export const API_BASE = "https://api.wafmanager.maula.ai/api/v1/wafmanager";
+export const WS_BASE = "wss://ws.wafmanager.maula.ai";
 
 export const SYSTEM_PROMPT = `You are WAFManager AI, an expert Web Application Firewall security assistant. You help users:
 - Create and manage WAF rules to protect web applications
@@ -41,7 +41,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   model: "gemini-2.5-flash-preview-05-20",
   activeTool: "none",
   workspaceMode: "CHAT",
-  portalUrl: "https://wafmanager.fyzo.xyz",
+  portalUrl: "https://wafmanager.maula.ai",
   canvas: {
     content: "// WAF Rule Configuration\n\nReady for security analysis.",
     type: "code",

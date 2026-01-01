@@ -74,7 +74,7 @@ simulate_deployment() {
     # Step 4: Simulate EC2 deployment
     log_step "4/8: Deploying to EC2 Server"
     echo "  → Would connect to: ubuntu@your-ec2-ip"
-    echo "  → Would create directories: /var/www/fyzo.xyz, /var/www/fguard.fyzo.xyz"
+    echo "  → Would create directories: /var/www/maula.ai, /var/www/fguard.maula.ai"
     echo "  → Would copy files via SCP..."
     echo "  → Would install serve: sudo npm install -g serve"
     log_success "EC2 deployment simulated"
@@ -92,8 +92,8 @@ simulate_deployment() {
 
     # Step 6: Simulate Nginx configuration
     log_step "6/8: Configuring Nginx"
-    echo "  → Would create: /etc/nginx/sites-available/fyzo.xyz"
-    echo "  → Would create: /etc/nginx/sites-available/fguard.fyzo.xyz"
+    echo "  → Would create: /etc/nginx/sites-available/maula.ai"
+    echo "  → Would create: /etc/nginx/sites-available/fguard.maula.ai"
     echo "  → Would enable sites and reload nginx"
     log_success "Nginx configuration simulated"
     sleep 1
@@ -109,9 +109,9 @@ simulate_deployment() {
 
     # Step 8: Simulate testing
     log_step "8/8: Testing Deployment"
-    echo "  → Would test: https://fyzo.xyz"
-    echo "  → Would test: https://fguard.fyzo.xyz"
-    echo "  → Would test: https://fguard.fyzo.xyz/api/health"
+    echo "  → Would test: https://maula.ai"
+    echo "  → Would test: https://fguard.maula.ai"
+    echo "  → Would test: https://fguard.maula.ai/api/health"
     log_success "Testing simulated"
     sleep 1
 
@@ -120,9 +120,9 @@ simulate_deployment() {
     log_success "🎉 MAULA.AI TEST DEPLOYMENT COMPLETED!"
     echo
     echo "📋 Production URLs (when deployed):"
-    echo "  🌐 Main Dashboard: https://fyzo.xyz"
-    echo "  🛡️  FraudGuard:     https://fguard.fyzo.xyz"
-    echo "  🤖 AI Chat:         https://fguard.fyzo.xyz (Neural Link Interface)"
+    echo "  🌐 Main Dashboard: https://maula.ai"
+    echo "  🛡️  FraudGuard:     https://fguard.maula.ai"
+    echo "  🤖 AI Chat:         https://fguard.maula.ai (Neural Link Interface)"
     echo
     echo "🔧 Services Started:"
     echo "  📊 Dashboard:       port 3000"
