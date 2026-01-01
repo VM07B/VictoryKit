@@ -1,21 +1,18 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
-// Import neural link components and logic
-import Header from "../../neural-link-interface/components/Header";
-import Sidebar from "../../neural-link-interface/components/Sidebar";
-import SettingsPanel from "../../neural-link-interface/components/SettingsPanel";
-import ChatBox from "../../neural-link-interface/components/ChatBox";
-import NavigationDrawer from "../../neural-link-interface/components/NavigationDrawer";
-import Overlay from "../../neural-link-interface/components/Overlay";
-import Footer from "../../neural-link-interface/components/Footer";
+// Import local components
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import SettingsPanel from "./SettingsPanel";
+import ChatBox from "./ChatBox";
+import NavigationDrawer from "./NavigationDrawer";
+import Overlay from "./Overlay";
+import Footer from "./Footer";
 
-import {
-  ChatSession,
-  Message,
-  SettingsState,
-} from "../../neural-link-interface/types";
-import { DEFAULT_SETTINGS } from "../../neural-link-interface/constants";
-import { callGemini } from "../../neural-link-interface/services/geminiService";
+// Import local types and services
+import { ChatSession, Message, SettingsState } from "../types";
+import { DEFAULT_SETTINGS } from "../constants";
+import { callGemini } from "../services/geminiService";
 
 const NeuralLinkInterface: React.FC = () => {
   // UI State
@@ -38,17 +35,20 @@ const NeuralLinkInterface: React.FC = () => {
   const [sessions, setSessions] = useState<ChatSession[]>(() => {
     const saved = localStorage.getItem("fraudguard_neural_sessions");
     if (saved) return JSON.parse(saved);
+    const now = new Date();
     return [
       {
         id: "1",
         name: "FRAUDGUARD_NEURAL_LINK",
         active: true,
+        createdAt: now.toISOString(),
+        lastActivity: now.toISOString(),
         messages: [
           {
             id: "init-1",
             sender: "AGENT",
             text: "🔒 FraudGuard Neural Link established. I have access to your fraud detection data, transaction analysis, and risk assessment tools. How can I help you with fraud detection today?",
-            timestamp: new Date().toLocaleTimeString(),
+            timestamp: now.toLocaleTimeString(),
           },
         ],
         settings: {
@@ -135,16 +135,19 @@ Help users analyze transactions, configure alerts, interpret risk scores, and op
   };
 
   const handleNewSession = () => {
+    const now = new Date();
     const newSession: ChatSession = {
       id: Date.now().toString(),
       name: `FraudGuard Session ${sessions.length + 1}`,
       active: true,
+      createdAt: now.toISOString(),
+      lastActivity: now.toISOString(),
       messages: [
         {
           id: "init-" + Date.now(),
           sender: "AGENT",
           text: "New FraudGuard analysis session started. Ready to help with fraud detection.",
-          timestamp: new Date().toLocaleTimeString(),
+          timestamp: now.toLocaleTimeString(),
         },
       ],
       settings: {

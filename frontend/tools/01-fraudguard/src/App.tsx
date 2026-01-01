@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import FraudGuardTool from "./components/FraudGuardTool";
-import NeuralLinkInterface from "../neural-link-interface";
+import NeuralLinkInterface from "./components/NeuralLinkInterface";
 
 function App() {
   return (

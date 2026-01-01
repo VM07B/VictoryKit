@@ -297,6 +297,16 @@ const FraudGuardTool: React.FC = () => {
 
       {/* Main Content */}
       <main className="relative max-w-7xl mx-auto p-6">
+        {/* Dashboard View */}
+        {currentView === "dashboard" && (
+          <RealTimeDashboard
+            onTransactionSelect={(txId) => {
+              // Navigate to transaction details
+              setCurrentView("history");
+            }}
+          />
+        )}
+
         {currentView === "analyze" && (
           <div className="space-y-6">
             {/* Hero Section */}
@@ -355,6 +365,23 @@ const FraudGuardTool: React.FC = () => {
             loading={loading}
           />
         )}
+
+        {currentView === "threat-intel" && (
+          <ThreatIntelPanel
+            onBlockEntity={(type, value) => {
+              console.log(`Blocked ${type}: ${value}`);
+            }}
+          />
+        )}
+
+        {currentView === "investigations" && (
+          <InvestigationCenter
+            onViewTransaction={(txId) => {
+              setCurrentView("history");
+            }}
+          />
+        )}
+
         {currentView === "alerts" && (
           <AlertsPanel
             alerts={alerts}
@@ -363,6 +390,7 @@ const FraudGuardTool: React.FC = () => {
             onToggleAlert={handleToggleAlert}
           />
         )}
+
         {currentView === "analytics" && (
           <RiskVisualization type="risk_breakdown" data={{}} />
         )}

@@ -121,12 +121,12 @@ export const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-// Production API Endpoints - NO LOCALHOST
+// Production API Endpoints - Using subdomain proxy
 export const API_ENDPOINTS = {
-  FRAUDGUARD_API: isProduction ? "https://api.maula.ai/fraudguard" : "https://api.maula.ai/fraudguard",
-  ML_API: isProduction ? "https://ml.maula.ai/fraudguard" : "https://ml.maula.ai/fraudguard",
-  AI_API: isProduction ? "https://ai.maula.ai/fraudguard" : "https://ai.maula.ai/fraudguard",
-  WS_API: isProduction ? "wss://ws.maula.ai/fraudguard" : "wss://ws.maula.ai/fraudguard",
+  FRAUDGUARD_API: isProduction ? "/api" : "/api",
+  ML_API: isProduction ? "/api/ml" : "/api/ml",
+  AI_API: isProduction ? "/api/ai" : "/api/ai",
+  WS_API: isProduction ? "wss://fguard.maula.ai/ws" : "wss://fguard.maula.ai/ws",
   GATEWAY_API: "https://api.maula.ai",
   AUTH_API: "https://api.maula.ai/auth",
 };
