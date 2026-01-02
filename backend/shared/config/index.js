@@ -39,7 +39,8 @@ const config = {
       soarengine: 'victorykit_soarengine',
       riskscoreai: 'victorykit_riskscoreai',
       policyengine: 'victorykit_policyengine',
-      cloudsecure: 'victorykit_cloudsecure'
+      cloudsecure: 'victorykit_cloudsecure',
+      apishield: 'victorykit_apishield'
     }
   },
   
@@ -106,7 +107,8 @@ const config = {
     soarengine: 4028,
     riskscoreai: 4029,
     policyengine: 4030,
-    cloudsecure: parseInt(process.env.PORT_CLOUDSECURE) || 4031
+    cloudsecure: parseInt(process.env.PORT_CLOUDSECURE) || 4031,
+    apishield: 4032
   },
   
   // ML Engines (local for now)
