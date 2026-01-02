@@ -246,8 +246,130 @@ exports.refreshSpec = async (req, res) => {
   }
 };
 
-// Analyze spec for issues
-exports.analyzeSpec = async (req, res) => {
+// Upload and parse new API spec
+exports.uploadSpec = async (req, res) => {
+  try {
+    const { name, url, content, format = 'openapi' } = req.body;
+
+    if (!name || (!url && !content)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Name and either URL or content are required'
+      });
+    }
+
+    let specContent;
+    if (url) {
+      // Fetch spec from URL
+      const axios = require('axios');
+      const response = await axios.get(url);
+      specContent = response.data;
+    } else {
+      specContent = content;
+    }
+
+    // Parse and validate spec
+    const parsedSpec = await OpenAPIParser.parseSpec(specContent, format);
+
+    // Create spec record
+    const spec = new APISpec({
+      name,
+      url,
+      format,
+      version: parsedSpec.version || '1.0.0',
+      endpoints: parsedSpec.endpoints?.length || 0,
+      specData: parsedSpec,
+      status: 'active'
+    });
+
+    await spec.save();
+
+    // Create endpoint records
+    if (parsedSpec.endpoints) {
+      const endpoints = parsedSpec.endpoints.map(ep => ({
+        specId: spec._id,
+        path: ep.path,
+        method: ep.method,
+        summary: ep.summary,
+        description: ep.description,
+        parameters: ep.parameters,
+        requestBody: ep.requestBody,
+        responses: ep.responses,
+        requiresAuth: ep.security && ep.security.length > 0,
+        deprecated: ep.deprecated || false
+      }));
+
+      await APIEndpoint.insertMany(endpoints);
+    }
+
+    res.status(201).json({
+      success: true,
+      data: { spec }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Validate API spec without saving
+exports.validateSpec = async (req, res) => {
+  try {
+    const { content, format = 'openapi' } = req.body;
+
+    if (!content) {
+      return res.status(400).json({
+        success: false,
+        error: 'Spec content is required'
+      });
+    }
+
+    const validation = await OpenAPIParser.validateSpec(content, format);
+
+    res.json({
+      success: true,
+      data: {
+        valid: validation.valid,
+        errors: validation.errors,
+        warnings: validation.warnings,
+        endpoints: validation.endpoints?.length || 0
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Get endpoints from spec
+exports.getSpecEndpoints = async (req, res) => {
+  try {
+    const spec = await APISpec.findById(req.params.id);
+    if (!spec) {
+      return res.status(404).json({
+        success: false,
+        error: 'API spec not found'
+      });
+    }
+
+    const endpoints = await APIEndpoint.find({ specId: spec._id })
+      .sort({ path: 1, method: 1 });
+
+    res.json({
+      success: true,
+      data: { endpoints }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
   try {
     const spec = await APISpec.findById(req.params.id);
     if (!spec) {

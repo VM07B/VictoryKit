@@ -8,16 +8,16 @@ router.get('/', vulnerabilityController.getVulnerabilities);
 // GET /api/vulnerabilities/:id - Get vulnerability by ID
 router.get('/:id', vulnerabilityController.getVulnerability);
 
-// PUT /api/vulnerabilities/:id - Update vulnerability
-router.put('/:id', vulnerabilityController.updateVulnerability);
-
-// PUT /api/vulnerabilities/bulk - Bulk update vulnerabilities
-router.put('/bulk', vulnerabilityController.bulkUpdateVulnerabilities);
-
-// DELETE /api/vulnerabilities/:id - Delete vulnerability
-router.delete('/:id', vulnerabilityController.deleteVulnerability);
+// PUT /api/vulnerabilities/:id/status - Update vulnerability status
+router.put('/:id/status', vulnerabilityController.updateVulnerabilityStatus);
 
 // GET /api/vulnerabilities/stats - Get vulnerability statistics
+router.get('/stats', vulnerabilityController.getVulnerabilityStats);
+
+// GET /api/vulnerabilities/:id/remediation - Get remediation code
+router.get('/:id/remediation', vulnerabilityController.getRemediationCode);
+
+module.exports = router;
 router.get('/stats', vulnerabilityController.getVulnerabilityStats);
 
 module.exports = router;

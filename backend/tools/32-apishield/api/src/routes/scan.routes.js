@@ -18,15 +18,3 @@ router.post('/', scanController.startScan);
 router.post('/:id/cancel', scanController.cancelScan);
 
 module.exports = router;
-router.post('/:id/start', scanController.startScan);
-
-// POST /api/scans/:id/stop - Stop scan
-router.post('/:id/stop', scanController.stopScan);
-
-// POST /api/scans/:id/report - Generate report
-router.post('/:id/report', scanController.generateReport);
-
-// GET /api/scans/:id/report/download - Download report
-router.get('/:id/report/download', scanController.downloadReport);
-
-module.exports = router;

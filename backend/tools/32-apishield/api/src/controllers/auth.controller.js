@@ -304,3 +304,176 @@ exports.fullAuthSuite = async (req, res) => {
     });
   }
 };
+
+// Analyze JWT token
+exports.analyzeJWT = async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        error: "JWT token is required"
+      });
+    }
+
+    const analysis = await AuthTester.analyzeJWT(token);
+
+    res.json({
+      success: true,
+      data: { analysis }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Test API key
+exports.testApiKey = async (req, res) => {
+  try {
+    const { apiKey, targetUrl, headerName = "X-API-Key" } = req.body;
+
+    if (!apiKey || !targetUrl) {
+      return res.status(400).json({
+        success: false,
+        error: "API key and target URL are required"
+      });
+    }
+
+    const result = await AuthTester.testAPIKey(targetUrl, apiKey, headerName);
+
+    res.json({
+      success: true,
+      data: { result }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Test OAuth flow
+exports.testOAuth = async (req, res) => {
+  try {
+    const { targetUrl, clientId, clientSecret, grantType = "authorization_code" } = req.body;
+
+    if (!targetUrl || !clientId) {
+      return res.status(400).json({
+        success: false,
+        error: "Target URL and client ID are required"
+      });
+    }
+
+    const result = await AuthTester.testOAuth(targetUrl, { clientId, clientSecret, grantType });
+
+    res.json({
+      success: true,
+      data: { result }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Get supported auth methods
+exports.getAuthMethods = async (req, res) => {
+  try {
+    const methods = [
+      "jwt",
+      "api-key",
+      "oauth2",
+      "basic-auth",
+      "bearer-token",
+      "session-based",
+      "certificate-based"
+    ];
+
+    res.json({
+      success: true,
+      data: { methods }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Create auth session
+exports.createAuthSession = async (req, res) => {
+  try {
+    const { targetUrl, authType, credentials } = req.body;
+
+    if (!targetUrl || !authType) {
+      return res.status(400).json({
+        success: false,
+        error: "Target URL and auth type are required"
+      });
+    }
+
+    const session = await AuthTester.createAuthSession(targetUrl, authType, credentials);
+
+    res.json({
+      success: true,
+      data: { session }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Get auth session
+exports.getAuthSession = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const session = await AuthTester.getAuthSession(id);
+    if (!session) {
+      return res.status(404).json({
+        success: false,
+        error: "Auth session not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      data: { session }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Delete auth session
+exports.deleteAuthSession = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await AuthTester.deleteAuthSession(id);
+
+    res.json({
+      success: true,
+      message: "Auth session deleted"
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};

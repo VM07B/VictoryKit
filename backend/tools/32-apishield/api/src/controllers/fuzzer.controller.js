@@ -202,3 +202,166 @@ exports.testParameterTampering = async (req, res) => {
     });
   }
 };
+
+// Start fuzzing session
+exports.startFuzzing = async (req, res) => {
+  try {
+    const { endpointId, payloadCategories, customPayloads, settings } = req.body;
+
+    const endpoint = await APIEndpoint.findById(endpointId);
+    if (!endpoint) {
+      return res.status(404).json({
+        success: false,
+        error: 'Endpoint not found'
+      });
+    }
+
+    const fuzzingEngine = new FuzzingEngine();
+    const sessionId = await fuzzingEngine.startSession(endpoint, {
+      payloadCategories: payloadCategories || ['sql-injection', 'xss', 'command-injection'],
+      customPayloads,
+      settings: {
+        maxRequests: settings?.maxRequests || 1000,
+        delay: settings?.delay || 100,
+        timeout: settings?.timeout || 30000,
+        ...settings
+      }
+    });
+
+    res.json({
+      success: true,
+      data: { sessionId }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Stop fuzzing session
+exports.stopFuzzing = async (req, res) => {
+  try {
+    const { sessionId } = req.body;
+
+    const fuzzingEngine = new FuzzingEngine();
+    await fuzzingEngine.stopSession(sessionId);
+
+    res.json({
+      success: true,
+      message: 'Fuzzing session stopped'
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Get fuzzing status
+exports.getFuzzingStatus = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+
+    const fuzzingEngine = new FuzzingEngine();
+    const status = await fuzzingEngine.getSessionStatus(sessionId);
+
+    res.json({
+      success: true,
+      data: { status }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Get fuzzing results
+exports.getFuzzingResults = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+
+    const fuzzingEngine = new FuzzingEngine();
+    const results = await fuzzingEngine.getSessionResults(sessionId);
+
+    res.json({
+      success: true,
+      data: { results }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Generate custom payloads
+exports.generatePayloads = async (req, res) => {
+  try {
+    const { category, count = 10 } = req.body;
+
+    const fuzzingEngine = new FuzzingEngine();
+    const payloads = await fuzzingEngine.generatePayloads(category, count);
+
+    res.json({
+      success: true,
+      data: { payloads }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Get payload categories
+exports.getPayloadCategories = async (req, res) => {
+  try {
+    const fuzzingEngine = new FuzzingEngine();
+    const categories = fuzzingEngine.getPayloadCategories();
+
+    res.json({
+      success: true,
+      data: { categories }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+// Test single payload
+exports.testPayload = async (req, res) => {
+  try {
+    const { endpointId, payload, parameter } = req.body;
+
+    const endpoint = await APIEndpoint.findById(endpointId);
+    if (!endpoint) {
+      return res.status(404).json({
+        success: false,
+        error: 'Endpoint not found'
+      });
+    }
+
+    const fuzzingEngine = new FuzzingEngine();
+    const result = await fuzzingEngine.testPayload(endpoint, payload, parameter);
+
+    res.json({
+      success: true,
+      data: { result }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
